@@ -99,7 +99,23 @@
   .btn-pdf:hover { background: #a87845; border-color: #a87845; color: #fff; }
   .btn-word { background: #2B5797; color: #fff; border-color: #2B5797; }
   .btn-word:hover { background: #1e3f6e; border-color: #1e3f6e; color: #fff; }
-  .output-body { padding: 1.5rem; font-size: .95rem; line-height: 1.8; color: #2A2420; white-space: pre-wrap; max-height: 600px; overflow-y: auto; }
+
+  /* Markdown-formatierter Output */
+  .output-body { padding: 1.5rem; font-size: .95rem; line-height: 1.8; color: #2A2420; max-height: 600px; overflow-y: auto; }
+  .output-body h1 { font-family: 'Fraunces',serif; font-size: 1.4rem; font-weight: 500; margin: 1.2rem 0 .5rem; color: #1A1714; }
+  .output-body h2 { font-family: 'Fraunces',serif; font-size: 1.2rem; font-weight: 500; margin: 1rem 0 .4rem; color: #1A1714; }
+  .output-body h3 { font-size: 1rem; font-weight: 600; margin: .8rem 0 .3rem; color: #1A1714; }
+  .output-body p { margin-bottom: .75rem; }
+  .output-body ul, .output-body ol { padding-left: 1.5rem; margin-bottom: .75rem; }
+  .output-body li { margin-bottom: .3rem; }
+  .output-body strong { font-weight: 600; }
+  .output-body em { font-style: italic; }
+  .output-body hr { border: none; border-top: 1px solid #EDE7DC; margin: 1rem 0; }
+  .output-body table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: .9rem; }
+  .output-body th { background: #F5F0E8; font-weight: 600; padding: .5rem .75rem; border: 1px solid #DDD6CC; text-align: left; }
+  .output-body td { padding: .5rem .75rem; border: 1px solid #DDD6CC; }
+  .output-body tr:nth-child(even) td { background: #FAF7F3; }
+
   .loading { display: none; text-align: center; padding: 3rem; color: #7A6F65; }
   .loading-dots { display: inline-flex; gap: .4rem; margin-top: .75rem; }
   .loading-dots span { width: 8px; height: 8px; background: #C4956A; border-radius: 50%; animation: bounce .9s infinite; }
@@ -278,11 +294,42 @@
 
   let currentType = 'arbeitsblatt';
   let currentTitle = '';
+  let currentRawText = '';
 
   function setType(btn, type) {
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentType = type;
+  }
+
+  // Markdown → HTML
+  function markdownToHtml(text) {
+    return text
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/^#### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^---+$/gm, '<hr>')
+      .replace(/^\|(.+)\|$/gm, (match) => {
+        const cells = match.split('|').filter((c,i,a) => i > 0 && i < a.length-1);
+        const isHeader = cells.every(c => c.trim().match(/^:?-+:?$/));
+        if (isHeader) return '';
+        const tag = 'td';
+        return '<tr>' + cells.map(c => `<${tag}>${c.trim()}</${tag}>`).join('') + '</tr>';
+      })
+      .replace(/(<tr>.*<\/tr>\n?)+/g, m => `<table>${m}</table>`)
+      .replace(/^\* (.+)$/gm, '<li>$1</li>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^(?!<[hupolt]|<\/[hupolt]|<hr)(.+)$/gm, (m) => m.startsWith('<') ? m : `<p>${m}</p>`)
+      .replace(/<p><\/p>/g, '')
+      .replace(/<p>(<h[123]>)/g, '$1')
+      .replace(/(<\/h[123]>)<\/p>/g, '$1');
   }
 
   async function generieren() {
@@ -323,9 +370,9 @@
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || 'Fehler');
-      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Keine Antwort erhalten.';
+      currentRawText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Keine Antwort erhalten.';
       document.getElementById('output-title').textContent = '✨ ' + currentTitle;
-      document.getElementById('output-body').textContent = text;
+      document.getElementById('output-body').innerHTML = markdownToHtml(currentRawText);
       document.getElementById('ki-output').style.display = 'block';
       document.getElementById('ki-output').scrollIntoView({ behavior: 'smooth' });
     } catch(e) {
@@ -338,7 +385,7 @@
   }
 
   function kopieren() {
-    navigator.clipboard.writeText(document.getElementById('output-body').textContent).then(() => {
+    navigator.clipboard.writeText(currentRawText).then(() => {
       const b = document.querySelector('.btn-action');
       b.textContent = '✅ Kopiert!';
       setTimeout(() => b.textContent = '📋 Kopieren', 2000);
@@ -348,7 +395,6 @@
   function alsPDFspeichern() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const text = document.getElementById('output-body').textContent;
     const title = currentTitle || 'KI-Ergebnis';
 
     doc.setFont('helvetica', 'bold');
@@ -363,8 +409,16 @@
     doc.setLineWidth(0.5);
     doc.line(20, 32, 190, 32);
 
+    // Markdown-Zeichen entfernen für PDF
+    const cleanText = currentRawText
+      .replace(/#{1,4} /g, '')
+      .replace(/\*\*/g, '')
+      .replace(/\*/g, '')
+      .replace(/^- /gm, '• ')
+      .replace(/^\d+\. /gm, (m) => m);
+
     doc.setFontSize(10);
-    const lines = doc.splitTextToSize(text, 170);
+    const lines = doc.splitTextToSize(cleanText, 170);
     let y = 40;
 
     lines.forEach(line => {
@@ -378,7 +432,6 @@
   }
 
   function alsWordspeichern() {
-    const text = document.getElementById('output-body').textContent;
     const title = currentTitle || 'KI-Ergebnis';
     const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office"
       xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -386,13 +439,20 @@
       <head><meta charset="UTF-8">
       <style>
         body { font-family: Arial, sans-serif; font-size: 12pt; line-height: 1.6; margin: 2cm; }
-        h1 { font-size: 16pt; border-bottom: 1pt solid #C4956A; padding-bottom: 6pt; }
-        .meta { color: #666; font-size: 10pt; margin-bottom: 20pt; }
-        pre { white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 11pt; }
+        h1 { font-size: 16pt; color: #1A1714; margin-top: 14pt; }
+        h2 { font-size: 14pt; color: #1A1714; margin-top: 12pt; }
+        h3 { font-size: 12pt; color: #1A1714; margin-top: 10pt; }
+        .meta { color: #666; font-size: 10pt; margin-bottom: 20pt; border-bottom: 1pt solid #C4956A; padding-bottom: 6pt; }
+        p { margin-bottom: 6pt; }
+        ul { margin-left: 16pt; }
+        li { margin-bottom: 3pt; }
+        table { border-collapse: collapse; width: 100%; }
+        td, th { border: 1pt solid #ccc; padding: 4pt 8pt; }
+        th { background: #f5f0e8; font-weight: bold; }
       </style></head><body>
       <h1>${title}</h1>
       <p class="meta">IGS 15 — Lehrkräfte-Plattform</p>
-      <pre>${text}</pre>
+      ${markdownToHtml(currentRawText)}
       </body></html>`;
     const blob = new Blob([html], { type: 'application/msword' });
     const url = URL.createObjectURL(blob);
