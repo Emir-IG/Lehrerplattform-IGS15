@@ -6,6 +6,7 @@
 <title>Lehrkräfte-Materialien – IGS 15</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   :root {
     --passwort: "IGSF1234!FFM";
@@ -89,10 +90,13 @@
   .btn-generate:hover { background: #C4956A; }
   .btn-generate:disabled { background: #9A8F84; cursor: not-allowed; }
   .ki-output { background: #fff; border-radius: 20px; border: 1px solid #EDE7DC; overflow: hidden; display: none; }
-  .output-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #EDE7DC; display: flex; align-items: center; justify-content: space-between; }
+  .output-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #EDE7DC; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
   .output-header h3 { font-family: 'Fraunces',serif; font-weight: 500; font-size: 1.05rem; }
-  .btn-copy { padding: .45rem .9rem; border: 1.5px solid #DDD6CC; border-radius: 8px; background: transparent; font-size: .82rem; font-family: 'DM Sans',sans-serif; color: #7A6F65; cursor: pointer; transition: all .15s; }
-  .btn-copy:hover { border-color: #C4956A; color: #C4956A; }
+  .output-actions { display: flex; gap: .5rem; }
+  .btn-action { padding: .45rem .9rem; border: 1.5px solid #DDD6CC; border-radius: 8px; background: transparent; font-size: .82rem; font-family: 'DM Sans',sans-serif; color: #7A6F65; cursor: pointer; transition: all .15s; }
+  .btn-action:hover { border-color: #C4956A; color: #C4956A; }
+  .btn-pdf { background: #1A1714; color: #F5F0E8; border-color: #1A1714; }
+  .btn-pdf:hover { background: #C4956A; border-color: #C4956A; color: #fff; }
   .output-body { padding: 1.5rem; font-size: .95rem; line-height: 1.8; color: #2A2420; white-space: pre-wrap; max-height: 600px; overflow-y: auto; }
   .loading { display: none; text-align: center; padding: 3rem; color: #7A6F65; }
   .loading-dots { display: inline-flex; gap: .4rem; margin-top: .75rem; }
@@ -217,7 +221,10 @@
       <div class="ki-output" id="ki-output">
         <div class="output-header">
           <h3 id="output-title">Ergebnis</h3>
-          <button class="btn-copy" onclick="kopieren()">📋 Kopieren</button>
+          <div class="output-actions">
+            <button class="btn-action" onclick="kopieren()">📋 Kopieren</button>
+            <button class="btn-action btn-pdf" onclick="alsP DFspeichern()">📄 Als PDF</button>
+          </div>
         </div>
         <div class="output-body" id="output-body"></div>
       </div>
@@ -267,6 +274,8 @@
   }
 
   let currentType = 'arbeitsblatt';
+  let currentTitle = '';
+
   function setType(btn, type) {
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -292,6 +301,8 @@
       elternbrief: `Schreibe einen professionellen Elternbrief.\nAnlass: ${thema}\nSchule: IGS 15\nKlasse: ${klasse||'nicht angegeben'}\n${wuensche?'Hinweise: '+wuensche:''}\n\nFreundlich, klar, professionell. Mit Datum, Anrede, Grußformel.`
     };
 
+    currentTitle = labels[currentType] + ': ' + thema;
+
     const btn = document.getElementById('btn-gen');
     btn.disabled = true;
     document.getElementById('btn-text').textContent = 'Wird generiert …';
@@ -310,7 +321,7 @@
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || 'Fehler');
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Keine Antwort erhalten.';
-      document.getElementById('output-title').textContent = '✨ ' + labels[currentType] + ': ' + thema;
+      document.getElementById('output-title').textContent = '✨ ' + currentTitle;
       document.getElementById('output-body').textContent = text;
       document.getElementById('ki-output').style.display = 'block';
       document.getElementById('ki-output').scrollIntoView({ behavior: 'smooth' });
@@ -325,10 +336,49 @@
 
   function kopieren() {
     navigator.clipboard.writeText(document.getElementById('output-body').textContent).then(() => {
-      const b = document.querySelector('.btn-copy');
+      const b = document.querySelector('.btn-action:first-child');
       b.textContent = '✅ Kopiert!';
       setTimeout(() => b.textContent = '📋 Kopieren', 2000);
     });
+  }
+
+  function alsPDFspeichern() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    
+    const text = document.getElementById('output-body').textContent;
+    const title = currentTitle || 'KI-Ergebnis';
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.text(title, 20, 20);
+    
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.text('IGS 15 — Lehrkräfte-Plattform', 20, 28);
+    
+    doc.setDrawColor(196, 149, 106);
+    doc.setLineWidth(0.5);
+    doc.line(20, 32, 190, 32);
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    
+    const lines = doc.splitTextToSize(text, 170);
+    let y = 40;
+    const pageHeight = 280;
+    
+    lines.forEach(line => {
+      if (y > pageHeight) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.text(line, 20, y);
+      y += 6;
+    });
+    
+    const dateiname = title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g, '').trim().replace(/ /g, '_') + '.pdf';
+    doc.save(dateiname);
   }
 </script>
 </body>
