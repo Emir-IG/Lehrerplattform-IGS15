@@ -226,6 +226,8 @@
 </div>
 
 <script>
+  const PROXY_URL = 'https://tiny-mud-3bdgemini-proxy.emircan-ep.workers.dev';
+
   function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim().replace(/^"|"$/g,''); }
   const PASSWORT    = cssVar('--passwort');
   const SCHULE      = cssVar('--schule');
@@ -272,7 +274,6 @@
   }
 
   async function generieren() {
-    const apiKey = 'AIzaSyCmd3CLPP6VLn-z7IFAiEAIfHqU6NAlSdg';
     const thema    = document.getElementById('thema').value.trim();
     const klasse   = document.getElementById('klasse').value.trim();
     const fach     = document.getElementById('fach').value.trim();
@@ -284,10 +285,10 @@
     const extra = `\nFach: ${fach||'nicht angegeben'}\nKlasse: ${klasse||'nicht angegeben'}\nNiveau: ${niveau||'mittel'}\n${wuensche?'Wünsche: '+wuensche:''}`;
 
     const prompts = {
-      arbeitsblatt: `Erstelle ein detailliertes Arbeitsblatt für den Schulunterricht.\nThema: ${thema}${extra}\n\nEnthalte: kurzer Einführungstext, mind. 5 abwechslungsreiche Aufgaben (Verständnis, Analyse, kreativ), klare Aufgabenstellungen. Auf Deutsch, schulgerecht, klar strukturiert.`,
+      arbeitsblatt: `Erstelle ein detailliertes Arbeitsblatt für den Schulunterricht.\nThema: ${thema}${extra}\n\nEnthalte: kurzer Einführungstext, mind. 5 abwechslungsreiche Aufgaben, klare Aufgabenstellungen. Auf Deutsch, schulgerecht, klar strukturiert.`,
       stunde: `Erstelle eine vollständige Stundenplanung (90 Min.).\nThema: ${thema}${extra}\n\nEnthalte: Lernziele, tabellarischer Verlaufsplan (Zeit/Phase/Inhalt/Methode/Sozialform), Materialien, Differenzierungshinweise, Hausaufgabe.`,
       reihe: `Erstelle eine Unterrichtsreihenplanung.\nThema: ${thema}${extra}\n\nEnthalte: Lernziele, 6-8 Stunden mit Thema/Methoden/Materialien, Leistungsüberprüfung.`,
-      pruefung: `Erstelle einen Prüfungsaufgabensatz.\nThema: ${thema}${extra}\n\nAufgaben auf 3 Anforderungsebenen (Reproduktion, Transfer, Reflexion) mit Punkten und Lösungserwartungen.`,
+      pruefung: `Erstelle einen Prüfungsaufgabensatz.\nThema: ${thema}${extra}\n\nAufgaben auf 3 Anforderungsebenen mit Punkten und Lösungserwartungen.`,
       elternbrief: `Schreibe einen professionellen Elternbrief.\nAnlass: ${thema}\nSchule: IGS 15\nKlasse: ${klasse||'nicht angegeben'}\n${wuensche?'Hinweise: '+wuensche:''}\n\nFreundlich, klar, professionell. Mit Datum, Anrede, Grußformel.`
     };
 
@@ -298,13 +299,16 @@
     document.getElementById('ki-output').style.display = 'none';
 
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+      const res = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompts[currentType] }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4000 } })
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompts[currentType] }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 4000 }
+        })
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error?.message || 'API-Fehler');
+      if (!res.ok) throw new Error(data.error?.message || 'Fehler');
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Keine Antwort erhalten.';
       document.getElementById('output-title').textContent = '✨ ' + labels[currentType] + ': ' + thema;
       document.getElementById('output-body').textContent = text;
