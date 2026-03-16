@@ -91,11 +91,13 @@
   .ki-output { background: #fff; border-radius: 20px; border: 1px solid #EDE7DC; overflow: hidden; display: none; }
   .output-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #EDE7DC; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
   .output-header h3 { font-family: 'Fraunces',serif; font-weight: 500; font-size: 1.05rem; }
-  .output-actions { display: flex; gap: .5rem; }
+  .output-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
   .btn-action { padding: .45rem .9rem; border: 1.5px solid #DDD6CC; border-radius: 8px; background: transparent; font-size: .82rem; font-family: 'DM Sans',sans-serif; color: #7A6F65; cursor: pointer; transition: all .15s; }
   .btn-action:hover { border-color: #C4956A; color: #C4956A; }
   .btn-pdf { background: #1A1714; color: #F5F0E8; border-color: #1A1714; }
   .btn-pdf:hover { background: #C4956A; border-color: #C4956A; color: #fff; }
+  .btn-word { background: #2B5797; color: #F5F0E8; border-color: #2B5797; }
+  .btn-word:hover { background: #1e3f6e; border-color: #1e3f6e; color: #fff; }
   .output-body { padding: 1.5rem; font-size: .95rem; line-height: 1.8; color: #2A2420; white-space: pre-wrap; max-height: 600px; overflow-y: auto; }
   .loading { display: none; text-align: center; padding: 3rem; color: #7A6F65; }
   .loading-dots { display: inline-flex; gap: .4rem; margin-top: .75rem; }
@@ -223,6 +225,7 @@
           <div class="output-actions">
             <button class="btn-action" onclick="kopieren()">📋 Kopieren</button>
             <button class="btn-action btn-pdf" onclick="alsPDFspeichern()">📄 Als PDF</button>
+            <button class="btn-action btn-word" onclick="alsWordspeichern()">📝 Als Word</button>
           </div>
         </div>
         <div class="output-body" id="output-body"></div>
@@ -360,6 +363,33 @@
     <script>window.onload = function(){ window.print(); }<\/script>
     </body></html>`);
     win.document.close();
+  }
+
+  function alsWordspeichern() {
+    const text = document.getElementById('output-body').textContent;
+    const title = currentTitle || 'KI-Ergebnis';
+    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+      <head><meta charset="UTF-8">
+      <style>
+        body { font-family: Arial, sans-serif; font-size: 12pt; line-height: 1.6; margin: 2cm; }
+        h1 { font-size: 16pt; border-bottom: 1pt solid #C4956A; padding-bottom: 6pt; }
+        .meta { color: #666; font-size: 10pt; margin-bottom: 20pt; }
+        pre { white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 11pt; }
+      </style></head><body>
+      <h1>${title}</h1>
+      <p class="meta">IGS 15 — Lehrkräfte-Plattform</p>
+      <pre>${text}</pre>
+      </body></html>`;
+    const blob = new Blob([html], { type: 'application/msword' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const dateiname = title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g, '').trim().replace(/ /g, '_') + '.doc';
+    a.href = url;
+    a.download = dateiname;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 </script>
 </body>
