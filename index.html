@@ -82,18 +82,16 @@
   .jahrgang-titel .jg-badge { background: rgba(255,255,255,.2); font-size: .75rem; padding: .2rem .5rem; border-radius: 6px; font-family: 'DM Sans',sans-serif; font-weight: 600; margin-left: auto; }
   .jahrgang-titel .jg-arrow { font-size: .8rem; opacity: .7; transition: transform .2s; }
   .jahrgang-titel.collapsed .jg-arrow { transform: rotate(-90deg); }
-
   .fach-gruppe { margin-bottom: .5rem; margin-left: .5rem; }
   .fach-titel { display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 500; color: #1A1714; padding: .6rem .9rem; background: #fff; border: 1px solid #EDE7DC; border-radius: 10px; cursor: pointer; user-select: none; margin-bottom: .35rem; }
   .fach-titel .fach-badge { background: #F5F0E8; color: #7A6F65; font-size: .72rem; padding: .15rem .45rem; border-radius: 5px; font-weight: 600; margin-left: auto; }
   .fach-titel .fach-arrow { font-size: .75rem; color: #9A8F84; transition: transform .2s; }
   .fach-titel.collapsed .fach-arrow { transform: rotate(-90deg); }
-
   .file-list { display: flex; flex-direction: column; gap: .35rem; margin-left: 1rem; }
   .file-item { display: flex; align-items: center; gap: .75rem; background: #FAF7F3; border: 1px solid #EDE7DC; border-radius: 9px; padding: .75rem .9rem; transition: box-shadow .15s; }
   .file-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); background: #fff; }
   .file-icon { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-  .icon-pdf { background: #FEE2E2; } .icon-word { background: #DBEAFE; } .icon-excel { background: #DCFCE7; } .icon-ppt { background: #FED7AA; } .icon-img { background: #F3E8FF; } .icon-other { background: #F5F0E8; }
+  .icon-pdf{background:#FEE2E2} .icon-word{background:#DBEAFE} .icon-excel{background:#DCFCE7} .icon-ppt{background:#FED7AA} .icon-img{background:#F3E8FF} .icon-other{background:#F5F0E8}
   .file-info { flex: 1; min-width: 0; }
   .file-name { font-weight: 500; font-size: .87rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: .1rem; }
   .file-meta { font-size: .74rem; color: #7A6F65; }
@@ -101,7 +99,6 @@
   .btn-icon { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1.5px solid #E2D9CE; background: transparent; cursor: pointer; font-size: .82rem; transition: all .15s; }
   .btn-icon:hover { background: #FEF4EC; border-color: #C4956A; }
   .btn-icon.del:hover { background: #FEE2E2; border-color: #FCA5A5; }
-
   .empty-state { text-align: center; padding: 2.5rem; color: #7A6F65; background: #fff; border-radius: 12px; border: 1px solid #EDE7DC; }
 
   .ki-header { margin-bottom: 2rem; }
@@ -144,14 +141,12 @@
   .output-body th { background: #F5F0E8; font-weight: 600; padding: .5rem .75rem; border: 1px solid #DDD6CC; text-align: left; }
   .output-body td { padding: .5rem .75rem; border: 1px solid #DDD6CC; }
   .output-body tr:nth-child(even) td { background: #FAF7F3; }
-
   .loading { display: none; text-align: center; padding: 3rem; color: #7A6F65; }
   .loading-dots { display: inline-flex; gap: .4rem; margin-top: .75rem; }
   .loading-dots span { width: 8px; height: 8px; background: #C4956A; border-radius: 50%; animation: bounce .9s infinite; }
   .loading-dots span:nth-child(2) { animation-delay: .15s; }
   .loading-dots span:nth-child(3) { animation-delay: .3s; }
   @keyframes bounce { 0%,80%,100%{transform:scale(0.7);opacity:.4} 40%{transform:scale(1);opacity:1} }
-
   .toast { position: fixed; bottom: 2rem; right: 2rem; padding: .85rem 1.25rem; border-radius: 12px; font-size: .875rem; font-weight: 500; box-shadow: 0 4px 20px rgba(0,0,0,.15); z-index: 999; }
   .toast-success { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
   .toast-error { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
@@ -237,9 +232,9 @@
              ondragover="handleDragOver(event)"
              ondragleave="handleDragLeave(event)"
              ondrop="handleDrop(event)">
-          <input type="file" id="file-input" multiple onchange="uploadFiles(this.files)">
+          <input type="file" id="file-input" multiple onchange="if(this.files[0]) autoDetect(this.files[0].name); uploadFiles(this.files)">
           <div style="font-size:1.5rem">📂</div>
-          <p>Klicken oder Dateien hierher ziehen</p>
+          <p>Klicken oder Dateien hierher ziehen — Fach wird automatisch erkannt</p>
         </div>
         <div class="upload-progress" id="upload-progress">
           <div class="progress-label" id="progress-label">Wird hochgeladen …</div>
@@ -387,6 +382,138 @@
     } catch(e) { console.error(e); }
   }
 
+  function autoDetect(filename) {
+    const name = filename.toLowerCase();
+
+    // Jahrgang erkennen
+    const jgMap = [
+      ['jahrgang5','jg5','klasse5','kl5','_5_','5.klasse'],
+      ['jahrgang6','jg6','klasse6','kl6','_6_','6.klasse'],
+      ['jahrgang7','jg7','klasse7','kl7','_7_','7.klasse'],
+      ['jahrgang8','jg8','klasse8','kl8','_8_','8.klasse'],
+      ['jahrgang9','jg9','klasse9','kl9','_9_','9.klasse'],
+      ['jahrgang10','jg10','klasse10','kl10','_10_','10.klasse'],
+      ['jahrgang11','jg11','klasse11','kl11','_11_','11.klasse'],
+      ['jahrgang12','jg12','klasse12','kl12','_12_','12.klasse'],
+      ['jahrgang13','jg13','klasse13','kl13','_13_','13.klasse'],
+    ];
+    const jgValues = ['Jahrgang 5','Jahrgang 6','Jahrgang 7','Jahrgang 8','Jahrgang 9','Jahrgang 10','Jahrgang 11','Jahrgang 12','Jahrgang 13'];
+    const nameClean = name.replace(/\s/g,'');
+    for (let i = 0; i < jgMap.length; i++) {
+      if (jgMap[i].some(k => nameClean.includes(k.replace(/\s/g,'')))) {
+        document.getElementById('sel-jahrgang').value = jgValues[i];
+        break;
+      }
+    }
+
+    // Fach erkennen
+    const fachMap = {
+      'Deutsch': [
+        'deutsch','grammatik','rechtschreib','aufsatz','lesen','schreiben','text',
+        'märchen','maerchen','fabel','gedicht','kurzgeschichte','erzählung','erzaehlung',
+        'satzglieder','nomen','verb','adjektiv','pronomen','artikel','konjunktion',
+        'präposition','praepositon','diktat','wortschatz','satzbau','interpunktion',
+        'komma','buchstabe','silbe','reim','strophe','metapher','analyse','lyrik',
+        'epik','dramatik','inhaltsangabe','charakterisierung','brief','bewerbung',
+        'leseförderung','lesen','vorlesen','buchvorstellung','leseverstehen','lrs',
+        'groß','klein','getrennt','zusammen','fremdwort','lehnwort','deutsch'
+      ],
+      'Mathematik': [
+        'mathe','mathematik','geometrie','algebra','rechnen','zahlen','bruch',
+        'dezimal','prozent','gleichung','funktion','diagramm','statistik',
+        'wahrscheinlichkeit','dreieck','viereck','kreis','fläche','volumen',
+        'umfang','winkel','koordinaten','achse','steigung','addition','subtraktion',
+        'multiplikation','division','potenzen','wurzel','primzahl','teiler',
+        'vielfache','dreisatz','verhältnis','terme','variable','ungleichung',
+        'kurvendiskussion','ableitung','integral','logarithmus','sinus','kosinus',
+        'tangens','stochastik','kombinatorik','matrize','vektor'
+      ],
+      'Englisch': [
+        'englisch','english','vocabulary','grammar','reading','writing','listening',
+        'speaking','present','past','future','tense','irregular','verb','noun',
+        'adjective','adverb','preposition','article','sentence','paragraph',
+        'text','story','poem','dialogue','letter','email','worksheet','exercise',
+        'simple','continuous','perfect','passive','conditional','relative',
+        'clause','punctuation','spelling','pronunciation','british','american'
+      ],
+      'GL (Gesellschaftslehre)': [
+        'gl','gesellschaft','politik','geschichte','erdkunde','geographie','sozial',
+        'ägypten','aegypten','griechen','rom','römer','roemer','mittelalter',
+        'demokratie','wirtschaft','europa','welt','antike','revolution','krieg',
+        'frieden','recht','gesetz','staat','regierung','parlament','wahl','partei',
+        'grundgesetz','menschenrecht','globalisierung','migration','flucht','asyl',
+        'klima','umwelt','nachhaltigkeit','ressourcen','karte','kontinent','land',
+        'hauptstadt','bevölkerung','stadtentwicklung','industrie','landwirtschaft',
+        'mittelmeer','orient','islam','christentum','judentum','reformation',
+        'aufklärung','kolonialismus','imperialismus','weltkrieg','holocaust',
+        'nationalsozialismus','ddr','brd','mauerfall','kalter krieg','un','nato',
+        'steinzeit','bronzezeit','eisenzeit','pharao','mesopotamien','babylon',
+        'alexander','caesar','feudalismus','kreuzzug','pest','humanismus',
+        'entdeckung','sklaverei','industrialisierung','weimarer','kaiserreich'
+      ],
+      'NaWi (Naturwissenschaften)': [
+        'nawi','natur','physik','chemie','biologie','bio','pflanzen','tiere',
+        'atom','energie','wärme','optik','elektr','magnet','kraft','bewegung',
+        'welle','schall','licht','strom','spannung','widerstand','säure','base',
+        'reaktion','verbrennung','oxidation','reduktion','element','periodensystem',
+        'molekül','ion','zelle','organ','körper','ernährung','verdauung','blut',
+        'kreislauf','gehirn','nerven','sinne','evolution','ökologie','ökosystem',
+        'fotosynthese','respiration','vererbung','gen','dna','bakterien','virus',
+        'impfung','experiment','hypothese','beobachtung','auswertung','labor',
+        'thermometer','druck','aggregatzustand','wasser','luft','boden','wetter'
+      ],
+      'Ethik': [
+        'ethik','moral','werte','religion','philosophie','verantwortung','gewissen',
+        'gerechtigkeit','freiheit','würde','respekt','toleranz','empathie','mitgefühl',
+        'freundschaft','liebe','familie','gemeinschaft','konflikt','gewalt','mobbing',
+        'sucht','drogen','medien','soziale netzwerke','identität','selbstbild',
+        'glück','sinn','tod','trauer','hoffnung','glaube','ritual','fest','gebet',
+        'buddhismus','hinduismus','judentum','islam','christentum','weltreligion',
+        'normen','regeln','taboo','dilemma','utilitarismus','kant','aristoteles'
+      ],
+      'Sport': [
+        'sport','bewegung','turnen','fitness','ausdauer','kraft','koordination',
+        'dehnung','aufwärmen','spiel','fußball','basketball','volleyball','handball',
+        'leichtathletik','schwimmen','tanzen','geräteturnen','kampfsport','yoga',
+        'laufen','werfen','springen','klettern','radfahren','puls','herzrate',
+        'training','wettkampf','regelkunde','fair play','teamwork'
+      ],
+      'Kunst': [
+        'kunst','zeichnen','malen','farbe','gestalt','form','linie','fläche',
+        'perspektive','komposition','collage','skulptur','plastik','drucken',
+        'aquarell','acryl','öl','bleistift','kohle','pastell','digitale kunst',
+        'art','design','grafik','illustration','bildanalyse','kunstgeschichte',
+        'renaissance','barock','impressionismus','expressionismus','modern',
+        'picasso','rembrandt','warhol','architekt','bauhaus','stil','technik'
+      ],
+      'Musik': [
+        'musik','rhythmus','instrument','note','takt','melodie','harmonie',
+        'dur','moll','intervall','akkord','stimme','chor','orchester','band',
+        'komposition','improvisation','lied','song','klassik','pop','rock','jazz',
+        'hip hop','folk','weltmusik','beethoven','mozart','bach','notation',
+        'dynamik','tempo','klang','frequenz','hören','musikgeschichte'
+      ],
+      'Arbeitslehre': [
+        'arbeitslehre','technik','haushalt','beruf','kochen','backen','nähen',
+        'holz','metall','elektro','werkzeug','maschine','produktion','wirtschaft',
+        'unternehmen','bewerbung','praktikum','berufsorientierung','ausbildung',
+        'handwerk','industrie','consumer','haushalt','ernährung','textil'
+      ],
+      'Förderung': [
+        'förder','lrs','dyskal','inklusion','inklusiv','sonderpädagogik',
+        'differenzierung','nachteilsausgleich','unterstützung','lernschwäche',
+        'konzentration','aufmerksamkeit','adhs','autismus','sprachförderung'
+      ],
+    };
+
+    for (const [fach, keywords] of Object.entries(fachMap)) {
+      if (keywords.some(k => name.includes(k))) {
+        document.getElementById('sel-fach').value = fach;
+        break;
+      }
+    }
+  }
+
   function renderFiles() {
     const q = document.getElementById('search-input').value.toLowerCase();
     const gefiltert = alleFiles.filter(f => f.name.toLowerCase().includes(q));
@@ -519,7 +646,7 @@
 
   function handleDragOver(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag-over'); }
   function handleDragLeave() { document.getElementById('upload-zone').classList.remove('drag-over'); }
-  function handleDrop(e) { e.preventDefault(); handleDragLeave(); uploadFiles(e.dataTransfer.files); }
+  function handleDrop(e) { e.preventDefault(); handleDragLeave(); if(e.dataTransfer.files[0]) autoDetect(e.dataTransfer.files[0].name); uploadFiles(e.dataTransfer.files); }
 
   function toast(msg, type) {
     const el = document.createElement('div');
