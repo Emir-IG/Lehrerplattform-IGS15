@@ -55,7 +55,6 @@
   .hero h2 em { font-style: italic; color: #C4956A; }
   .hero p { color: #7A6F65; font-size: .95rem; }
 
-  /* Upload */
   .upload-box { background: #fff; border-radius: 20px; border: 1px solid #EDE7DC; padding: 1.5rem; margin-bottom: 1.5rem; }
   .upload-box h3 { font-family: 'Fraunces',serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 1rem; }
   .upload-selects { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: .75rem; }
@@ -71,7 +70,6 @@
   .progress-bar-wrap { background: #F5F0E8; border-radius: 99px; height: 6px; overflow: hidden; }
   .progress-bar { height: 100%; background: #C4956A; border-radius: 99px; width: 0%; transition: width .3s; }
 
-  /* Controls */
   .controls { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
   .search-wrap { position: relative; flex: 1; min-width: 180px; }
   .search-wrap input { width: 100%; padding: .6rem 1rem .6rem 2.4rem; border: 1.5px solid #E2D9CE; border-radius: 10px; font-size: .88rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #fff; outline: none; }
@@ -79,9 +77,8 @@
   .search-icon { position: absolute; left: .75rem; top: 50%; transform: translateY(-50%); font-size: .9rem; opacity: .4; }
   .count-badge { background: #F5F0E8; color: #7A6F65; padding: .4rem .8rem; border-radius: 8px; font-size: .8rem; font-weight: 600; white-space: nowrap; }
 
-  /* Jahrgang-Gruppen */
   .jahrgang-gruppe { margin-bottom: 1rem; }
-  .jahrgang-titel { display: flex; align-items: center; gap: .6rem; font-family: 'Fraunces',serif; font-size: 1.1rem; font-weight: 500; color: #1A1714; padding: .75rem 1rem; background: #1A1714; color: #F5F0E8; border-radius: 12px; cursor: pointer; user-select: none; margin-bottom: .5rem; }
+  .jahrgang-titel { display: flex; align-items: center; gap: .6rem; font-family: 'Fraunces',serif; font-size: 1.1rem; font-weight: 500; padding: .75rem 1rem; background: #1A1714; color: #F5F0E8; border-radius: 12px; cursor: pointer; user-select: none; margin-bottom: .5rem; }
   .jahrgang-titel .jg-badge { background: rgba(255,255,255,.2); font-size: .75rem; padding: .2rem .5rem; border-radius: 6px; font-family: 'DM Sans',sans-serif; font-weight: 600; margin-left: auto; }
   .jahrgang-titel .jg-arrow { font-size: .8rem; opacity: .7; transition: transform .2s; }
   .jahrgang-titel.collapsed .jg-arrow { transform: rotate(-90deg); }
@@ -107,7 +104,6 @@
 
   .empty-state { text-align: center; padding: 2.5rem; color: #7A6F65; background: #fff; border-radius: 12px; border: 1px solid #EDE7DC; }
 
-  /* KI */
   .ki-header { margin-bottom: 2rem; }
   .ki-header h2 { font-family: 'Fraunces',serif; font-size: 2.2rem; font-weight: 300; margin-bottom: .4rem; }
   .ki-header h2 em { font-style: italic; color: #C4956A; }
@@ -224,16 +220,14 @@
               <option value="Deutsch">🖊️ Deutsch</option>
               <option value="Mathematik">📐 Mathematik</option>
               <option value="Englisch">🌍 Englisch</option>
-              <option value="Politik & Wirtschaft">🏛️ Politik & Wirtschaft</option>
+              <option value="GL (Gesellschaftslehre)">🏛️ GL (Gesellschaftslehre)</option>
+              <option value="NaWi (Naturwissenschaften)">🔬 NaWi (Naturwissenschaften)</option>
               <option value="Ethik">☯️ Ethik</option>
-              <option value="Erdkunde">🌎 Erdkunde</option>
-              <option value="Geschichte">📜 Geschichte</option>
-              <option value="Biologie">🌿 Biologie</option>
-              <option value="Chemie">⚗️ Chemie</option>
-              <option value="Physik">⚡ Physik</option>
               <option value="Sport">⚽ Sport</option>
               <option value="Kunst">🎨 Kunst</option>
               <option value="Musik">🎵 Musik</option>
+              <option value="Arbeitslehre">🔧 Arbeitslehre</option>
+              <option value="Förderung">💡 Förderung</option>
               <option value="Sonstiges">🗂️ Sonstiges</option>
             </select>
           </div>
@@ -290,7 +284,21 @@
         <div class="form-row">
           <div class="form-group">
             <label>Fach</label>
-            <input type="text" id="fach" placeholder="z.B. Deutsch, Politik …">
+            <select id="fach">
+              <option value="">Bitte wählen</option>
+              <option value="Deutsch">🖊️ Deutsch</option>
+              <option value="Mathematik">📐 Mathematik</option>
+              <option value="Englisch">🌍 Englisch</option>
+              <option value="GL (Gesellschaftslehre)">🏛️ GL (Gesellschaftslehre)</option>
+              <option value="NaWi (Naturwissenschaften)">🔬 NaWi (Naturwissenschaften)</option>
+              <option value="Ethik">☯️ Ethik</option>
+              <option value="Sport">⚽ Sport</option>
+              <option value="Kunst">🎨 Kunst</option>
+              <option value="Musik">🎵 Musik</option>
+              <option value="Arbeitslehre">🔧 Arbeitslehre</option>
+              <option value="Förderung">💡 Förderung</option>
+              <option value="Sonstiges">🗂️ Sonstiges</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Niveau</label>
@@ -390,10 +398,9 @@
       return;
     }
 
-    // Baum: Jahrgang → Fach → Dateien
     const struktur = {};
     gefiltert.forEach(f => {
-      const jg = f.jahrgang || f.kategorie || 'Allgemein';
+      const jg = f.jahrgang || 'Allgemein';
       const fach = f.fach || 'Sonstiges';
       if (!struktur[jg]) struktur[jg] = {};
       if (!struktur[jg][fach]) struktur[jg][fach] = [];
@@ -401,9 +408,10 @@
     });
 
     const fachIcons = {
-      'Deutsch':'🖊️','Mathematik':'📐','Englisch':'🌍','Politik & Wirtschaft':'🏛️',
-      'Ethik':'☯️','Erdkunde':'🌎','Geschichte':'📜','Biologie':'🌿','Chemie':'⚗️',
-      'Physik':'⚡','Sport':'⚽','Kunst':'🎨','Musik':'🎵','Sonstiges':'🗂️'
+      'Deutsch':'🖊️','Mathematik':'📐','Englisch':'🌍',
+      'GL (Gesellschaftslehre)':'🏛️','NaWi (Naturwissenschaften)':'🔬',
+      'Ethik':'☯️','Sport':'⚽','Kunst':'🎨','Musik':'🎵',
+      'Arbeitslehre':'🔧','Förderung':'💡','Sonstiges':'🗂️'
     };
 
     tree.innerHTML = Object.keys(struktur).sort().map(jg => {
@@ -521,7 +529,6 @@
     setTimeout(() => el.remove(), 3000);
   }
 
-  // KI
   let currentType = 'arbeitsblatt';
   let currentTitle = '';
   let currentRawText = '';
@@ -550,7 +557,7 @@
   async function generieren() {
     const thema=document.getElementById('thema').value.trim();
     const klasse=document.getElementById('klasse').value.trim();
-    const fach=document.getElementById('fach').value.trim();
+    const fach=document.getElementById('fach').value;
     const niveau=document.getElementById('niveau').value;
     const wuensche=document.getElementById('wuensche').value.trim();
     if (!thema) { alert('Bitte ein Thema eingeben.'); return; }
