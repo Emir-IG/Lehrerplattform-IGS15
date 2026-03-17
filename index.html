@@ -139,7 +139,6 @@
   .output-body td { padding: .5rem .75rem; border: 1px solid #DDD6CC; }
   .output-body tr:nth-child(even) td { background: #FAF7F3; }
 
-  /* Arbeitsblatt-Stil */
   .ab-wrap { font-family: 'DM Sans', sans-serif; }
   .ab-header { background: linear-gradient(135deg,#1A1714,#3A2F28); color:#fff; border-radius:14px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
   .ab-header .ab-schule { font-size:.8rem; opacity:.6; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.3rem; }
@@ -157,7 +156,6 @@
   .ab-aufgabe-text { margin-top:.6rem; color:#3A2F28; line-height:1.7; font-size:.93rem; }
   .ab-linie { border:none; border-bottom:1.5px dashed #DDD6CC; margin:.6rem 0; height:28px; display:block; }
 
-  /* NOTENRECHNER */
   .noten-header { margin-bottom: 2rem; }
   .noten-header h2 { font-family: 'Fraunces',serif; font-size: 2.2rem; font-weight: 300; margin-bottom: .4rem; }
   .noten-header h2 em { font-style: italic; color: #C4956A; }
@@ -404,70 +402,42 @@
 <script>
   const WORKER = 'https://tiny-mud-3bdgemini-proxy.emircan-ep.workers.dev';
 
-  function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim().replace(/^"|"$/g,''); }
-  const PASSWORT = cssVar('--passwort');
-  const SCHULE   = cssVar('--schule');
+  function cssVar(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim().replace(/^"|"$/g,'');}
+  const PASSWORT=cssVar('--passwort'), SCHULE=cssVar('--schule');
+  document.getElementById('schulname-login').textContent=SCHULE;
+  document.getElementById('schulname-header').textContent=SCHULE;
 
-  document.getElementById('schulname-login').textContent = SCHULE;
-  document.getElementById('schulname-header').textContent = SCHULE;
-
-  function einloggen() {
-    if (document.getElementById('pw').value !== PASSWORT) {
-      document.getElementById('fehler').style.display = 'block';
-      document.getElementById('pw').value = '';
-      return;
-    }
-    sessionStorage.setItem('lp_auth','1');
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    loadFiles();
+  function einloggen(){
+    if(document.getElementById('pw').value!==PASSWORT){document.getElementById('fehler').style.display='block';document.getElementById('pw').value='';return;}
+    sessionStorage.setItem('lp_auth','1');document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';loadFiles();
   }
+  function ausloggen(){sessionStorage.clear();location.reload();}
+  if(sessionStorage.getItem('lp_auth')==='1'){document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';loadFiles();}
 
-  function ausloggen() { sessionStorage.clear(); location.reload(); }
-
-  if (sessionStorage.getItem('lp_auth') === '1') {
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    loadFiles();
-  }
-
-  function showTab(id, btn) {
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    document.getElementById('panel-'+id).classList.add('active');
-    btn.classList.add('active');
-  }
+  function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');btn.classList.add('active');}
 
   // NOTENRECHNER
-  const SCHLUESSEL = {
-    standard:[{note:1,min:92},{note:2,min:81},{note:3,min:67},{note:4,min:50},{note:5,min:20},{note:6,min:0}],
-    streng:  [{note:1,min:95},{note:2,min:85},{note:3,min:70},{note:4,min:60},{note:5,min:30},{note:6,min:0}],
-    mild:    [{note:1,min:90},{note:2,min:75},{note:3,min:60},{note:4,min:45},{note:5,min:20},{note:6,min:0}],
-  };
-  const NOTEN_TEXT = {1:'Sehr gut',2:'Gut',3:'Befriedigend',4:'Ausreichend',5:'Mangelhaft',6:'Ungenügend'};
+  const SCHLUESSEL={standard:[{note:1,min:92},{note:2,min:81},{note:3,min:67},{note:4,min:50},{note:5,min:20},{note:6,min:0}],streng:[{note:1,min:95},{note:2,min:85},{note:3,min:70},{note:4,min:60},{note:5,min:30},{note:6,min:0}],mild:[{note:1,min:90},{note:2,min:75},{note:3,min:60},{note:4,min:45},{note:5,min:20},{note:6,min:0}]};
+  const NOTEN_TEXT={1:'Sehr gut',2:'Gut',3:'Befriedigend',4:'Ausreichend',5:'Mangelhaft',6:'Ungenügend'};
 
-  function berechneTabelle() {
-    const max = parseInt(document.getElementById('max-punkte').value);
-    if (!max||max<1){document.getElementById('noten-tabelle-wrap').style.display='none';return;}
-    const sk = SCHLUESSEL[document.getElementById('noten-schluessel').value];
+  function berechneTabelle(){
+    const max=parseInt(document.getElementById('max-punkte').value);
+    if(!max||max<1){document.getElementById('noten-tabelle-wrap').style.display='none';return;}
+    const sk=SCHLUESSEL[document.getElementById('noten-schluessel').value];
     document.getElementById('noten-tabelle-wrap').style.display='block';
-    document.getElementById('noten-tbody').innerHTML = sk.map((s,i)=>{
-      const bisProz=i===0?100:sk[i-1].min-1;
-      const vonPkt=Math.ceil(s.min/100*max); const bisPkt=Math.floor(bisProz/100*max);
-      return `<tr><td><span class="note-chip chip-${s.note}">${s.note}</span></td><td><strong>${NOTEN_TEXT[s.note]}</strong></td><td>${vonPkt} Punkte</td><td>${bisPkt} Punkte</td><td>${s.min}% – ${bisProz}%</td></tr>`;
+    document.getElementById('noten-tbody').innerHTML=sk.map((s,i)=>{
+      const bp=i===0?100:sk[i-1].min-1;const vp=Math.ceil(s.min/100*max);const bp2=Math.floor(bp/100*max);
+      return `<tr><td><span class="note-chip chip-${s.note}">${s.note}</span></td><td><strong>${NOTEN_TEXT[s.note]}</strong></td><td>${vp} Punkte</td><td>${bp2} Punkte</td><td>${s.min}% – ${bp}%</td></tr>`;
     }).join('');
   }
 
   // DATEIVERWALTUNG
-  let alleFiles=[], collapsedJG={}, collapsedFach={};
+  let alleFiles=[],collapsedJG={},collapsedFach={};
 
-  async function loadFiles() {
-    try { const res=await fetch(WORKER+'/files'); alleFiles=await res.json(); renderFiles(); }
-    catch(e){console.error(e);}
-  }
+  async function loadFiles(){try{const res=await fetch(WORKER+'/files');alleFiles=await res.json();renderFiles();}catch(e){console.error(e);}}
 
-  function autoDetect(filename) {
-    const name=filename.toLowerCase(); const nc=name.replace(/\s/g,'');
+  function autoDetect(filename){
+    const name=filename.toLowerCase(),nc=name.replace(/\s/g,'');
     const jgMap=[['jahrgang5','jg5','klasse5','kl5','_5_'],['jahrgang6','jg6','klasse6','kl6','_6_'],['jahrgang7','jg7','klasse7','kl7','_7_'],['jahrgang8','jg8','klasse8','kl8','_8_'],['jahrgang9','jg9','klasse9','kl9','_9_'],['jahrgang10','jg10','klasse10','kl10','_10_'],['jahrgang11','jg11','klasse11','kl11','_11_'],['jahrgang12','jg12','klasse12','kl12','_12_'],['jahrgang13','jg13','klasse13','kl13','_13_']];
     const jgV=['Jahrgang 5','Jahrgang 6','Jahrgang 7','Jahrgang 8','Jahrgang 9','Jahrgang 10','Jahrgang 11','Jahrgang 12','Jahrgang 13'];
     for(let i=0;i<jgMap.length;i++){if(jgMap[i].some(k=>nc.includes(k))){document.getElementById('sel-jahrgang').value=jgV[i];break;}}
@@ -475,7 +445,7 @@
     for(const[fach,kw]of Object.entries(fm)){if(kw.some(k=>name.includes(k))){document.getElementById('sel-fach').value=fach;break;}}
   }
 
-  function renderFiles() {
+  function renderFiles(){
     const q=document.getElementById('search-input').value.toLowerCase();
     const gef=alleFiles.filter(f=>f.name.toLowerCase().includes(q));
     document.getElementById('count-badge').textContent=gef.length+' Datei'+(gef.length!==1?'en':'');
@@ -501,7 +471,7 @@
   function getIcon(ext){if(ext==='pdf')return{icon:'📄',cls:'icon-pdf'};if(['doc','docx'].includes(ext))return{icon:'📝',cls:'icon-word'};if(['xls','xlsx'].includes(ext))return{icon:'📊',cls:'icon-excel'};if(['ppt','pptx'].includes(ext))return{icon:'📋',cls:'icon-ppt'};if(['png','jpg','jpeg','gif'].includes(ext))return{icon:'🖼️',cls:'icon-img'};return{icon:'📁',cls:'icon-other'};}
   function formatSize(b){if(b<1024)return b+' B';if(b<1024*1024)return(b/1024).toFixed(1)+' KB';return(b/1024/1024).toFixed(1)+' MB';}
 
-  async function uploadFiles(files) {
+  async function uploadFiles(files){
     if(!files?.length)return;
     const jahrgang=document.getElementById('sel-jahrgang').value;const fach=document.getElementById('sel-fach').value;
     document.getElementById('upload-progress').style.display='block';let done=0;
@@ -523,7 +493,7 @@
   function toast(msg,type){const el=document.createElement('div');el.className='toast toast-'+type;el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),3000);}
 
   // KI
-  let currentType='arbeitsblatt', currentTitle='', currentRawText='', currentIsAB=false;
+  let currentType='arbeitsblatt',currentTitle='',currentRawText='';
 
   function setType(btn,type){document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentType=type;}
 
@@ -541,11 +511,10 @@
       .replace(/<p><\/p>/g,'').replace(/<p>(<h[123]>)/g,'$1').replace(/(<\/h[123]>)<\/p>/g,'$1');
   }
 
-  function renderArbeitsblatt(text, thema, klasse, fach) {
-    const lines=text.split('\n');
-    let intro='', aufgaben=[], currentAufgabe=null, aufgabeNr=0;
+  function renderArbeitsblatt(text,thema,klasse,fach){
+    const lines=text.split('\n');let intro='',aufgaben=[],currentAufgabe=null,aufgabeNr=0;
     for(const line of lines){
-      const t=line.trim(); if(!t)continue;
+      const t=line.trim();if(!t)continue;
       const m=t.match(/^(?:Aufgabe\s*(\d+)|(\d+)\.|(\d+)\))[:\s]*(.*)/i);
       if(m){if(currentAufgabe)aufgaben.push(currentAufgabe);aufgabeNr++;currentAufgabe={nr:aufgabeNr,titel:m[4]||'',zeilen:[]};}
       else if(currentAufgabe){currentAufgabe.zeilen.push(t.replace(/\*\*/g,'').replace(/\*/g,'').replace(/^#+\s*/,''));}
@@ -554,53 +523,19 @@
     if(currentAufgabe)aufgaben.push(currentAufgabe);
     if(aufgaben.length===0)return null;
     const datum=new Date().toLocaleDateString('de-DE');
-    let html=`<div class="ab-wrap">
-      <div class="ab-header">
-        <div class="ab-schule">IGS 15 Frankfurt</div>
-        <div class="ab-titel">${thema}</div>
-        <div class="ab-meta">
-          <div class="ab-meta-item"><span class="ab-meta-label">Fach</span><span class="ab-meta-value">${fach||'&nbsp;'}</span></div>
-          <div class="ab-meta-item"><span class="ab-meta-label">Klasse</span><span class="ab-meta-value">${klasse||'&nbsp;'}</span></div>
-          <div class="ab-meta-item"><span class="ab-meta-label">Name</span><span class="ab-meta-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
-          <div class="ab-meta-item"><span class="ab-meta-label">Datum</span><span class="ab-meta-value">${datum}</span></div>
-        </div>
-      </div>`;
+    let html=`<div class="ab-wrap"><div class="ab-header"><div class="ab-schule">IGS 15 Frankfurt</div><div class="ab-titel">${thema}</div><div class="ab-meta"><div class="ab-meta-item"><span class="ab-meta-label">Fach</span><span class="ab-meta-value">${fach||'&nbsp;'}</span></div><div class="ab-meta-item"><span class="ab-meta-label">Klasse</span><span class="ab-meta-value">${klasse||'&nbsp;'}</span></div><div class="ab-meta-item"><span class="ab-meta-label">Name</span><span class="ab-meta-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="ab-meta-item"><span class="ab-meta-label">Datum</span><span class="ab-meta-value">${datum}</span></div></div></div>`;
     if(intro.trim())html+=`<div class="ab-intro">📖 ${intro.trim()}</div>`;
     aufgaben.forEach(a=>{
       html+=`<div class="ab-aufgabe"><div><span class="ab-aufgabe-nr">${a.nr}</span><span class="ab-aufgabe-titel">${a.titel}</span></div><div class="ab-aufgabe-text">`;
-      a.zeilen.forEach(z=>{
-        if(z.startsWith('•')||z.startsWith('-')||z.match(/^\d+\./))html+=`<li>${z.replace(/^[•\-]\s*/,'').replace(/^\d+\.\s*/,'')}</li>`;
-        else html+=`<p>${z}</p>`;
-      });
+      a.zeilen.forEach(z=>{if(z.startsWith('•')||z.startsWith('-')||z.match(/^\d+\./))html+=`<li>${z.replace(/^[•\-]\s*/,'').replace(/^\d+\.\s*/,'')}</li>`;else html+=`<p>${z}</p>`;});
       html+=`<div class="ab-linie"></div><div class="ab-linie"></div><div class="ab-linie"></div></div></div>`;
     });
-    html+=`</div>`;
-    return html;
+    return html+`</div>`;
   }
 
-  const AB_CSS = `
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'DM Sans',sans-serif;padding:20px;color:#1A1714;background:#fff;}
-    .ab-wrap{font-family:sans-serif;}
-    .ab-header{background:linear-gradient(135deg,#1A1714,#3A2F28);color:#fff;border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:1.5rem;}
-    .ab-header .ab-schule{font-size:.75rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;}
-    .ab-header .ab-titel{font-size:1.5rem;font-weight:300;margin-bottom:.75rem;}
-    .ab-header .ab-meta{display:flex;gap:1.5rem;flex-wrap:wrap;}
-    .ab-header .ab-meta-item{display:flex;flex-direction:column;}
-    .ab-header .ab-meta-label{font-size:.65rem;opacity:.5;text-transform:uppercase;letter-spacing:.08em;}
-    .ab-header .ab-meta-value{font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.3);min-width:100px;padding-bottom:2px;margin-top:2px;}
-    .ab-intro{background:#FFF8F0;border-left:4px solid #C4956A;border-radius:0 10px 10px 0;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:.95rem;line-height:1.7;color:#3A2F28;}
-    .ab-aufgabe{background:#fff;border:1.5px solid #EDE7DC;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem;page-break-inside:avoid;}
-    .ab-aufgabe:nth-child(odd){border-left:4px solid #C4956A;}
-    .ab-aufgabe:nth-child(even){border-left:4px solid #5B8DB8;}
-    .ab-aufgabe-nr{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1A1714;color:#fff;font-size:.75rem;font-weight:700;margin-right:.6rem;vertical-align:middle;}
-    .ab-aufgabe-titel{font-weight:600;font-size:.95rem;vertical-align:middle;}
-    .ab-aufgabe-text{margin-top:.6rem;color:#3A2F28;line-height:1.7;font-size:.9rem;}
-    .ab-linie{border:none;border-bottom:1.5px dashed #DDD6CC;margin:.6rem 0;height:24px;display:block;}
-    p{margin-bottom:.4rem;}li{margin-bottom:.2rem;margin-left:1rem;}
-    @media print{body{padding:10px;}.ab-aufgabe{page-break-inside:avoid;}}`;
+  const AB_CSS=`*{box-sizing:border-box;margin:0;padding:0;}body{font-family:sans-serif;padding:20px;color:#1A1714;background:#fff;}.ab-wrap{font-family:sans-serif;}.ab-header{background:linear-gradient(135deg,#1A1714,#3A2F28);color:#fff;border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:1.5rem;}.ab-header .ab-schule{font-size:.75rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem;}.ab-header .ab-titel{font-size:1.5rem;font-weight:300;margin-bottom:.75rem;}.ab-header .ab-meta{display:flex;gap:1.5rem;flex-wrap:wrap;}.ab-header .ab-meta-item{display:flex;flex-direction:column;}.ab-header .ab-meta-label{font-size:.65rem;opacity:.5;text-transform:uppercase;letter-spacing:.08em;}.ab-header .ab-meta-value{font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.3);min-width:100px;padding-bottom:2px;margin-top:2px;}.ab-intro{background:#FFF8F0;border-left:4px solid #C4956A;border-radius:0 10px 10px 0;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:.95rem;line-height:1.7;color:#3A2F28;}.ab-aufgabe{background:#fff;border:1.5px solid #EDE7DC;border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem;page-break-inside:avoid;}.ab-aufgabe:nth-child(odd){border-left:4px solid #C4956A;}.ab-aufgabe:nth-child(even){border-left:4px solid #5B8DB8;}.ab-aufgabe-nr{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1A1714;color:#fff;font-size:.75rem;font-weight:700;margin-right:.6rem;vertical-align:middle;}.ab-aufgabe-titel{font-weight:600;font-size:.95rem;vertical-align:middle;}.ab-aufgabe-text{margin-top:.6rem;color:#3A2F28;line-height:1.7;font-size:.9rem;}.ab-linie{border:none;border-bottom:1.5px dashed #DDD6CC;margin:.6rem 0;height:24px;display:block;}p{margin-bottom:.4rem;}li{margin-bottom:.2rem;margin-left:1rem;}h1,h2,h3{font-weight:600;margin:.8rem 0 .4rem;}strong{font-weight:600;}table{width:100%;border-collapse:collapse;margin-bottom:1rem;}th{background:#f5f0e8;font-weight:600;padding:.5rem .75rem;border:1px solid #ddd;text-align:left;}td{padding:.5rem .75rem;border:1px solid #ddd;}`;
 
-  async function generieren() {
+  async function generieren(){
     const thema=document.getElementById('thema').value.trim();
     const klasse=document.getElementById('klasse').value.trim();
     const fach=document.getElementById('fach').value;
@@ -620,7 +555,7 @@
     const btn=document.getElementById('btn-gen');
     btn.disabled=true;document.getElementById('btn-text').textContent='Wird generiert …';
     document.getElementById('loading').style.display='block';document.getElementById('ki-output').style.display='none';
-    try {
+    try{
       const res=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompts[currentType]}]}],generationConfig:{temperature:0.7,maxOutputTokens:4000}})});
       const data=await res.json();
       if(!res.ok)throw new Error(data.error?.message||'Fehler');
@@ -628,57 +563,40 @@
       document.getElementById('output-title').textContent='✨ '+currentTitle;
       if(currentType==='arbeitsblatt'){
         const abHtml=renderArbeitsblatt(currentRawText,thema,klasse,fach);
-        currentIsAB=!!abHtml;
         document.getElementById('output-body').innerHTML=abHtml||markdownToHtml(currentRawText);
       } else {
-        currentIsAB=false;
         document.getElementById('output-body').innerHTML=markdownToHtml(currentRawText);
       }
       document.getElementById('ki-output').style.display='block';
       document.getElementById('ki-output').scrollIntoView({behavior:'smooth'});
-    } catch(e){alert('Fehler: '+e.message);}
+    }catch(e){alert('Fehler: '+e.message);}
     finally{btn.disabled=false;document.getElementById('btn-text').textContent='Generieren';document.getElementById('loading').style.display='none';}
   }
 
   function kopieren(){navigator.clipboard.writeText(currentRawText).then(()=>{const b=document.querySelector('.btn-action');b.textContent='✅ Kopiert!';setTimeout(()=>b.textContent='📋 Kopieren',2000);});}
 
-  function alsPDFspeichern() {
+  function alsPDFspeichern(){
     const title=currentTitle||'KI-Ergebnis';
     const inhalt=document.getElementById('output-body').innerHTML;
-    const win=window.open('','_blank');
-    win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>${AB_CSS}
-    h1,h2,h3{font-weight:600;margin:.8rem 0 .4rem;}strong{font-weight:600;}
-    table{width:100%;border-collapse:collapse;margin-bottom:1rem;}th{background:#f5f0e8;font-weight:600;padding:.5rem .75rem;border:1px solid #ddd;text-align:left;}td{padding:.5rem .75rem;border:1px solid #ddd;}
-    </style></head><body>${inhalt}
-    <script>window.onload=function(){window.print();}<\/script></body></html>`);
-    win.document.close();
+    const container=document.createElement('div');
+    container.style.cssText='position:fixed;left:-9999px;top:0;width:794px;background:#fff;padding:40px;font-family:sans-serif;color:#1A1714;';
+    container.innerHTML=`<style>${AB_CSS}</style>${inhalt}`;
+    document.body.appendChild(container);
+    const dateiname=title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_')+'.pdf';
+    if(window.html2pdf){
+      html2pdf().set({margin:10,filename:dateiname,html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(container).save().then(()=>document.body.removeChild(container));
+    } else {
+      const script=document.createElement('script');
+      script.src='https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+      script.onload=function(){html2pdf().set({margin:10,filename:dateiname,html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(container).save().then(()=>document.body.removeChild(container));};
+      document.head.appendChild(script);
+    }
   }
 
-  function alsWordspeichern() {
+  function alsWordspeichern(){
     const title=currentTitle||'KI-Ergebnis';
     const inhalt=document.getElementById('output-body').innerHTML;
-    const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-    <head><meta charset="UTF-8"><style>
-    body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.6;margin:2cm;}
-    .ab-header{background:#1A1714;color:#fff;padding:12pt 16pt;margin-bottom:16pt;}
-    .ab-header .ab-schule{font-size:8pt;margin-bottom:4pt;}
-    .ab-header .ab-titel{font-size:16pt;font-weight:300;margin-bottom:8pt;}
-    .ab-header .ab-meta{display:flex;gap:16pt;flex-wrap:wrap;}
-    .ab-header .ab-meta-item{display:flex;flex-direction:column;}
-    .ab-header .ab-meta-label{font-size:7pt;opacity:.7;}
-    .ab-header .ab-meta-value{font-size:9pt;border-bottom:1pt solid rgba(255,255,255,.5);min-width:80pt;padding-bottom:2pt;}
-    .ab-intro{background:#FFF8F0;border-left:4pt solid #C4956A;padding:8pt 12pt;margin-bottom:12pt;font-size:10pt;}
-    .ab-aufgabe{border:1pt solid #EDE7DC;padding:10pt 14pt;margin-bottom:10pt;page-break-inside:avoid;}
-    .ab-aufgabe-nr{display:inline-block;width:20pt;height:20pt;background:#1A1714;color:#fff;font-size:8pt;font-weight:700;text-align:center;line-height:20pt;border-radius:50%;margin-right:6pt;}
-    .ab-aufgabe-titel{font-weight:600;font-size:10pt;}
-    .ab-aufgabe-text{margin-top:6pt;font-size:10pt;line-height:1.6;}
-    .ab-linie{border-bottom:1pt dashed #ccc;margin:5pt 0;height:18pt;display:block;}
-    h1{font-size:16pt;}h2{font-size:14pt;}h3{font-size:12pt;}
-    p{margin-bottom:5pt;}ul{margin-left:14pt;}li{margin-bottom:2pt;}
-    table{border-collapse:collapse;width:100%;}td,th{border:1pt solid #ccc;padding:4pt 8pt;}th{background:#f5f0e8;font-weight:bold;}
-    </style></head><body>${inhalt}</body></html>`;
+    const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.6;margin:2cm;}.ab-header{background:#1A1714;color:#fff;padding:12pt 16pt;margin-bottom:16pt;}.ab-header .ab-schule{font-size:8pt;margin-bottom:4pt;}.ab-header .ab-titel{font-size:16pt;font-weight:300;margin-bottom:8pt;}.ab-header .ab-meta{display:flex;gap:16pt;flex-wrap:wrap;}.ab-header .ab-meta-item{display:flex;flex-direction:column;}.ab-header .ab-meta-label{font-size:7pt;opacity:.7;}.ab-header .ab-meta-value{font-size:9pt;border-bottom:1pt solid rgba(255,255,255,.5);min-width:80pt;padding-bottom:2pt;}.ab-intro{background:#FFF8F0;border-left:4pt solid #C4956A;padding:8pt 12pt;margin-bottom:12pt;font-size:10pt;}.ab-aufgabe{border:1pt solid #EDE7DC;padding:10pt 14pt;margin-bottom:10pt;page-break-inside:avoid;}.ab-aufgabe-nr{display:inline-block;width:20pt;height:20pt;background:#1A1714;color:#fff;font-size:8pt;font-weight:700;text-align:center;line-height:20pt;border-radius:50%;margin-right:6pt;}.ab-aufgabe-titel{font-weight:600;font-size:10pt;}.ab-aufgabe-text{margin-top:6pt;font-size:10pt;line-height:1.6;}.ab-linie{border-bottom:1pt dashed #ccc;margin:5pt 0;height:18pt;display:block;}h1{font-size:16pt;}h2{font-size:14pt;}h3{font-size:12pt;}p{margin-bottom:5pt;}ul{margin-left:14pt;}li{margin-bottom:2pt;}table{border-collapse:collapse;width:100%;}td,th{border:1pt solid #ccc;padding:4pt 8pt;}th{background:#f5f0e8;font-weight:bold;}</style></head><body>${inhalt}</body></html>`;
     const blob=new Blob([html],{type:'application/msword'});
     const a=document.createElement('a');a.href=URL.createObjectURL(blob);
     a.download=title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_')+'.doc';a.click();
