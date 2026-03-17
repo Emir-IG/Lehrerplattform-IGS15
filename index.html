@@ -8,10 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-  :root {
-    --passwort: "IGSF1234!FFM";
-    --schule: "IGS 15";
-  }
+  :root { --passwort: "IGSF1234!FFM"; --schule: "IGS 15"; }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; background: #F5F0E8; min-height: 100vh; color: #1A1714; }
@@ -41,8 +38,8 @@
   .btn-out { padding: .4rem .9rem; border: 1.5px solid #DDD6CC; border-radius: 8px; background: transparent; font-size: .82rem; font-family: 'DM Sans',sans-serif; color: #7A6F65; cursor: pointer; transition: all .15s; }
   .btn-out:hover { border-color: #C4956A; color: #C4956A; }
 
-  .tabs { display: flex; border-bottom: 1px solid #EDE7DC; background: #fff; padding: 0 2rem; position: sticky; top: 60px; z-index: 40; }
-  .tab { padding: .9rem 1.25rem; font-size: .9rem; font-weight: 500; color: #7A6F65; cursor: pointer; border-bottom: 2.5px solid transparent; transition: all .15s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'DM Sans',sans-serif; }
+  .tabs { display: flex; border-bottom: 1px solid #EDE7DC; background: #fff; padding: 0 2rem; position: sticky; top: 60px; z-index: 40; overflow-x: auto; }
+  .tab { padding: .9rem 1.25rem; font-size: .9rem; font-weight: 500; color: #7A6F65; cursor: pointer; border-bottom: 2.5px solid transparent; transition: all .15s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'DM Sans',sans-serif; white-space: nowrap; }
   .tab:hover { color: #1A1714; }
   .tab.active { color: #C4956A; border-bottom-color: #C4956A; }
 
@@ -101,6 +98,7 @@
   .btn-icon.del:hover { background: #FEE2E2; border-color: #FCA5A5; }
   .empty-state { text-align: center; padding: 2.5rem; color: #7A6F65; background: #fff; border-radius: 12px; border: 1px solid #EDE7DC; }
 
+  /* KI */
   .ki-header { margin-bottom: 2rem; }
   .ki-header h2 { font-family: 'Fraunces',serif; font-size: 2.2rem; font-weight: 300; margin-bottom: .4rem; }
   .ki-header h2 em { font-style: italic; color: #C4956A; }
@@ -141,21 +139,72 @@
   .output-body th { background: #F5F0E8; font-weight: 600; padding: .5rem .75rem; border: 1px solid #DDD6CC; text-align: left; }
   .output-body td { padding: .5rem .75rem; border: 1px solid #DDD6CC; }
   .output-body tr:nth-child(even) td { background: #FAF7F3; }
+
+  /* NOTENRECHNER */
+  .noten-header { margin-bottom: 2rem; }
+  .noten-header h2 { font-family: 'Fraunces',serif; font-size: 2.2rem; font-weight: 300; margin-bottom: .4rem; }
+  .noten-header h2 em { font-style: italic; color: #C4956A; }
+  .noten-header p { color: #7A6F65; font-size: .95rem; }
+
+  .noten-box { background: #fff; border-radius: 20px; border: 1px solid #EDE7DC; padding: 1.75rem; margin-bottom: 1.5rem; }
+  .noten-box h3 { font-family: 'Fraunces',serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 1.25rem; }
+
+  .schnell-rechner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; align-items: end; }
+  .schnell-rechner .form-group { margin-bottom: 0; }
+  .note-display { background: #F5F0E8; border-radius: 14px; padding: 1rem; text-align: center; }
+  .note-zahl { font-family: 'Fraunces',serif; font-size: 3rem; font-weight: 500; line-height: 1; }
+  .note-text { font-size: .8rem; color: #7A6F65; margin-top: .25rem; }
+  .note-1 { color: #166534; } .note-2 { color: #1d4ed8; } .note-3 { color: #92400e; }
+  .note-4 { color: #b45309; } .note-5 { color: #dc2626; } .note-6 { color: #7f1d1d; }
+
+  .schluessel-box { display: grid; grid-template-columns: repeat(6, 1fr); gap: .4rem; margin-bottom: 1.5rem; }
+  .schluessel-item { background: #FAF7F3; border: 1px solid #EDE7DC; border-radius: 8px; padding: .6rem .4rem; text-align: center; font-size: .78rem; }
+  .schluessel-item .s-note { font-family: 'Fraunces',serif; font-size: 1.1rem; font-weight: 500; }
+  .schluessel-item .s-range { color: #7A6F65; font-size: .72rem; margin-top: .1rem; }
+
+  /* Klassenliste */
+  .klassen-grid { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1rem; }
+  .schueler-row { display: grid; grid-template-columns: 2fr 1fr 1fr 80px 36px; gap: .5rem; align-items: center; background: #FAF7F3; border: 1px solid #EDE7DC; border-radius: 10px; padding: .6rem .75rem; }
+  .schueler-row input { width: 100%; padding: .5rem .75rem; border: 1.5px solid #E5DDD4; border-radius: 8px; font-size: .88rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #fff; outline: none; }
+  .schueler-row input:focus { border-color: #C4956A; }
+  .schueler-note { font-family: 'Fraunces',serif; font-size: 1.3rem; font-weight: 500; text-align: center; }
+  .schueler-prozent { font-size: .78rem; color: #7A6F65; text-align: center; }
+  .btn-add-schueler { display: flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; background: #F5F0E8; border: 1.5px dashed #C8BCAC; border-radius: 10px; font-size: .88rem; font-family: 'DM Sans',sans-serif; color: #7A6F65; cursor: pointer; transition: all .15s; width: 100%; justify-content: center; margin-bottom: 1rem; }
+  .btn-add-schueler:hover { border-color: #C4956A; color: #C4956A; background: #FEF4EC; }
+
+  /* Notenspiegel */
+  .notenspiegel { background: #FAF7F3; border-radius: 14px; padding: 1.25rem; }
+  .notenspiegel h4 { font-family: 'Fraunces',serif; font-size: 1rem; font-weight: 500; margin-bottom: 1rem; }
+  .spiegel-balken { display: flex; flex-direction: column; gap: .4rem; }
+  .spiegel-row { display: flex; align-items: center; gap: .75rem; }
+  .spiegel-label { width: 60px; font-size: .82rem; font-weight: 600; }
+  .spiegel-bar-wrap { flex: 1; background: #EDE7DC; border-radius: 99px; height: 20px; overflow: hidden; }
+  .spiegel-bar { height: 100%; border-radius: 99px; transition: width .4s; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: .72rem; color: #fff; font-weight: 600; min-width: 24px; }
+  .bar-1{background:#166534} .bar-2{background:#1d4ed8} .bar-3{background:#92400e}
+  .bar-4{background:#b45309} .bar-5{background:#dc2626} .bar-6{background:#7f1d1d}
+  .spiegel-count { width: 30px; font-size: .78rem; color: #7A6F65; text-align: right; }
+  .schnitt-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #EDE7DC; display: flex; justify-content: space-between; align-items: center; }
+  .schnitt-label { font-size: .85rem; color: #7A6F65; }
+  .schnitt-wert { font-family: 'Fraunces',serif; font-size: 1.5rem; font-weight: 500; }
+
   .loading { display: none; text-align: center; padding: 3rem; color: #7A6F65; }
   .loading-dots { display: inline-flex; gap: .4rem; margin-top: .75rem; }
   .loading-dots span { width: 8px; height: 8px; background: #C4956A; border-radius: 50%; animation: bounce .9s infinite; }
   .loading-dots span:nth-child(2) { animation-delay: .15s; }
   .loading-dots span:nth-child(3) { animation-delay: .3s; }
   @keyframes bounce { 0%,80%,100%{transform:scale(0.7);opacity:.4} 40%{transform:scale(1);opacity:1} }
+
   .toast { position: fixed; bottom: 2rem; right: 2rem; padding: .85rem 1.25rem; border-radius: 12px; font-size: .875rem; font-weight: 500; box-shadow: 0 4px 20px rgba(0,0,0,.15); z-index: 999; }
   .toast-success { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
   .toast-error { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
 
   @media (max-width: 600px) {
-    .upload-selects, .form-row { grid-template-columns: 1fr; }
+    .upload-selects, .form-row, .schnell-rechner { grid-template-columns: 1fr; }
+    .schluessel-box { grid-template-columns: repeat(3,1fr); }
+    .schueler-row { grid-template-columns: 1fr 1fr 60px 30px; }
     main { padding: 1.5rem 1rem 3rem; }
     header, .tabs { padding: 0 1rem; }
-    .hero h2, .ki-header h2 { font-size: 1.8rem; }
+    .hero h2, .ki-header h2, .noten-header h2 { font-size: 1.8rem; }
   }
 </style>
 </head>
@@ -183,14 +232,16 @@
   <div class="tabs">
     <button class="tab active" onclick="showTab('materialien',this)">📁 Materialien</button>
     <button class="tab" onclick="showTab('ki',this)">✨ KI-Assistent</button>
+    <button class="tab" onclick="showTab('noten',this)">📊 Notenrechner</button>
   </div>
   <main>
+
+    <!-- MATERIALIEN -->
     <div class="panel active" id="panel-materialien">
       <div class="hero">
         <h2>Unsere <em>gemeinsamen</em> Materialien</h2>
         <p>Nach Jahrgang und Fach sortiert.</p>
       </div>
-
       <div class="upload-box">
         <h3>📤 Datei hochladen</h3>
         <div class="upload-selects">
@@ -241,7 +292,6 @@
           <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
         </div>
       </div>
-
       <div class="controls">
         <div class="search-wrap">
           <span class="search-icon">🔍</span>
@@ -249,10 +299,10 @@
         </div>
         <div class="count-badge" id="count-badge">0 Dateien</div>
       </div>
-
       <div id="file-tree"></div>
     </div>
 
+    <!-- KI ASSISTENT -->
     <div class="panel" id="panel-ki">
       <div class="ki-header">
         <h2>KI-<em>Assistent</em></h2>
@@ -330,6 +380,69 @@
         <div class="output-body" id="output-body"></div>
       </div>
     </div>
+
+    <!-- NOTENRECHNER -->
+    <div class="panel" id="panel-noten">
+      <div class="noten-header">
+        <h2>📊 Noten<em>rechner</em></h2>
+        <p>Punkte eingeben — Note kommt automatisch. Mit Notenspiegel für die ganze Klasse.</p>
+      </div>
+
+      <!-- Einzel-Rechner -->
+      <div class="noten-box">
+        <h3>🎯 Schnellrechner</h3>
+        <div class="schnell-rechner">
+          <div class="form-group">
+            <label>Erreichte Punkte</label>
+            <input type="number" id="punkte-erreicht" placeholder="z.B. 32" min="0" oninput="berechneNote()">
+          </div>
+          <div class="form-group">
+            <label>Maximale Punkte</label>
+            <input type="number" id="punkte-max" placeholder="z.B. 40" min="1" oninput="berechneNote()">
+          </div>
+          <div class="note-display">
+            <div class="note-zahl" id="schnell-note">—</div>
+            <div class="note-text" id="schnell-text">Note</div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:1rem">
+          <label>Notenschlüssel</label>
+          <select id="schluessel" onchange="berechneNote(); berechneKlasse()">
+            <option value="standard">Standard Hessen (ab 50% = 4)</option>
+            <option value="streng">Streng (ab 60% = 4)</option>
+            <option value="mild">Mild (ab 45% = 4)</option>
+          </select>
+        </div>
+
+        <div class="schluessel-box" id="schluessel-anzeige"></div>
+      </div>
+
+      <!-- Klassenliste -->
+      <div class="noten-box">
+        <h3>👥 Klassenliste</h3>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 80px 36px;gap:.5rem;margin-bottom:.5rem;padding:0 .75rem">
+          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em">Name</div>
+          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em">Erreicht</div>
+          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em">Von</div>
+          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em;text-align:center">Note</div>
+          <div></div>
+        </div>
+        <div class="klassen-grid" id="klassen-grid"></div>
+        <button class="btn-add-schueler" onclick="addSchueler()">+ Schüler/in hinzufügen</button>
+
+        <!-- Notenspiegel -->
+        <div class="notenspiegel" id="notenspiegel" style="display:none">
+          <h4>📈 Notenspiegel</h4>
+          <div class="spiegel-balken" id="spiegel-balken"></div>
+          <div class="schnitt-box">
+            <span class="schnitt-label">Klassendurchschnitt</span>
+            <span class="schnitt-wert" id="schnitt-wert">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -353,6 +466,7 @@
     document.getElementById('login').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     loadFiles();
+    initNotenrechner();
   }
 
   function ausloggen() { sessionStorage.clear(); location.reload(); }
@@ -361,6 +475,7 @@
     document.getElementById('login').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     loadFiles();
+    initNotenrechner();
   }
 
   function showTab(id, btn) {
@@ -370,6 +485,123 @@
     btn.classList.add('active');
   }
 
+  // ── NOTENRECHNER ──
+  const SCHLUESSEL = {
+    standard: [{note:1,min:92},{note:2,min:81},{note:3,min:67},{note:4,min:50},{note:5,min:20},{note:6,min:0}],
+    streng:   [{note:1,min:95},{note:2,min:85},{note:3,min:70},{note:4,min:60},{note:5,min:30},{note:6,min:0}],
+    mild:     [{note:1,min:90},{note:2,min:75},{note:3,min:60},{note:4,min:45},{note:5,min:20},{note:6,min:0}],
+  };
+  const NOTEN_TEXT = {1:'Sehr gut',2:'Gut',3:'Befriedigend',4:'Ausreichend',5:'Mangelhaft',6:'Ungenügend'};
+  let schuelerListe = [];
+
+  function getSchluessel() { return SCHLUESSEL[document.getElementById('schluessel').value]; }
+
+  function prozentZuNote(pct) {
+    const sk = getSchluessel();
+    for (const s of sk) { if (pct >= s.min) return s.note; }
+    return 6;
+  }
+
+  function berechneNote() {
+    const err = parseFloat(document.getElementById('punkte-erreicht').value);
+    const max = parseFloat(document.getElementById('punkte-max').value);
+    const el = document.getElementById('schnell-note');
+    const tx = document.getElementById('schnell-text');
+    if (isNaN(err) || isNaN(max) || max <= 0) { el.textContent = '—'; el.className = 'note-zahl'; tx.textContent = 'Note'; return; }
+    const pct = Math.round((err/max)*100);
+    const note = prozentZuNote(pct);
+    el.textContent = note;
+    el.className = 'note-zahl note-' + note;
+    tx.textContent = NOTEN_TEXT[note] + ' (' + pct + '%)';
+    aktualisiereSchluesselAnzeige();
+  }
+
+  function aktualisiereSchluesselAnzeige() {
+    const sk = getSchluessel();
+    const max = parseFloat(document.getElementById('punkte-max').value) || 100;
+    document.getElementById('schluessel-anzeige').innerHTML = sk.map((s,i) => {
+      const bis = i === 0 ? 100 : sk[i-1].min - 1;
+      const vonP = Math.round(s.min / 100 * max);
+      const bisP = Math.round(bis / 100 * max);
+      return `<div class="schluessel-item">
+        <div class="s-note note-${s.note}">${s.note}</div>
+        <div class="s-range">${s.min}–${bis}%</div>
+        <div class="s-range">${vonP}–${bisP}P</div>
+      </div>`;
+    }).join('');
+  }
+
+  function initNotenrechner() {
+    aktualisiereSchluesselAnzeige();
+    if (schuelerListe.length === 0) {
+      for (let i = 0; i < 5; i++) addSchueler();
+    }
+  }
+
+  function addSchueler() {
+    const id = Date.now() + Math.random();
+    schuelerListe.push({ id });
+    renderKlasse();
+  }
+
+  function removeSchueler(id) {
+    schuelerListe = schuelerListe.filter(s => s.id !== id);
+    renderKlasse();
+  }
+
+  function renderKlasse() {
+    const grid = document.getElementById('klassen-grid');
+    const max = parseFloat(document.getElementById('punkte-max').value) || '';
+    grid.innerHTML = schuelerListe.map(s => {
+      return `<div class="schueler-row" id="row-${s.id}">
+        <input type="text" placeholder="Name …" value="${s.name||''}" oninput="updateSchueler(${s.id},'name',this.value)">
+        <input type="number" placeholder="Pkt." min="0" value="${s.erreicht!==undefined?s.erreicht:''}" oninput="updateSchueler(${s.id},'erreicht',this.value)">
+        <input type="number" placeholder="${max||'Max'}" min="1" value="${s.max||max||''}" oninput="updateSchueler(${s.id},'max',this.value)">
+        <div>
+          <div class="schueler-note note-${s.note||''}">${s.note||'—'}</div>
+          <div class="schueler-prozent">${s.pct!==undefined?s.pct+'%':''}</div>
+        </div>
+        <button class="btn-icon del" onclick="removeSchueler(${s.id})">🗑️</button>
+      </div>`;
+    }).join('');
+    berechneKlasse();
+  }
+
+  function updateSchueler(id, feld, wert) {
+    const s = schuelerListe.find(x => x.id === id);
+    if (!s) return;
+    s[feld] = wert;
+    const err = parseFloat(s.erreicht);
+    const max = parseFloat(s.max) || parseFloat(document.getElementById('punkte-max').value);
+    if (!isNaN(err) && !isNaN(max) && max > 0) {
+      s.pct = Math.round((err/max)*100);
+      s.note = prozentZuNote(s.pct);
+    } else { s.pct = undefined; s.note = undefined; }
+    renderKlasse();
+  }
+
+  function berechneKlasse() {
+    const mitNoten = schuelerListe.filter(s => s.note);
+    const verteilung = {1:0,2:0,3:0,4:0,5:0,6:0};
+    mitNoten.forEach(s => verteilung[s.note]++);
+    const spiegel = document.getElementById('notenspiegel');
+    if (mitNoten.length === 0) { spiegel.style.display = 'none'; return; }
+    spiegel.style.display = 'block';
+    const max = Math.max(...Object.values(verteilung), 1);
+    document.getElementById('spiegel-balken').innerHTML = [1,2,3,4,5,6].map(n => {
+      const count = verteilung[n];
+      const pct = Math.round((count/max)*100);
+      return `<div class="spiegel-row">
+        <div class="spiegel-label note-${n}">${n} — ${NOTEN_TEXT[n].split(' ')[0]}</div>
+        <div class="spiegel-bar-wrap"><div class="spiegel-bar bar-${n}" style="width:${pct}%">${count>0?count:''}</div></div>
+        <div class="spiegel-count">${count}×</div>
+      </div>`;
+    }).join('');
+    const schnitt = mitNoten.reduce((a,s) => a + s.note, 0) / mitNoten.length;
+    document.getElementById('schnitt-wert').textContent = schnitt.toFixed(2);
+  }
+
+  // ── DATEIVERWALTUNG ──
   let alleFiles = [];
   let collapsedJG = {};
   let collapsedFach = {};
@@ -384,8 +616,7 @@
 
   function autoDetect(filename) {
     const name = filename.toLowerCase();
-
-    // Jahrgang erkennen
+    const nameClean = name.replace(/\s/g,'');
     const jgMap = [
       ['jahrgang5','jg5','klasse5','kl5','_5_','5.klasse'],
       ['jahrgang6','jg6','klasse6','kl6','_6_','6.klasse'],
@@ -398,114 +629,25 @@
       ['jahrgang13','jg13','klasse13','kl13','_13_','13.klasse'],
     ];
     const jgValues = ['Jahrgang 5','Jahrgang 6','Jahrgang 7','Jahrgang 8','Jahrgang 9','Jahrgang 10','Jahrgang 11','Jahrgang 12','Jahrgang 13'];
-    const nameClean = name.replace(/\s/g,'');
     for (let i = 0; i < jgMap.length; i++) {
       if (jgMap[i].some(k => nameClean.includes(k.replace(/\s/g,'')))) {
         document.getElementById('sel-jahrgang').value = jgValues[i];
         break;
       }
     }
-
-    // Fach erkennen
     const fachMap = {
-      'Deutsch': [
-        'deutsch','grammatik','rechtschreib','aufsatz','lesen','schreiben','text',
-        'märchen','maerchen','fabel','gedicht','kurzgeschichte','erzählung','erzaehlung',
-        'satzglieder','nomen','verb','adjektiv','pronomen','artikel','konjunktion',
-        'präposition','praepositon','diktat','wortschatz','satzbau','interpunktion',
-        'komma','buchstabe','silbe','reim','strophe','metapher','analyse','lyrik',
-        'epik','dramatik','inhaltsangabe','charakterisierung','brief','bewerbung',
-        'leseförderung','lesen','vorlesen','buchvorstellung','leseverstehen','lrs',
-        'groß','klein','getrennt','zusammen','fremdwort','lehnwort','deutsch'
-      ],
-      'Mathematik': [
-        'mathe','mathematik','geometrie','algebra','rechnen','zahlen','bruch',
-        'dezimal','prozent','gleichung','funktion','diagramm','statistik',
-        'wahrscheinlichkeit','dreieck','viereck','kreis','fläche','volumen',
-        'umfang','winkel','koordinaten','achse','steigung','addition','subtraktion',
-        'multiplikation','division','potenzen','wurzel','primzahl','teiler',
-        'vielfache','dreisatz','verhältnis','terme','variable','ungleichung',
-        'kurvendiskussion','ableitung','integral','logarithmus','sinus','kosinus',
-        'tangens','stochastik','kombinatorik','matrize','vektor'
-      ],
-      'Englisch': [
-        'englisch','english','vocabulary','grammar','reading','writing','listening',
-        'speaking','present','past','future','tense','irregular','verb','noun',
-        'adjective','adverb','preposition','article','sentence','paragraph',
-        'text','story','poem','dialogue','letter','email','worksheet','exercise',
-        'simple','continuous','perfect','passive','conditional','relative',
-        'clause','punctuation','spelling','pronunciation','british','american'
-      ],
-      'GL (Gesellschaftslehre)': [
-        'gl','gesellschaft','politik','geschichte','erdkunde','geographie','sozial',
-        'ägypten','aegypten','griechen','rom','römer','roemer','mittelalter',
-        'demokratie','wirtschaft','europa','welt','antike','revolution','krieg',
-        'frieden','recht','gesetz','staat','regierung','parlament','wahl','partei',
-        'grundgesetz','menschenrecht','globalisierung','migration','flucht','asyl',
-        'klima','umwelt','nachhaltigkeit','ressourcen','karte','kontinent','land',
-        'hauptstadt','bevölkerung','stadtentwicklung','industrie','landwirtschaft',
-        'mittelmeer','orient','islam','christentum','judentum','reformation',
-        'aufklärung','kolonialismus','imperialismus','weltkrieg','holocaust',
-        'nationalsozialismus','ddr','brd','mauerfall','kalter krieg','un','nato',
-        'steinzeit','bronzezeit','eisenzeit','pharao','mesopotamien','babylon',
-        'alexander','caesar','feudalismus','kreuzzug','pest','humanismus',
-        'entdeckung','sklaverei','industrialisierung','weimarer','kaiserreich'
-      ],
-      'NaWi (Naturwissenschaften)': [
-        'nawi','natur','physik','chemie','biologie','bio','pflanzen','tiere',
-        'atom','energie','wärme','optik','elektr','magnet','kraft','bewegung',
-        'welle','schall','licht','strom','spannung','widerstand','säure','base',
-        'reaktion','verbrennung','oxidation','reduktion','element','periodensystem',
-        'molekül','ion','zelle','organ','körper','ernährung','verdauung','blut',
-        'kreislauf','gehirn','nerven','sinne','evolution','ökologie','ökosystem',
-        'fotosynthese','respiration','vererbung','gen','dna','bakterien','virus',
-        'impfung','experiment','hypothese','beobachtung','auswertung','labor',
-        'thermometer','druck','aggregatzustand','wasser','luft','boden','wetter'
-      ],
-      'Ethik': [
-        'ethik','moral','werte','religion','philosophie','verantwortung','gewissen',
-        'gerechtigkeit','freiheit','würde','respekt','toleranz','empathie','mitgefühl',
-        'freundschaft','liebe','familie','gemeinschaft','konflikt','gewalt','mobbing',
-        'sucht','drogen','medien','soziale netzwerke','identität','selbstbild',
-        'glück','sinn','tod','trauer','hoffnung','glaube','ritual','fest','gebet',
-        'buddhismus','hinduismus','judentum','islam','christentum','weltreligion',
-        'normen','regeln','taboo','dilemma','utilitarismus','kant','aristoteles'
-      ],
-      'Sport': [
-        'sport','bewegung','turnen','fitness','ausdauer','kraft','koordination',
-        'dehnung','aufwärmen','spiel','fußball','basketball','volleyball','handball',
-        'leichtathletik','schwimmen','tanzen','geräteturnen','kampfsport','yoga',
-        'laufen','werfen','springen','klettern','radfahren','puls','herzrate',
-        'training','wettkampf','regelkunde','fair play','teamwork'
-      ],
-      'Kunst': [
-        'kunst','zeichnen','malen','farbe','gestalt','form','linie','fläche',
-        'perspektive','komposition','collage','skulptur','plastik','drucken',
-        'aquarell','acryl','öl','bleistift','kohle','pastell','digitale kunst',
-        'art','design','grafik','illustration','bildanalyse','kunstgeschichte',
-        'renaissance','barock','impressionismus','expressionismus','modern',
-        'picasso','rembrandt','warhol','architekt','bauhaus','stil','technik'
-      ],
-      'Musik': [
-        'musik','rhythmus','instrument','note','takt','melodie','harmonie',
-        'dur','moll','intervall','akkord','stimme','chor','orchester','band',
-        'komposition','improvisation','lied','song','klassik','pop','rock','jazz',
-        'hip hop','folk','weltmusik','beethoven','mozart','bach','notation',
-        'dynamik','tempo','klang','frequenz','hören','musikgeschichte'
-      ],
-      'Arbeitslehre': [
-        'arbeitslehre','technik','haushalt','beruf','kochen','backen','nähen',
-        'holz','metall','elektro','werkzeug','maschine','produktion','wirtschaft',
-        'unternehmen','bewerbung','praktikum','berufsorientierung','ausbildung',
-        'handwerk','industrie','consumer','haushalt','ernährung','textil'
-      ],
-      'Förderung': [
-        'förder','lrs','dyskal','inklusion','inklusiv','sonderpädagogik',
-        'differenzierung','nachteilsausgleich','unterstützung','lernschwäche',
-        'konzentration','aufmerksamkeit','adhs','autismus','sprachförderung'
-      ],
+      'Deutsch': ['deutsch','grammatik','rechtschreib','aufsatz','lesen','schreiben','märchen','maerchen','fabel','gedicht','kurzgeschichte','erzählung','erzaehlung','satzglieder','nomen','verb','adjektiv','pronomen','artikel','diktat','wortschatz','satzbau','interpunktion','komma','reim','strophe','metapher','lyrik','epik','inhaltsangabe','charakterisierung','brief','bewerbung','leseverstehen'],
+      'Mathematik': ['mathe','mathematik','geometrie','algebra','rechnen','zahlen','bruch','dezimal','prozent','gleichung','funktion','diagramm','statistik','wahrscheinlichkeit','dreieck','viereck','kreis','fläche','volumen','umfang','winkel','koordinaten','addition','subtraktion','multiplikation','division','potenzen','wurzel','primzahl','dreisatz','terme','variable','stochastik','vektor'],
+      'Englisch': ['englisch','english','vocabulary','grammar','reading','writing','listening','present','past','future','tense','irregular','verb','noun','adjective','adverb','preposition','sentence','paragraph','dialogue','letter','email','simple','continuous','perfect','passive','conditional','spelling'],
+      'GL (Gesellschaftslehre)': ['gl','gesellschaft','politik','geschichte','erdkunde','geographie','sozial','ägypten','aegypten','griechen','rom','römer','roemer','mittelalter','demokratie','wirtschaft','europa','welt','antike','revolution','krieg','frieden','recht','gesetz','staat','regierung','parlament','wahl','partei','grundgesetz','menschenrecht','globalisierung','migration','flucht','asyl','klima','kontinent','bevölkerung','stadtentwicklung','pharao','mesopotamien','babylon','alexander','caesar','feudalismus','kreuzzug','pest','humanismus','sklaverei','industrialisierung','weimarer','kaiserreich','holocaust','nationalsozialismus','ddr','brd','mauerfall','un','nato','steinzeit','bronzezeit','eisenzeit'],
+      'NaWi (Naturwissenschaften)': ['nawi','natur','physik','chemie','biologie','bio','pflanzen','tiere','atom','energie','wärme','optik','elektr','magnet','kraft','bewegung','welle','schall','licht','strom','spannung','widerstand','säure','base','reaktion','verbrennung','element','periodensystem','molekül','ion','zelle','organ','körper','ernährung','verdauung','blut','kreislauf','gehirn','nerven','evolution','ökologie','ökosystem','fotosynthese','vererbung','gen','dna','bakterien','virus','impfung','experiment','hypothese','thermometer','druck','aggregatzustand'],
+      'Ethik': ['ethik','moral','werte','religion','philosophie','verantwortung','gewissen','gerechtigkeit','freiheit','würde','respekt','toleranz','empathie','freundschaft','liebe','familie','gemeinschaft','konflikt','gewalt','mobbing','sucht','drogen','identität','glück','sinn','tod','trauer','hoffnung','glaube','ritual','buddhismus','hinduismus','judentum','islam','christentum','weltreligion','normen','dilemma'],
+      'Sport': ['sport','bewegung','turnen','fitness','ausdauer','kraft','koordination','dehnung','aufwärmen','fußball','basketball','volleyball','handball','leichtathletik','schwimmen','tanzen','geräteturnen','laufen','werfen','springen','klettern','puls','training','wettkampf','regelkunde'],
+      'Kunst': ['kunst','zeichnen','malen','farbe','gestalt','form','linie','perspektive','komposition','collage','skulptur','drucken','aquarell','acryl','bleistift','kohle','pastell','design','grafik','illustration','bildanalyse','kunstgeschichte','renaissance','barock','impressionismus','expressionismus'],
+      'Musik': ['musik','rhythmus','instrument','note','takt','melodie','harmonie','dur','moll','intervall','akkord','stimme','chor','orchester','band','komposition','lied','song','klassik','pop','rock','jazz','beethoven','mozart','bach','notation','dynamik','tempo','klang'],
+      'Arbeitslehre': ['arbeitslehre','technik','haushalt','beruf','kochen','backen','nähen','holz','metall','elektro','werkzeug','maschine','produktion','unternehmen','bewerbung','praktikum','berufsorientierung','ausbildung','handwerk','ernährung','textil'],
+      'Förderung': ['förder','lrs','dyskal','inklusion','inklusiv','sonderpädagogik','differenzierung','nachteilsausgleich','unterstützung','lernschwäche','konzentration','aufmerksamkeit','adhs','autismus','sprachförderung'],
     };
-
     for (const [fach, keywords] of Object.entries(fachMap)) {
       if (keywords.some(k => name.includes(k))) {
         document.getElementById('sel-fach').value = fach;
@@ -518,13 +660,11 @@
     const q = document.getElementById('search-input').value.toLowerCase();
     const gefiltert = alleFiles.filter(f => f.name.toLowerCase().includes(q));
     document.getElementById('count-badge').textContent = gefiltert.length + ' Datei' + (gefiltert.length !== 1 ? 'en' : '');
-
     const tree = document.getElementById('file-tree');
     if (!gefiltert.length) {
       tree.innerHTML = `<div class="empty-state"><p>${alleFiles.length ? '🔍 Keine Treffer' : '📂 Noch keine Dateien — lade jetzt hoch!'}</p></div>`;
       return;
     }
-
     const struktur = {};
     gefiltert.forEach(f => {
       const jg = f.jahrgang || 'Allgemein';
@@ -533,23 +673,14 @@
       if (!struktur[jg][fach]) struktur[jg][fach] = [];
       struktur[jg][fach].push(f);
     });
-
-    const fachIcons = {
-      'Deutsch':'🖊️','Mathematik':'📐','Englisch':'🌍',
-      'GL (Gesellschaftslehre)':'🏛️','NaWi (Naturwissenschaften)':'🔬',
-      'Ethik':'☯️','Sport':'⚽','Kunst':'🎨','Musik':'🎵',
-      'Arbeitslehre':'🔧','Förderung':'💡','Sonstiges':'🗂️'
-    };
-
+    const fachIcons = {'Deutsch':'🖊️','Mathematik':'📐','Englisch':'🌍','GL (Gesellschaftslehre)':'🏛️','NaWi (Naturwissenschaften)':'🔬','Ethik':'☯️','Sport':'⚽','Kunst':'🎨','Musik':'🎵','Arbeitslehre':'🔧','Förderung':'💡','Sonstiges':'🗂️'};
     tree.innerHTML = Object.keys(struktur).sort().map(jg => {
       const jgFiles = Object.values(struktur[jg]).flat();
       const jgId = jg.replace(/[^a-z0-9]/gi,'_');
       const jgCollapsed = collapsedJG[jg];
       return `<div class="jahrgang-gruppe">
         <div class="jahrgang-titel ${jgCollapsed?'collapsed':''}" onclick="toggleJG('${jg}')">
-          📁 ${jg}
-          <span class="jg-badge">${jgFiles.length}</span>
-          <span class="jg-arrow">▾</span>
+          📁 ${jg} <span class="jg-badge">${jgFiles.length}</span><span class="jg-arrow">▾</span>
         </div>
         <div id="jg-${jgId}" style="display:${jgCollapsed?'none':'block'}">
           ${Object.keys(struktur[jg]).sort().map(fach => {
@@ -559,9 +690,7 @@
             const icon = fachIcons[fach] || '📁';
             return `<div class="fach-gruppe">
               <div class="fach-titel ${fachCollapsed?'collapsed':''}" onclick="toggleFach('${jg}','${fach}')">
-                ${icon} ${fach}
-                <span class="fach-badge">${fachFiles.length}</span>
-                <span class="fach-arrow">▾</span>
+                ${icon} ${fach} <span class="fach-badge">${fachFiles.length}</span><span class="fach-arrow">▾</span>
               </div>
               <div class="file-list" id="fach-${fachId}" style="display:${fachCollapsed?'none':'flex'}">
                 ${fachFiles.map(f => {
@@ -576,8 +705,8 @@
                       <div class="file-meta">${size} · ${datum}</div>
                     </div>
                     <div class="file-actions">
-                      <button class="btn-icon" title="Herunterladen" onclick="window.open('${WORKER}/download/${encodeURIComponent(f.key)}')">⬇️</button>
-                      <button class="btn-icon del" title="Löschen" onclick="deleteFile('${f.key}','${f.name}')">🗑️</button>
+                      <button class="btn-icon" onclick="window.open('${WORKER}/download/${encodeURIComponent(f.key)}')">⬇️</button>
+                      <button class="btn-icon del" onclick="deleteFile('${f.key}','${f.name}')">🗑️</button>
                     </div>
                   </div>`;
                 }).join('')}
@@ -593,54 +722,47 @@
   function toggleFach(jg, fach) { collapsedFach[jg+'_'+fach] = !collapsedFach[jg+'_'+fach]; renderFiles(); }
 
   function getIcon(ext) {
-    if (ext === 'pdf') return { icon: '📄', cls: 'icon-pdf' };
-    if (['doc','docx'].includes(ext)) return { icon: '📝', cls: 'icon-word' };
-    if (['xls','xlsx'].includes(ext)) return { icon: '📊', cls: 'icon-excel' };
-    if (['ppt','pptx'].includes(ext)) return { icon: '📋', cls: 'icon-ppt' };
-    if (['png','jpg','jpeg','gif'].includes(ext)) return { icon: '🖼️', cls: 'icon-img' };
-    return { icon: '📁', cls: 'icon-other' };
+    if (ext==='pdf') return {icon:'📄',cls:'icon-pdf'};
+    if (['doc','docx'].includes(ext)) return {icon:'📝',cls:'icon-word'};
+    if (['xls','xlsx'].includes(ext)) return {icon:'📊',cls:'icon-excel'};
+    if (['ppt','pptx'].includes(ext)) return {icon:'📋',cls:'icon-ppt'};
+    if (['png','jpg','jpeg','gif'].includes(ext)) return {icon:'🖼️',cls:'icon-img'};
+    return {icon:'📁',cls:'icon-other'};
   }
 
   function formatSize(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-    return (bytes/1024/1024).toFixed(1) + ' MB';
+    if (bytes<1024) return bytes+' B';
+    if (bytes<1024*1024) return (bytes/1024).toFixed(1)+' KB';
+    return (bytes/1024/1024).toFixed(1)+' MB';
   }
 
   async function uploadFiles(files) {
     if (!files?.length) return;
     const jahrgang = document.getElementById('sel-jahrgang').value;
     const fach = document.getElementById('sel-fach').value;
-    const kategorie = jahrgang + ' / ' + fach;
     document.getElementById('upload-progress').style.display = 'block';
     let done = 0;
     for (const file of files) {
       document.getElementById('progress-label').textContent = `Lade hoch: ${file.name}`;
-      document.getElementById('progress-bar').style.width = Math.round((done/files.length)*100) + '%';
+      document.getElementById('progress-bar').style.width = Math.round((done/files.length)*100)+'%';
       const fd = new FormData();
       fd.append('file', file);
-      fd.append('kategorie', kategorie);
+      fd.append('kategorie', jahrgang+' / '+fach);
       fd.append('jahrgang', jahrgang);
       fd.append('fach', fach);
-      try {
-        await fetch(WORKER + '/upload', { method: 'POST', body: fd });
-        done++;
-      } catch(e) { toast('❌ Fehler: ' + file.name, 'error'); }
+      try { await fetch(WORKER+'/upload',{method:'POST',body:fd}); done++; }
+      catch(e) { toast('❌ Fehler: '+file.name,'error'); }
     }
-    document.getElementById('progress-bar').style.width = '100%';
-    setTimeout(() => {
-      document.getElementById('upload-progress').style.display = 'none';
-      document.getElementById('progress-bar').style.width = '0%';
-      document.getElementById('file-input').value = '';
-    }, 500);
-    toast('✅ ' + done + ' Datei(en) hochgeladen', 'success');
+    document.getElementById('progress-bar').style.width='100%';
+    setTimeout(()=>{ document.getElementById('upload-progress').style.display='none'; document.getElementById('progress-bar').style.width='0%'; document.getElementById('file-input').value=''; },500);
+    toast('✅ '+done+' Datei(en) hochgeladen','success');
     loadFiles();
   }
 
   async function deleteFile(key, name) {
     if (!confirm(`"${name}" wirklich löschen?`)) return;
-    await fetch(WORKER + '/delete/' + encodeURIComponent(key), { method: 'DELETE' });
-    toast('🗑️ Gelöscht', 'success');
+    await fetch(WORKER+'/delete/'+encodeURIComponent(key),{method:'DELETE'});
+    toast('🗑️ Gelöscht','success');
     loadFiles();
   }
 
@@ -650,18 +772,19 @@
 
   function toast(msg, type) {
     const el = document.createElement('div');
-    el.className = 'toast toast-' + type;
+    el.className = 'toast toast-'+type;
     el.textContent = msg;
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 3000);
+    setTimeout(()=>el.remove(),3000);
   }
 
+  // KI
   let currentType = 'arbeitsblatt';
   let currentTitle = '';
   let currentRawText = '';
 
   function setType(btn, type) {
-    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     currentType = type;
   }
@@ -688,7 +811,6 @@
     const niveau=document.getElementById('niveau').value;
     const wuensche=document.getElementById('wuensche').value.trim();
     if (!thema) { alert('Bitte ein Thema eingeben.'); return; }
-
     const labels={arbeitsblatt:'Arbeitsblatt',stunde:'Stundenplanung',reihe:'Unterrichtsreihe',pruefung:'Prüfungsaufgaben',elternbrief:'Elternbrief'};
     const extra=`\nFach: ${fach||'nicht angegeben'}\nKlasse: ${klasse||'nicht angegeben'}\nNiveau: ${niveau||'mittel'}\n${wuensche?'Wünsche: '+wuensche:''}`;
     const prompts={
@@ -698,64 +820,50 @@
       pruefung:`Erstelle Prüfungsaufgaben.\nThema: ${thema}${extra}\n\n3 Anforderungsebenen mit Punkten und Lösungserwartungen.`,
       elternbrief:`Schreibe einen Elternbrief.\nAnlass: ${thema}\nSchule: IGS 15\nKlasse: ${klasse||'nicht angegeben'}\n${wuensche?'Hinweise: '+wuensche:''}\n\nFreundlich, professionell, mit Datum und Grußformel.`
     };
-
-    currentTitle = labels[currentType] + ': ' + thema;
+    currentTitle = labels[currentType]+': '+thema;
     const btn = document.getElementById('btn-gen');
     btn.disabled = true;
     document.getElementById('btn-text').textContent = 'Wird generiert …';
     document.getElementById('loading').style.display = 'block';
     document.getElementById('ki-output').style.display = 'none';
-
     try {
-      const res = await fetch(WORKER, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents:[{parts:[{text:prompts[currentType]}]}], generationConfig:{temperature:0.7,maxOutputTokens:4000} })
-      });
+      const res = await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompts[currentType]}]}],generationConfig:{temperature:0.7,maxOutputTokens:4000}})});
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error?.message || 'Fehler');
-      currentRawText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Keine Antwort erhalten.';
-      document.getElementById('output-title').textContent = '✨ ' + currentTitle;
+      if (!res.ok) throw new Error(data.error?.message||'Fehler');
+      currentRawText = data.candidates?.[0]?.content?.parts?.[0]?.text||'Keine Antwort erhalten.';
+      document.getElementById('output-title').textContent = '✨ '+currentTitle;
       document.getElementById('output-body').innerHTML = markdownToHtml(currentRawText);
       document.getElementById('ki-output').style.display = 'block';
-      document.getElementById('ki-output').scrollIntoView({ behavior: 'smooth' });
-    } catch(e) { alert('Fehler: ' + e.message); }
-    finally {
-      btn.disabled = false;
-      document.getElementById('btn-text').textContent = 'Generieren';
-      document.getElementById('loading').style.display = 'none';
-    }
+      document.getElementById('ki-output').scrollIntoView({behavior:'smooth'});
+    } catch(e) { alert('Fehler: '+e.message); }
+    finally { btn.disabled=false; document.getElementById('btn-text').textContent='Generieren'; document.getElementById('loading').style.display='none'; }
   }
 
   function kopieren() {
-    navigator.clipboard.writeText(currentRawText).then(() => {
-      const b = document.querySelector('.btn-action');
-      b.textContent = '✅ Kopiert!';
-      setTimeout(() => b.textContent = '📋 Kopieren', 2000);
+    navigator.clipboard.writeText(currentRawText).then(()=>{
+      const b=document.querySelector('.btn-action'); b.textContent='✅ Kopiert!'; setTimeout(()=>b.textContent='📋 Kopieren',2000);
     });
   }
 
   function alsPDFspeichern() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
-    const title = currentTitle || 'KI-Ergebnis';
-    doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.text(title, 20, 20);
-    doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.text('IGS 15 — Lehrkräfte-Plattform', 20, 28);
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    const title=currentTitle||'KI-Ergebnis';
+    doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.text(title,20,20);
+    doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.text('IGS 15 — Lehrkräfte-Plattform',20,28);
     doc.setDrawColor(196,149,106); doc.setLineWidth(0.5); doc.line(20,32,190,32);
-    const clean = currentRawText.replace(/#{1,4} /g,'').replace(/\*\*/g,'').replace(/\*/g,'').replace(/^- /gm,'• ');
-    const lines = doc.splitTextToSize(clean, 170);
-    let y = 40;
-    lines.forEach(line => { if (y > 280) { doc.addPage(); y = 20; } doc.text(line, 20, y); y += 6; });
-    doc.save(title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_') + '.pdf');
+    const clean=currentRawText.replace(/#{1,4} /g,'').replace(/\*\*/g,'').replace(/\*/g,'').replace(/^- /gm,'• ');
+    const lines=doc.splitTextToSize(clean,170); let y=40;
+    lines.forEach(line=>{if(y>280){doc.addPage();y=20;}doc.text(line,20,y);y+=6;});
+    doc.save(title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_')+'.pdf');
   }
 
   function alsWordspeichern() {
-    const title = currentTitle || 'KI-Ergebnis';
-    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.6;margin:2cm}h1{font-size:16pt}h2{font-size:14pt}h3{font-size:12pt}.meta{color:#666;font-size:10pt;border-bottom:1pt solid #C4956A;padding-bottom:6pt;margin-bottom:20pt}p{margin-bottom:6pt}ul{margin-left:16pt}li{margin-bottom:3pt}table{border-collapse:collapse;width:100%}td,th{border:1pt solid #ccc;padding:4pt 8pt}th{background:#f5f0e8;font-weight:bold}</style></head><body><h1>${title}</h1><p class="meta">IGS 15 — Lehrkräfte-Plattform</p>${markdownToHtml(currentRawText)}</body></html>`;
-    const blob = new Blob([html], { type: 'application/msword' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_') + '.doc';
-    a.click();
+    const title=currentTitle||'KI-Ergebnis';
+    const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.6;margin:2cm}h1{font-size:16pt}h2{font-size:14pt}h3{font-size:12pt}.meta{color:#666;font-size:10pt;border-bottom:1pt solid #C4956A;padding-bottom:6pt;margin-bottom:20pt}p{margin-bottom:6pt}ul{margin-left:16pt}li{margin-bottom:3pt}table{border-collapse:collapse;width:100%}td,th{border:1pt solid #ccc;padding:4pt 8pt}th{background:#f5f0e8;font-weight:bold}</style></head><body><h1>${title}</h1><p class="meta">IGS 15 — Lehrkräfte-Plattform</p>${markdownToHtml(currentRawText)}</body></html>`;
+    const blob=new Blob([html],{type:'application/msword'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download=title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_')+'.doc'; a.click();
   }
 </script>
 </body>
