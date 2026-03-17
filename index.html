@@ -98,6 +98,7 @@
   .btn-icon.del:hover { background: #FEE2E2; border-color: #FCA5A5; }
   .empty-state { text-align: center; padding: 2.5rem; color: #7A6F65; background: #fff; border-radius: 12px; border: 1px solid #EDE7DC; }
 
+  /* KI */
   .ki-header { margin-bottom: 2rem; }
   .ki-header h2 { font-family: 'Fraunces',serif; font-size: 2.2rem; font-weight: 300; margin-bottom: .4rem; }
   .ki-header h2 em { font-style: italic; color: #C4956A; }
@@ -125,7 +126,9 @@
   .btn-pdf:hover { background: #a87845; border-color: #a87845; color: #fff; }
   .btn-word { background: #2B5797; color: #fff; border-color: #2B5797; }
   .btn-word:hover { background: #1e3f6e; border-color: #1e3f6e; color: #fff; }
-  .output-body { padding: 1.5rem; font-size: .95rem; line-height: 1.8; color: #2A2420; max-height: 600px; overflow-y: auto; }
+
+  /* Output Body — normaler Modus */
+  .output-body { padding: 1.5rem; font-size: .95rem; line-height: 1.8; color: #2A2420; max-height: 700px; overflow-y: auto; }
   .output-body h1 { font-family: 'Fraunces',serif; font-size: 1.4rem; font-weight: 500; margin: 1.2rem 0 .5rem; }
   .output-body h2 { font-family: 'Fraunces',serif; font-size: 1.2rem; font-weight: 500; margin: 1rem 0 .4rem; }
   .output-body h3 { font-size: 1rem; font-weight: 600; margin: .8rem 0 .3rem; }
@@ -139,20 +142,40 @@
   .output-body td { padding: .5rem .75rem; border: 1px solid #DDD6CC; }
   .output-body tr:nth-child(even) td { background: #FAF7F3; }
 
+  /* Arbeitsblatt-Stil */
+  .ab-wrap { font-family: 'DM Sans', sans-serif; max-width: 100%; }
+  .ab-header { background: linear-gradient(135deg, #1A1714, #3A2F28); color: #fff; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; }
+  .ab-header .ab-schule { font-size: .8rem; opacity: .6; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .3rem; }
+  .ab-header .ab-titel { font-family: 'Fraunces',serif; font-size: 1.6rem; font-weight: 300; margin-bottom: .75rem; }
+  .ab-header .ab-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .ab-header .ab-meta-item { display: flex; flex-direction: column; }
+  .ab-header .ab-meta-label { font-size: .7rem; opacity: .5; text-transform: uppercase; letter-spacing: .08em; }
+  .ab-header .ab-meta-value { font-size: .9rem; border-bottom: 1px solid rgba(255,255,255,.3); min-width: 100px; padding-bottom: 2px; margin-top: 2px; }
+  .ab-intro { background: #FFF8F0; border-left: 4px solid #C4956A; border-radius: 0 10px 10px 0; padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: .95rem; line-height: 1.7; color: #3A2F28; }
+  .ab-aufgabe { background: #fff; border: 1.5px solid #EDE7DC; border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; position: relative; }
+  .ab-aufgabe:nth-child(odd) { border-left: 4px solid #C4956A; }
+  .ab-aufgabe:nth-child(even) { border-left: 4px solid #5B8DB8; }
+  .ab-aufgabe-nr { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #1A1714; color: #fff; font-size: .78rem; font-weight: 700; margin-right: .6rem; flex-shrink: 0; vertical-align: middle; }
+  .ab-aufgabe-titel { font-weight: 600; font-size: 1rem; display: inline; vertical-align: middle; }
+  .ab-aufgabe-text { margin-top: .6rem; color: #3A2F28; line-height: 1.7; font-size: .93rem; }
+  .ab-aufgabe ul, .ab-aufgabe ol { padding-left: 1.5rem; margin-top: .4rem; }
+  .ab-aufgabe li { margin-bottom: .3rem; font-size: .92rem; }
+  .ab-linie { border: none; border-bottom: 1.5px dashed #DDD6CC; margin: .6rem 0; height: 28px; display: block; }
+  .ab-info-box { background: #EEF4FB; border: 1px solid #BFD4EB; border-radius: 10px; padding: .9rem 1.1rem; margin: .75rem 0; font-size: .88rem; color: #1A3A5C; }
+  .ab-tipp-box { background: #FFF8E7; border: 1px solid #F0D080; border-radius: 10px; padding: .9rem 1.1rem; margin: .75rem 0; font-size: .88rem; color: #5A3E00; }
+  .ab-punkte { float: right; background: #F5F0E8; border-radius: 20px; padding: .2rem .7rem; font-size: .75rem; font-weight: 600; color: #7A6F65; }
+
   /* NOTENRECHNER */
   .noten-header { margin-bottom: 2rem; }
   .noten-header h2 { font-family: 'Fraunces',serif; font-size: 2.2rem; font-weight: 300; margin-bottom: .4rem; }
   .noten-header h2 em { font-style: italic; color: #C4956A; }
   .noten-header p { color: #7A6F65; font-size: .95rem; }
-
   .noten-box { background: #fff; border-radius: 20px; border: 1px solid #EDE7DC; padding: 1.75rem; margin-bottom: 1.5rem; }
   .noten-box h3 { font-family: 'Fraunces',serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 1.25rem; }
   .noten-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
   .noten-label { display: block; font-size: .78rem; font-weight: 500; color: #7A6F65; margin-bottom: .35rem; letter-spacing: .04em; text-transform: uppercase; }
   .noten-input { width: 100%; padding: .85rem 1rem; border: 1.5px solid #E5DDD4; border-radius: 10px; font-size: 1.1rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #FAF7F3; outline: none; transition: border-color .2s; }
   .noten-input:focus { border-color: #C4956A; background: #fff; box-shadow: 0 0 0 3px rgba(196,149,106,.15); }
-
-  /* Notentabelle */
   .noten-tabelle { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; }
   .noten-tabelle thead tr { background: #1A1714; color: #F5F0E8; }
   .noten-tabelle th { padding: .75rem 1rem; text-align: left; font-size: .85rem; font-weight: 500; letter-spacing: .03em; }
@@ -179,6 +202,7 @@
     main { padding: 1.5rem 1rem 3rem; }
     header, .tabs { padding: 0 1rem; }
     .hero h2, .ki-header h2, .noten-header h2 { font-size: 1.8rem; }
+    .ab-header .ab-meta { gap: .75rem; }
   }
 </style>
 </head>
@@ -444,22 +468,20 @@
 
   function berechneTabelle() {
     const max = parseInt(document.getElementById('max-punkte').value);
-    if (!max || max < 1) { document.getElementById('noten-tabelle-wrap').style.display = 'none'; return; }
-
+    if (!max || max < 1) { document.getElementById('noten-tabelle-wrap').style.display='none'; return; }
     const sk = SCHLUESSEL[document.getElementById('noten-schluessel').value];
     document.getElementById('noten-tabelle-wrap').style.display = 'block';
-
     const tbody = document.getElementById('noten-tbody');
-    tbody.innerHTML = sk.map((s, i) => {
-      const bisProz = i === 0 ? 100 : sk[i-1].min - 1;
-      const vonPkt = Math.ceil(s.min / 100 * max);
-      const bisPkt = Math.floor(bisProz / 100 * max);
+    tbody.innerHTML = sk.map((s,i) => {
+      const bisProz = i===0 ? 100 : sk[i-1].min-1;
+      const vonPkt = Math.ceil(s.min/100*max);
+      const bisPkt = Math.floor(bisProz/100*max);
       return `<tr>
         <td><span class="note-chip chip-${s.note}">${s.note}</span></td>
         <td><strong>${NOTEN_TEXT[s.note]}</strong></td>
         <td>${vonPkt} Punkte</td>
         <td>${bisPkt} Punkte</td>
-        <td>${s.min} % – ${bisProz} %</td>
+        <td>${s.min}% – ${bisProz}%</td>
       </tr>`;
     }).join('');
   }
@@ -480,177 +502,66 @@
   function autoDetect(filename) {
     const name = filename.toLowerCase();
     const nameClean = name.replace(/\s/g,'');
-    const jgMap = [
-      ['jahrgang5','jg5','klasse5','kl5','_5_','5.klasse'],
-      ['jahrgang6','jg6','klasse6','kl6','_6_','6.klasse'],
-      ['jahrgang7','jg7','klasse7','kl7','_7_','7.klasse'],
-      ['jahrgang8','jg8','klasse8','kl8','_8_','8.klasse'],
-      ['jahrgang9','jg9','klasse9','kl9','_9_','9.klasse'],
-      ['jahrgang10','jg10','klasse10','kl10','_10_','10.klasse'],
-      ['jahrgang11','jg11','klasse11','kl11','_11_','11.klasse'],
-      ['jahrgang12','jg12','klasse12','kl12','_12_','12.klasse'],
-      ['jahrgang13','jg13','klasse13','kl13','_13_','13.klasse'],
-    ];
+    const jgMap = [['jahrgang5','jg5','klasse5','kl5','_5_'],['jahrgang6','jg6','klasse6','kl6','_6_'],['jahrgang7','jg7','klasse7','kl7','_7_'],['jahrgang8','jg8','klasse8','kl8','_8_'],['jahrgang9','jg9','klasse9','kl9','_9_'],['jahrgang10','jg10','klasse10','kl10','_10_'],['jahrgang11','jg11','klasse11','kl11','_11_'],['jahrgang12','jg12','klasse12','kl12','_12_'],['jahrgang13','jg13','klasse13','kl13','_13_']];
     const jgValues = ['Jahrgang 5','Jahrgang 6','Jahrgang 7','Jahrgang 8','Jahrgang 9','Jahrgang 10','Jahrgang 11','Jahrgang 12','Jahrgang 13'];
-    for (let i = 0; i < jgMap.length; i++) {
-      if (jgMap[i].some(k => nameClean.includes(k.replace(/\s/g,'')))) {
-        document.getElementById('sel-jahrgang').value = jgValues[i];
-        break;
-      }
-    }
-    const fachMap = {
-      'Deutsch': ['deutsch','grammatik','rechtschreib','aufsatz','lesen','schreiben','märchen','maerchen','fabel','gedicht','kurzgeschichte','erzählung','satzglieder','nomen','verb','adjektiv','pronomen','diktat','wortschatz','satzbau','interpunktion','reim','strophe','metapher','lyrik','epik','inhaltsangabe','charakterisierung','brief','bewerbung','leseverstehen'],
-      'Mathematik': ['mathe','mathematik','geometrie','algebra','rechnen','zahlen','bruch','dezimal','prozent','gleichung','funktion','diagramm','statistik','wahrscheinlichkeit','dreieck','viereck','kreis','fläche','volumen','umfang','winkel','koordinaten','addition','subtraktion','multiplikation','division','potenzen','wurzel','primzahl','dreisatz','terme','variable','stochastik','vektor'],
-      'Englisch': ['englisch','english','vocabulary','grammar','reading','writing','listening','present','past','future','tense','irregular','verb','noun','adjective','adverb','preposition','sentence','paragraph','dialogue','letter','email','simple','continuous','perfect','passive','conditional','spelling'],
-      'GL (Gesellschaftslehre)': ['gl','gesellschaft','politik','geschichte','erdkunde','geographie','sozial','ägypten','aegypten','griechen','rom','römer','mittelalter','demokratie','wirtschaft','europa','welt','antike','revolution','krieg','frieden','recht','gesetz','staat','regierung','parlament','wahl','partei','grundgesetz','menschenrecht','globalisierung','migration','flucht','klima','kontinent','bevölkerung','pharao','mesopotamien','babylon','alexander','caesar','feudalismus','kreuzzug','pest','humanismus','sklaverei','industrialisierung','weimarer','kaiserreich','holocaust','nationalsozialismus','ddr','brd','mauerfall','un','nato','steinzeit','bronzezeit','eisenzeit'],
-      'NaWi (Naturwissenschaften)': ['nawi','natur','physik','chemie','biologie','bio','pflanzen','tiere','atom','energie','wärme','optik','elektr','magnet','kraft','bewegung','welle','schall','licht','strom','spannung','widerstand','säure','base','reaktion','verbrennung','element','periodensystem','molekül','ion','zelle','organ','körper','ernährung','verdauung','blut','kreislauf','gehirn','nerven','evolution','ökologie','ökosystem','fotosynthese','vererbung','gen','dna','bakterien','virus','experiment','hypothese','thermometer','druck','aggregatzustand'],
-      'Ethik': ['ethik','moral','werte','religion','philosophie','verantwortung','gewissen','gerechtigkeit','freiheit','würde','respekt','toleranz','empathie','freundschaft','liebe','familie','gemeinschaft','konflikt','gewalt','mobbing','sucht','drogen','identität','glück','sinn','tod','trauer','hoffnung','glaube','ritual','buddhismus','hinduismus','judentum','islam','christentum','weltreligion','normen','dilemma'],
-      'Sport': ['sport','bewegung','turnen','fitness','ausdauer','kraft','koordination','dehnung','aufwärmen','fußball','basketball','volleyball','handball','leichtathletik','schwimmen','tanzen','geräteturnen','laufen','werfen','springen','klettern','puls','training','wettkampf','regelkunde'],
-      'Kunst': ['kunst','zeichnen','malen','farbe','gestalt','form','linie','perspektive','komposition','collage','skulptur','drucken','aquarell','acryl','bleistift','kohle','pastell','design','grafik','illustration','bildanalyse','kunstgeschichte','renaissance','barock','impressionismus','expressionismus'],
-      'Musik': ['musik','rhythmus','instrument','note','takt','melodie','harmonie','dur','moll','intervall','akkord','stimme','chor','orchester','band','komposition','lied','song','klassik','pop','rock','jazz','beethoven','mozart','bach','notation','dynamik','tempo','klang'],
-      'Arbeitslehre': ['arbeitslehre','technik','haushalt','beruf','kochen','backen','nähen','holz','metall','elektro','werkzeug','maschine','produktion','unternehmen','bewerbung','praktikum','berufsorientierung','ausbildung','handwerk','ernährung','textil'],
-      'Förderung': ['förder','lrs','dyskal','inklusion','inklusiv','sonderpädagogik','differenzierung','nachteilsausgleich','unterstützung','lernschwäche','konzentration','aufmerksamkeit','adhs','autismus','sprachförderung'],
-    };
-    for (const [fach, keywords] of Object.entries(fachMap)) {
-      if (keywords.some(k => name.includes(k))) {
-        document.getElementById('sel-fach').value = fach;
-        break;
-      }
-    }
+    for (let i=0;i<jgMap.length;i++) { if (jgMap[i].some(k=>nameClean.includes(k))) { document.getElementById('sel-jahrgang').value=jgValues[i]; break; } }
+    const fachMap = {'Deutsch':['deutsch','grammatik','rechtschreib','aufsatz','lesen','schreiben','märchen','maerchen','fabel','gedicht','kurzgeschichte','erzählung','satzglieder','nomen','verb','adjektiv','pronomen','diktat','wortschatz','satzbau','interpunktion','reim','strophe','metapher','lyrik','epik','inhaltsangabe','charakterisierung','brief','bewerbung'],'Mathematik':['mathe','mathematik','geometrie','algebra','rechnen','zahlen','bruch','dezimal','prozent','gleichung','funktion','diagramm','statistik','wahrscheinlichkeit','dreieck','viereck','kreis','fläche','volumen','umfang','winkel','koordinaten','addition','subtraktion','multiplikation','division','potenzen','wurzel','primzahl','dreisatz','terme','variable','stochastik','vektor'],'Englisch':['englisch','english','vocabulary','grammar','reading','writing','listening','present','past','future','tense','irregular','verb','noun','adjective','adverb','preposition','sentence','paragraph','dialogue','letter','email','simple','continuous','perfect','passive','conditional','spelling'],'GL (Gesellschaftslehre)':['gl','gesellschaft','politik','geschichte','erdkunde','geographie','sozial','ägypten','aegypten','griechen','rom','römer','mittelalter','demokratie','wirtschaft','europa','welt','antike','revolution','krieg','frieden','recht','gesetz','staat','regierung','parlament','wahl','partei','grundgesetz','menschenrecht','globalisierung','migration','flucht','klima','kontinent','bevölkerung','pharao','mesopotamien','babylon','alexander','caesar','feudalismus','kreuzzug','pest','humanismus','sklaverei','industrialisierung','weimarer','kaiserreich','holocaust','nationalsozialismus','ddr','brd','mauerfall','un','nato','steinzeit','bronzezeit','eisenzeit'],'NaWi (Naturwissenschaften)':['nawi','natur','physik','chemie','biologie','bio','pflanzen','tiere','atom','energie','wärme','optik','elektr','magnet','kraft','bewegung','welle','schall','licht','strom','spannung','widerstand','säure','base','reaktion','verbrennung','element','periodensystem','molekül','ion','zelle','organ','körper','ernährung','verdauung','blut','kreislauf','gehirn','nerven','evolution','ökologie','ökosystem','fotosynthese','vererbung','gen','dna','bakterien','virus','experiment','hypothese','thermometer','druck'],'Ethik':['ethik','moral','werte','religion','philosophie','verantwortung','gewissen','gerechtigkeit','freiheit','würde','respekt','toleranz','empathie','freundschaft','liebe','familie','gemeinschaft','konflikt','gewalt','mobbing','sucht','drogen','identität','glück','sinn','tod','trauer','hoffnung','glaube','ritual','buddhismus','hinduismus','judentum','islam','christentum','weltreligion','normen','dilemma'],'Sport':['sport','bewegung','turnen','fitness','ausdauer','kraft','koordination','dehnung','aufwärmen','fußball','basketball','volleyball','handball','leichtathletik','schwimmen','tanzen','geräteturnen','laufen','werfen','springen','klettern','puls','training','wettkampf'],'Kunst':['kunst','zeichnen','malen','farbe','gestalt','form','linie','perspektive','komposition','collage','skulptur','drucken','aquarell','acryl','bleistift','kohle','pastell','design','grafik','illustration','bildanalyse','kunstgeschichte'],'Musik':['musik','rhythmus','instrument','note','takt','melodie','harmonie','dur','moll','intervall','akkord','stimme','chor','orchester','band','komposition','lied','song','klassik','pop','rock','jazz','beethoven','mozart','bach','notation','dynamik','tempo'],'Arbeitslehre':['arbeitslehre','technik','haushalt','beruf','kochen','backen','nähen','holz','metall','elektro','werkzeug','maschine','produktion','unternehmen','bewerbung','praktikum','berufsorientierung','ausbildung','handwerk','ernährung','textil'],'Förderung':['förder','lrs','dyskal','inklusion','inklusiv','sonderpädagogik','differenzierung','nachteilsausgleich','unterstützung','lernschwäche','konzentration','aufmerksamkeit','adhs','autismus','sprachförderung']};
+    for (const [fach,keywords] of Object.entries(fachMap)) { if (keywords.some(k=>name.includes(k))) { document.getElementById('sel-fach').value=fach; break; } }
   }
 
   function renderFiles() {
     const q = document.getElementById('search-input').value.toLowerCase();
-    const gefiltert = alleFiles.filter(f => f.name.toLowerCase().includes(q));
-    document.getElementById('count-badge').textContent = gefiltert.length + ' Datei' + (gefiltert.length !== 1 ? 'en' : '');
+    const gefiltert = alleFiles.filter(f=>f.name.toLowerCase().includes(q));
+    document.getElementById('count-badge').textContent = gefiltert.length+' Datei'+(gefiltert.length!==1?'en':'');
     const tree = document.getElementById('file-tree');
-    if (!gefiltert.length) {
-      tree.innerHTML = `<div class="empty-state"><p>${alleFiles.length ? '🔍 Keine Treffer' : '📂 Noch keine Dateien — lade jetzt hoch!'}</p></div>`;
-      return;
-    }
+    if (!gefiltert.length) { tree.innerHTML=`<div class="empty-state"><p>${alleFiles.length?'🔍 Keine Treffer':'📂 Noch keine Dateien — lade jetzt hoch!'}</p></div>`; return; }
     const struktur = {};
-    gefiltert.forEach(f => {
-      const jg = f.jahrgang || 'Allgemein';
-      const fach = f.fach || 'Sonstiges';
-      if (!struktur[jg]) struktur[jg] = {};
-      if (!struktur[jg][fach]) struktur[jg][fach] = [];
-      struktur[jg][fach].push(f);
-    });
-    const fachIcons = {'Deutsch':'🖊️','Mathematik':'📐','Englisch':'🌍','GL (Gesellschaftslehre)':'🏛️','NaWi (Naturwissenschaften)':'🔬','Ethik':'☯️','Sport':'⚽','Kunst':'🎨','Musik':'🎵','Arbeitslehre':'🔧','Förderung':'💡','Sonstiges':'🗂️'};
-    tree.innerHTML = Object.keys(struktur).sort().map(jg => {
-      const jgFiles = Object.values(struktur[jg]).flat();
-      const jgId = jg.replace(/[^a-z0-9]/gi,'_');
-      const jgCollapsed = collapsedJG[jg];
-      return `<div class="jahrgang-gruppe">
-        <div class="jahrgang-titel ${jgCollapsed?'collapsed':''}" onclick="toggleJG('${jg}')">
-          📁 ${jg} <span class="jg-badge">${jgFiles.length}</span><span class="jg-arrow">▾</span>
-        </div>
-        <div id="jg-${jgId}" style="display:${jgCollapsed?'none':'block'}">
-          ${Object.keys(struktur[jg]).sort().map(fach => {
-            const fachFiles = struktur[jg][fach];
-            const fachId = (jg+fach).replace(/[^a-z0-9]/gi,'_');
-            const fachCollapsed = collapsedFach[jg+'_'+fach];
-            const icon = fachIcons[fach] || '📁';
-            return `<div class="fach-gruppe">
-              <div class="fach-titel ${fachCollapsed?'collapsed':''}" onclick="toggleFach('${jg}','${fach}')">
-                ${icon} ${fach} <span class="fach-badge">${fachFiles.length}</span><span class="fach-arrow">▾</span>
-              </div>
-              <div class="file-list" id="fach-${fachId}" style="display:${fachCollapsed?'none':'flex'}">
-                ${fachFiles.map(f => {
-                  const ext = f.name.split('.').pop().toLowerCase();
-                  const {icon:fi,cls} = getIcon(ext);
-                  const size = formatSize(f.size);
-                  const datum = new Date(f.uploaded).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
-                  return `<div class="file-item">
-                    <div class="file-icon ${cls}">${fi}</div>
-                    <div class="file-info">
-                      <div class="file-name" title="${f.name}">${f.name}</div>
-                      <div class="file-meta">${size} · ${datum}</div>
-                    </div>
-                    <div class="file-actions">
-                      <button class="btn-icon" onclick="window.open('${WORKER}/download/${encodeURIComponent(f.key)}')">⬇️</button>
-                      <button class="btn-icon del" onclick="deleteFile('${f.key}','${f.name}')">🗑️</button>
-                    </div>
-                  </div>`;
-                }).join('')}
-              </div>
-            </div>`;
-          }).join('')}
-        </div>
-      </div>`;
+    gefiltert.forEach(f=>{ const jg=f.jahrgang||'Allgemein'; const fach=f.fach||'Sonstiges'; if(!struktur[jg])struktur[jg]={}; if(!struktur[jg][fach])struktur[jg][fach]=[]; struktur[jg][fach].push(f); });
+    const fachIcons={'Deutsch':'🖊️','Mathematik':'📐','Englisch':'🌍','GL (Gesellschaftslehre)':'🏛️','NaWi (Naturwissenschaften)':'🔬','Ethik':'☯️','Sport':'⚽','Kunst':'🎨','Musik':'🎵','Arbeitslehre':'🔧','Förderung':'💡','Sonstiges':'🗂️'};
+    tree.innerHTML=Object.keys(struktur).sort().map(jg=>{
+      const jgFiles=Object.values(struktur[jg]).flat(); const jgId=jg.replace(/[^a-z0-9]/gi,'_'); const jgCollapsed=collapsedJG[jg];
+      return `<div class="jahrgang-gruppe"><div class="jahrgang-titel ${jgCollapsed?'collapsed':''}" onclick="toggleJG('${jg}')">📁 ${jg}<span class="jg-badge">${jgFiles.length}</span><span class="jg-arrow">▾</span></div><div id="jg-${jgId}" style="display:${jgCollapsed?'none':'block'}">${Object.keys(struktur[jg]).sort().map(fach=>{
+        const fachFiles=struktur[jg][fach]; const fachId=(jg+fach).replace(/[^a-z0-9]/gi,'_'); const fachCollapsed=collapsedFach[jg+'_'+fach]; const icon=fachIcons[fach]||'📁';
+        return `<div class="fach-gruppe"><div class="fach-titel ${fachCollapsed?'collapsed':''}" onclick="toggleFach('${jg}','${fach}')">${icon} ${fach}<span class="fach-badge">${fachFiles.length}</span><span class="fach-arrow">▾</span></div><div class="file-list" id="fach-${fachId}" style="display:${fachCollapsed?'none':'flex'}">${fachFiles.map(f=>{
+          const ext=f.name.split('.').pop().toLowerCase(); const {icon:fi,cls}=getIcon(ext); const size=formatSize(f.size); const datum=new Date(f.uploaded).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
+          return `<div class="file-item"><div class="file-icon ${cls}">${fi}</div><div class="file-info"><div class="file-name" title="${f.name}">${f.name}</div><div class="file-meta">${size} · ${datum}</div></div><div class="file-actions"><button class="btn-icon" onclick="window.open('${WORKER}/download/${encodeURIComponent(f.key)}')">⬇️</button><button class="btn-icon del" onclick="deleteFile('${f.key}','${f.name}')">🗑️</button></div></div>`;
+        }).join('')}</div></div>`;
+      }).join('')}</div></div>`;
     }).join('');
   }
 
-  function toggleJG(jg) { collapsedJG[jg]=!collapsedJG[jg]; renderFiles(); }
-  function toggleFach(jg,fach) { collapsedFach[jg+'_'+fach]=!collapsedFach[jg+'_'+fach]; renderFiles(); }
-
-  function getIcon(ext) {
-    if (ext==='pdf') return {icon:'📄',cls:'icon-pdf'};
-    if (['doc','docx'].includes(ext)) return {icon:'📝',cls:'icon-word'};
-    if (['xls','xlsx'].includes(ext)) return {icon:'📊',cls:'icon-excel'};
-    if (['ppt','pptx'].includes(ext)) return {icon:'📋',cls:'icon-ppt'};
-    if (['png','jpg','jpeg','gif'].includes(ext)) return {icon:'🖼️',cls:'icon-img'};
-    return {icon:'📁',cls:'icon-other'};
-  }
-
-  function formatSize(bytes) {
-    if (bytes<1024) return bytes+' B';
-    if (bytes<1024*1024) return (bytes/1024).toFixed(1)+' KB';
-    return (bytes/1024/1024).toFixed(1)+' MB';
-  }
+  function toggleJG(jg){collapsedJG[jg]=!collapsedJG[jg];renderFiles();}
+  function toggleFach(jg,fach){collapsedFach[jg+'_'+fach]=!collapsedFach[jg+'_'+fach];renderFiles();}
+  function getIcon(ext){if(ext==='pdf')return{icon:'📄',cls:'icon-pdf'};if(['doc','docx'].includes(ext))return{icon:'📝',cls:'icon-word'};if(['xls','xlsx'].includes(ext))return{icon:'📊',cls:'icon-excel'};if(['ppt','pptx'].includes(ext))return{icon:'📋',cls:'icon-ppt'};if(['png','jpg','jpeg','gif'].includes(ext))return{icon:'🖼️',cls:'icon-img'};return{icon:'📁',cls:'icon-other'};}
+  function formatSize(bytes){if(bytes<1024)return bytes+' B';if(bytes<1024*1024)return(bytes/1024).toFixed(1)+' KB';return(bytes/1024/1024).toFixed(1)+' MB';}
 
   async function uploadFiles(files) {
     if (!files?.length) return;
-    const jahrgang = document.getElementById('sel-jahrgang').value;
-    const fach = document.getElementById('sel-fach').value;
-    document.getElementById('upload-progress').style.display = 'block';
-    let done = 0;
+    const jahrgang=document.getElementById('sel-jahrgang').value; const fach=document.getElementById('sel-fach').value;
+    document.getElementById('upload-progress').style.display='block'; let done=0;
     for (const file of files) {
-      document.getElementById('progress-label').textContent = `Lade hoch: ${file.name}`;
-      document.getElementById('progress-bar').style.width = Math.round((done/files.length)*100)+'%';
-      const fd = new FormData();
-      fd.append('file', file);
-      fd.append('kategorie', jahrgang+' / '+fach);
-      fd.append('jahrgang', jahrgang);
-      fd.append('fach', fach);
-      try { await fetch(WORKER+'/upload',{method:'POST',body:fd}); done++; }
-      catch(e) { toast('❌ Fehler: '+file.name,'error'); }
+      document.getElementById('progress-label').textContent=`Lade hoch: ${file.name}`;
+      document.getElementById('progress-bar').style.width=Math.round((done/files.length)*100)+'%';
+      const fd=new FormData(); fd.append('file',file); fd.append('kategorie',jahrgang+' / '+fach); fd.append('jahrgang',jahrgang); fd.append('fach',fach);
+      try{await fetch(WORKER+'/upload',{method:'POST',body:fd});done++;}catch(e){toast('❌ Fehler: '+file.name,'error');}
     }
     document.getElementById('progress-bar').style.width='100%';
-    setTimeout(()=>{ document.getElementById('upload-progress').style.display='none'; document.getElementById('progress-bar').style.width='0%'; document.getElementById('file-input').value=''; },500);
-    toast('✅ '+done+' Datei(en) hochgeladen','success');
-    loadFiles();
+    setTimeout(()=>{document.getElementById('upload-progress').style.display='none';document.getElementById('progress-bar').style.width='0%';document.getElementById('file-input').value='';},500);
+    toast('✅ '+done+' Datei(en) hochgeladen','success'); loadFiles();
   }
 
-  async function deleteFile(key, name) {
-    if (!confirm(`"${name}" wirklich löschen?`)) return;
-    await fetch(WORKER+'/delete/'+encodeURIComponent(key),{method:'DELETE'});
-    toast('🗑️ Gelöscht','success');
-    loadFiles();
-  }
+  async function deleteFile(key,name){if(!confirm(`"${name}" wirklich löschen?`))return;await fetch(WORKER+'/delete/'+encodeURIComponent(key),{method:'DELETE'});toast('🗑️ Gelöscht','success');loadFiles();}
+  function handleDragOver(e){e.preventDefault();document.getElementById('upload-zone').classList.add('drag-over');}
+  function handleDragLeave(){document.getElementById('upload-zone').classList.remove('drag-over');}
+  function handleDrop(e){e.preventDefault();handleDragLeave();if(e.dataTransfer.files[0])autoDetect(e.dataTransfer.files[0].name);uploadFiles(e.dataTransfer.files);}
+  function toast(msg,type){const el=document.createElement('div');el.className='toast toast-'+type;el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),3000);}
 
-  function handleDragOver(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag-over'); }
-  function handleDragLeave() { document.getElementById('upload-zone').classList.remove('drag-over'); }
-  function handleDrop(e) { e.preventDefault(); handleDragLeave(); if(e.dataTransfer.files[0]) autoDetect(e.dataTransfer.files[0].name); uploadFiles(e.dataTransfer.files); }
-
-  function toast(msg, type) {
-    const el = document.createElement('div');
-    el.className = 'toast toast-'+type;
-    el.textContent = msg;
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),3000);
-  }
-
-  // KI
+  // ── KI ──
   let currentType = 'arbeitsblatt';
   let currentTitle = '';
   let currentRawText = '';
 
-  function setType(btn, type) {
-    document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentType = type;
-  }
+  function setType(btn,type){document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentType=type;}
 
   function markdownToHtml(text) {
     return text
@@ -667,66 +578,149 @@
       .replace(/<p><\/p>/g,'').replace(/<p>(<h[123]>)/g,'$1').replace(/(<\/h[123]>)<\/p>/g,'$1');
   }
 
+  function renderArbeitsblatt(text, thema, klasse, fach) {
+    // Teile den Text in Abschnitte auf
+    const lines = text.split('\n');
+    let intro = '';
+    let aufgaben = [];
+    let currentAufgabe = null;
+    let aufgabeNr = 0;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+
+      // Aufgaben erkennen
+      const aufgabeMatch = trimmed.match(/^(?:Aufgabe\s*(\d+)|(\d+)\.|(\d+)\))[:\s]*(.*)/i);
+      if (aufgabeMatch) {
+        if (currentAufgabe) aufgaben.push(currentAufgabe);
+        aufgabeNr++;
+        const titel = aufgabeMatch[4] || '';
+        currentAufgabe = { nr: aufgabeNr, titel, zeilen: [] };
+      } else if (currentAufgabe) {
+        currentAufgabe.zeilen.push(trimmed.replace(/\*\*/g,'').replace(/\*/g,'').replace(/^#+\s*/,''));
+      } else {
+        if (!trimmed.match(/^#+\s/) && !trimmed.match(/^Arbeitsblatt/i)) {
+          intro += trimmed.replace(/\*\*/g,'').replace(/\*/g,'') + ' ';
+        }
+      }
+    }
+    if (currentAufgabe) aufgaben.push(currentAufgabe);
+
+    // Falls keine Aufgaben erkannt → normale Darstellung
+    if (aufgaben.length === 0) return null;
+
+    const datum = new Date().toLocaleDateString('de-DE');
+
+    let html = `<div class="ab-wrap">
+      <div class="ab-header">
+        <div class="ab-schule">IGS 15 Frankfurt</div>
+        <div class="ab-titel">${thema}</div>
+        <div class="ab-meta">
+          <div class="ab-meta-item"><span class="ab-meta-label">Fach</span><span class="ab-meta-value">${fach||'&nbsp;'}</span></div>
+          <div class="ab-meta-item"><span class="ab-meta-label">Klasse</span><span class="ab-meta-value">${klasse||'&nbsp;'}</span></div>
+          <div class="ab-meta-item"><span class="ab-meta-label">Name</span><span class="ab-meta-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+          <div class="ab-meta-item"><span class="ab-meta-label">Datum</span><span class="ab-meta-value">${datum}</span></div>
+        </div>
+      </div>`;
+
+    if (intro.trim()) {
+      html += `<div class="ab-intro">📖 ${intro.trim()}</div>`;
+    }
+
+    aufgaben.forEach((a, i) => {
+      const inhalt = a.zeilen.join('\n');
+      const hatListe = inhalt.includes('•') || inhalt.includes('-') || /^\d\./.test(inhalt);
+      html += `<div class="ab-aufgabe">
+        <div><span class="ab-aufgabe-nr">${a.nr}</span><span class="ab-aufgabe-titel">${a.titel}</span></div>
+        <div class="ab-aufgabe-text">`;
+
+      const zeilen = a.zeilen;
+      zeilen.forEach(z => {
+        if (z.startsWith('•') || z.startsWith('-') || z.match(/^\d+\./)) {
+          html += `<li>${z.replace(/^[•\-]\s*/,'').replace(/^\d+\.\s*/,'')}</li>`;
+        } else {
+          html += `<p>${z}</p>`;
+        }
+      });
+
+      // Schreiblinien für Antworten
+      html += `<div class="ab-linie"></div><div class="ab-linie"></div><div class="ab-linie"></div>`;
+      html += `</div></div>`;
+    });
+
+    html += `</div>`;
+    return html;
+  }
+
   async function generieren() {
     const thema=document.getElementById('thema').value.trim();
     const klasse=document.getElementById('klasse').value.trim();
     const fach=document.getElementById('fach').value;
     const niveau=document.getElementById('niveau').value;
     const wuensche=document.getElementById('wuensche').value.trim();
-    if (!thema) { alert('Bitte ein Thema eingeben.'); return; }
+    if (!thema){alert('Bitte ein Thema eingeben.');return;}
+
     const labels={arbeitsblatt:'Arbeitsblatt',stunde:'Stundenplanung',reihe:'Unterrichtsreihe',pruefung:'Prüfungsaufgaben',elternbrief:'Elternbrief'};
     const extra=`\nFach: ${fach||'nicht angegeben'}\nKlasse: ${klasse||'nicht angegeben'}\nNiveau: ${niveau||'mittel'}\n${wuensche?'Wünsche: '+wuensche:''}`;
+
     const prompts={
-      arbeitsblatt:`Erstelle ein detailliertes Arbeitsblatt.\nThema: ${thema}${extra}\n\nEinführungstext, mind. 5 Aufgaben, klar strukturiert. Auf Deutsch.`,
+      arbeitsblatt:`Erstelle ein Arbeitsblatt für den Schulunterricht.\nThema: ${thema}${extra}\n\nFormat:\n- Beginne mit einem kurzen Einführungstext (2-3 Sätze)\n- Dann mind. 5 Aufgaben im Format "Aufgabe 1: [Titel]"\n- Jede Aufgabe mit klarer Aufgabenstellung\n- Auf Deutsch, schulgerecht\n- Keine Markdown-Formatierung außer Aufgabennummern`,
       stunde:`Erstelle eine Stundenplanung (90 Min.).\nThema: ${thema}${extra}\n\nLernziele, Verlaufsplan (Zeit/Phase/Inhalt/Methode/Sozialform), Materialien, Differenzierung, Hausaufgabe.`,
       reihe:`Erstelle eine Unterrichtsreihenplanung.\nThema: ${thema}${extra}\n\nLernziele, 6-8 Stunden, Leistungsüberprüfung.`,
       pruefung:`Erstelle Prüfungsaufgaben.\nThema: ${thema}${extra}\n\n3 Anforderungsebenen mit Punkten und Lösungserwartungen.`,
       elternbrief:`Schreibe einen Elternbrief.\nAnlass: ${thema}\nSchule: IGS 15\nKlasse: ${klasse||'nicht angegeben'}\n${wuensche?'Hinweise: '+wuensche:''}\n\nFreundlich, professionell, mit Datum und Grußformel.`
     };
-    currentTitle = labels[currentType]+': '+thema;
-    const btn = document.getElementById('btn-gen');
-    btn.disabled = true;
-    document.getElementById('btn-text').textContent = 'Wird generiert …';
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('ki-output').style.display = 'none';
+
+    currentTitle=labels[currentType]+': '+thema;
+    const btn=document.getElementById('btn-gen');
+    btn.disabled=true;
+    document.getElementById('btn-text').textContent='Wird generiert …';
+    document.getElementById('loading').style.display='block';
+    document.getElementById('ki-output').style.display='none';
+
     try {
-      const res = await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompts[currentType]}]}],generationConfig:{temperature:0.7,maxOutputTokens:4000}})});
-      const data = await res.json();
+      const res=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompts[currentType]}]}],generationConfig:{temperature:0.7,maxOutputTokens:4000}})});
+      const data=await res.json();
       if (!res.ok) throw new Error(data.error?.message||'Fehler');
-      currentRawText = data.candidates?.[0]?.content?.parts?.[0]?.text||'Keine Antwort erhalten.';
-      document.getElementById('output-title').textContent = '✨ '+currentTitle;
-      document.getElementById('output-body').innerHTML = markdownToHtml(currentRawText);
-      document.getElementById('ki-output').style.display = 'block';
+      currentRawText=data.candidates?.[0]?.content?.parts?.[0]?.text||'Keine Antwort erhalten.';
+      document.getElementById('output-title').textContent='✨ '+currentTitle;
+
+      // Arbeitsblatt schön rendern, Rest normal
+      if (currentType === 'arbeitsblatt') {
+        const abHtml = renderArbeitsblatt(currentRawText, thema, klasse, fach);
+        document.getElementById('output-body').innerHTML = abHtml || markdownToHtml(currentRawText);
+      } else {
+        document.getElementById('output-body').innerHTML = markdownToHtml(currentRawText);
+      }
+
+      document.getElementById('ki-output').style.display='block';
       document.getElementById('ki-output').scrollIntoView({behavior:'smooth'});
-    } catch(e) { alert('Fehler: '+e.message); }
-    finally { btn.disabled=false; document.getElementById('btn-text').textContent='Generieren'; document.getElementById('loading').style.display='none'; }
+    } catch(e){alert('Fehler: '+e.message);}
+    finally{btn.disabled=false;document.getElementById('btn-text').textContent='Generieren';document.getElementById('loading').style.display='none';}
   }
 
-  function kopieren() {
-    navigator.clipboard.writeText(currentRawText).then(()=>{
-      const b=document.querySelector('.btn-action'); b.textContent='✅ Kopiert!'; setTimeout(()=>b.textContent='📋 Kopieren',2000);
-    });
-  }
+  function kopieren(){navigator.clipboard.writeText(currentRawText).then(()=>{const b=document.querySelector('.btn-action');b.textContent='✅ Kopiert!';setTimeout(()=>b.textContent='📋 Kopieren',2000);});}
 
-  function alsPDFspeichern() {
+  function alsPDFspeichern(){
     const {jsPDF}=window.jspdf;
     const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
     const title=currentTitle||'KI-Ergebnis';
-    doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.text(title,20,20);
-    doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.text('IGS 15 — Lehrkräfte-Plattform',20,28);
-    doc.setDrawColor(196,149,106); doc.setLineWidth(0.5); doc.line(20,32,190,32);
+    doc.setFont('helvetica','bold');doc.setFontSize(14);doc.text(title,20,20);
+    doc.setFont('helvetica','normal');doc.setFontSize(10);doc.text('IGS 15 — Lehrkräfte-Plattform',20,28);
+    doc.setDrawColor(196,149,106);doc.setLineWidth(0.5);doc.line(20,32,190,32);
     const clean=currentRawText.replace(/#{1,4} /g,'').replace(/\*\*/g,'').replace(/\*/g,'').replace(/^- /gm,'• ');
-    const lines=doc.splitTextToSize(clean,170); let y=40;
+    const lines=doc.splitTextToSize(clean,170);let y=40;
     lines.forEach(line=>{if(y>280){doc.addPage();y=20;}doc.text(line,20,y);y+=6;});
     doc.save(title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_')+'.pdf');
   }
 
-  function alsWordspeichern() {
+  function alsWordspeichern(){
     const title=currentTitle||'KI-Ergebnis';
     const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.6;margin:2cm}h1{font-size:16pt}h2{font-size:14pt}h3{font-size:12pt}.meta{color:#666;font-size:10pt;border-bottom:1pt solid #C4956A;padding-bottom:6pt;margin-bottom:20pt}p{margin-bottom:6pt}ul{margin-left:16pt}li{margin-bottom:3pt}table{border-collapse:collapse;width:100%}td,th{border:1pt solid #ccc;padding:4pt 8pt}th{background:#f5f0e8;font-weight:bold}</style></head><body><h1>${title}</h1><p class="meta">IGS 15 — Lehrkräfte-Plattform</p>${markdownToHtml(currentRawText)}</body></html>`;
     const blob=new Blob([html],{type:'application/msword'});
-    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-    a.download=title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_')+'.doc'; a.click();
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download=title.replace(/[^a-zA-Z0-9äöüÄÖÜß ]/g,'').trim().replace(/ /g,'_')+'.doc';a.click();
   }
 </script>
 </body>
