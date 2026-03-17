@@ -11,8 +11,6 @@
   :root {
     --passwort: "IGSF1234!FFM";
     --schule: "IGS 15";
-    --drive-link: "https://drive.google.com/drive/folders/1kQ9EtXIyI1_qauyDlBECn0zuuuFIXyef?usp=share_link";
-    --drive-embed: "https://drive.google.com/embeddedfolderview?id=1kQ9EtXIyI1_qauyDlBECn0zuuuFIXyef#list";
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,7 +46,7 @@
   .tab:hover { color: #1A1714; }
   .tab.active { color: #C4956A; border-bottom-color: #C4956A; }
 
-  main { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
   .panel { display: none; }
   .panel.active { display: block; }
 
@@ -57,57 +55,57 @@
   .hero h2 em { font-style: italic; color: #C4956A; }
   .hero p { color: #7A6F65; font-size: .95rem; }
 
-  /* Upload Zone */
-  .upload-zone { border: 2px dashed #C8BCAC; border-radius: 16px; padding: 2.5rem; text-align: center; cursor: pointer; transition: all .2s; background: #fff; margin-bottom: 1.5rem; }
+  /* Upload */
+  .upload-box { background: #fff; border-radius: 20px; border: 1px solid #EDE7DC; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .upload-box h3 { font-family: 'Fraunces',serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 1rem; }
+  .upload-selects { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: .75rem; }
+  .upload-zone { border: 2px dashed #C8BCAC; border-radius: 12px; padding: 1.25rem; text-align: center; cursor: pointer; transition: all .2s; background: #FAF7F3; margin-bottom: .75rem; }
   .upload-zone:hover, .upload-zone.drag-over { border-color: #C4956A; background: #FFF8F5; }
   .upload-zone input { display: none; }
-  .upload-icon { font-size: 2rem; margin-bottom: .5rem; }
-  .upload-zone h3 { font-family: 'Fraunces',serif; font-size: 1.1rem; font-weight: 300; margin-bottom: .3rem; }
-  .upload-zone p { color: #7A6F65; font-size: .85rem; }
-
-  .upload-progress { display: none; background: #fff; border: 1px solid #EDE7DC; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
-  .progress-label { font-size: .875rem; color: #5A4F44; margin-bottom: .5rem; font-weight: 500; }
+  .upload-zone p { color: #7A6F65; font-size: .85rem; margin-top: .25rem; }
+  .sel { width: 100%; padding: .75rem 1rem; border: 1.5px solid #E5DDD4; border-radius: 10px; font-size: .9rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #FAF7F3; outline: none; cursor: pointer; }
+  .sel:focus { border-color: #C4956A; }
+  .sel-label { display: block; font-size: .78rem; font-weight: 500; color: #7A6F65; margin-bottom: .35rem; letter-spacing: .04em; text-transform: uppercase; }
+  .upload-progress { display: none; margin-top: .5rem; }
+  .progress-label { font-size: .82rem; color: #5A4F44; margin-bottom: .4rem; }
   .progress-bar-wrap { background: #F5F0E8; border-radius: 99px; height: 6px; overflow: hidden; }
   .progress-bar { height: 100%; background: #C4956A; border-radius: 99px; width: 0%; transition: width .3s; }
 
-  /* File list */
-  .controls { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap input { width: 100%; padding: .6rem 1rem .6rem 2.4rem; border: 1.5px solid #E2D9CE; border-radius: 10px; font-size: .9rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #fff; outline: none; transition: border-color .2s; }
+  /* Controls */
+  .controls { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .search-wrap { position: relative; flex: 1; min-width: 180px; }
+  .search-wrap input { width: 100%; padding: .6rem 1rem .6rem 2.4rem; border: 1.5px solid #E2D9CE; border-radius: 10px; font-size: .88rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #fff; outline: none; }
   .search-wrap input:focus { border-color: #C4956A; }
-  .search-icon { position: absolute; left: .75rem; top: 50%; transform: translateY(-50%); font-size: .95rem; opacity: .4; }
+  .search-icon { position: absolute; left: .75rem; top: 50%; transform: translateY(-50%); font-size: .9rem; opacity: .4; }
   .count-badge { background: #F5F0E8; color: #7A6F65; padding: .4rem .8rem; border-radius: 8px; font-size: .8rem; font-weight: 600; white-space: nowrap; }
 
-  .file-list { display: flex; flex-direction: column; gap: .5rem; }
-  .file-item { display: flex; align-items: center; gap: 1rem; background: #fff; border: 1px solid #EDE7DC; border-radius: 12px; padding: 1rem 1.25rem; transition: box-shadow .15s; }
-  .file-item:hover { box-shadow: 0 2px 12px rgba(0,0,0,.07); }
-  .file-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-  .icon-pdf { background: #FEE2E2; }
-  .icon-word { background: #DBEAFE; }
-  .icon-excel { background: #DCFCE7; }
-  .icon-ppt { background: #FED7AA; }
-  .icon-img { background: #F3E8FF; }
-  .icon-other { background: #F5F0E8; }
+  /* Jahrgang-Gruppen */
+  .jahrgang-gruppe { margin-bottom: 1rem; }
+  .jahrgang-titel { display: flex; align-items: center; gap: .6rem; font-family: 'Fraunces',serif; font-size: 1.1rem; font-weight: 500; color: #1A1714; padding: .75rem 1rem; background: #1A1714; color: #F5F0E8; border-radius: 12px; cursor: pointer; user-select: none; margin-bottom: .5rem; }
+  .jahrgang-titel .jg-badge { background: rgba(255,255,255,.2); font-size: .75rem; padding: .2rem .5rem; border-radius: 6px; font-family: 'DM Sans',sans-serif; font-weight: 600; margin-left: auto; }
+  .jahrgang-titel .jg-arrow { font-size: .8rem; opacity: .7; transition: transform .2s; }
+  .jahrgang-titel.collapsed .jg-arrow { transform: rotate(-90deg); }
+
+  .fach-gruppe { margin-bottom: .5rem; margin-left: .5rem; }
+  .fach-titel { display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 500; color: #1A1714; padding: .6rem .9rem; background: #fff; border: 1px solid #EDE7DC; border-radius: 10px; cursor: pointer; user-select: none; margin-bottom: .35rem; }
+  .fach-titel .fach-badge { background: #F5F0E8; color: #7A6F65; font-size: .72rem; padding: .15rem .45rem; border-radius: 5px; font-weight: 600; margin-left: auto; }
+  .fach-titel .fach-arrow { font-size: .75rem; color: #9A8F84; transition: transform .2s; }
+  .fach-titel.collapsed .fach-arrow { transform: rotate(-90deg); }
+
+  .file-list { display: flex; flex-direction: column; gap: .35rem; margin-left: 1rem; }
+  .file-item { display: flex; align-items: center; gap: .75rem; background: #FAF7F3; border: 1px solid #EDE7DC; border-radius: 9px; padding: .75rem .9rem; transition: box-shadow .15s; }
+  .file-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); background: #fff; }
+  .file-icon { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .icon-pdf { background: #FEE2E2; } .icon-word { background: #DBEAFE; } .icon-excel { background: #DCFCE7; } .icon-ppt { background: #FED7AA; } .icon-img { background: #F3E8FF; } .icon-other { background: #F5F0E8; }
   .file-info { flex: 1; min-width: 0; }
-  .file-name { font-weight: 500; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: .15rem; }
-  .file-meta { font-size: .78rem; color: #7A6F65; }
-  .file-actions { display: flex; gap: .4rem; flex-shrink: 0; }
-  .btn-icon { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: 1.5px solid #E2D9CE; background: transparent; cursor: pointer; font-size: .9rem; transition: all .15s; }
+  .file-name { font-weight: 500; font-size: .87rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: .1rem; }
+  .file-meta { font-size: .74rem; color: #7A6F65; }
+  .file-actions { display: flex; gap: .35rem; flex-shrink: 0; }
+  .btn-icon { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1.5px solid #E2D9CE; background: transparent; cursor: pointer; font-size: .82rem; transition: all .15s; }
   .btn-icon:hover { background: #FEF4EC; border-color: #C4956A; }
   .btn-icon.del:hover { background: #FEE2E2; border-color: #FCA5A5; }
 
-  .empty-state { text-align: center; padding: 3rem; color: #7A6F65; }
-  .empty-state .emoji { font-size: 2.5rem; margin-bottom: .75rem; }
-
-  /* Drive section */
-  .section-title { font-family: 'Fraunces',serif; font-size: 1.2rem; font-weight: 500; margin: 2rem 0 1rem; display: flex; align-items: center; gap: .5rem; }
-  .drive-section { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid #EDE7DC; }
-  .drive-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #EDE7DC; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
-  .drive-header h3 { font-family: 'Fraunces',serif; font-weight: 500; font-size: 1.05rem; }
-  .drive-embed { width: 100%; height: 400px; border: none; display: block; background: #FAF7F3; }
-  .btn-card { display: inline-flex; align-items: center; gap: .4rem; border-radius: 10px; font-size: .85rem; font-family: 'DM Sans',sans-serif; font-weight: 500; text-decoration: none; cursor: pointer; border: none; transition: all .15s; padding: .5rem 1rem; }
-  .btn-secondary { background: #F5F0E8; color: #1A1714; }
-  .btn-secondary:hover { background: #EDE7DC; }
+  .empty-state { text-align: center; padding: 2.5rem; color: #7A6F65; background: #fff; border-radius: 12px; border: 1px solid #EDE7DC; }
 
   /* KI */
   .ki-header { margin-bottom: 2rem; }
@@ -163,7 +161,7 @@
   .toast-error { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
 
   @media (max-width: 600px) {
-    .form-row { grid-template-columns: 1fr; }
+    .upload-selects, .form-row { grid-template-columns: 1fr; }
     main { padding: 1.5rem 1rem 3rem; }
     header, .tabs { padding: 0 1rem; }
     .hero h2, .ki-header h2 { font-size: 1.8rem; }
@@ -196,28 +194,63 @@
     <button class="tab" onclick="showTab('ki',this)">✨ KI-Assistent</button>
   </div>
   <main>
-    <!-- MATERIALIEN -->
     <div class="panel active" id="panel-materialien">
       <div class="hero">
         <h2>Unsere <em>gemeinsamen</em> Materialien</h2>
-        <p>Dateien direkt hochladen oder Google Drive nutzen.</p>
+        <p>Nach Jahrgang und Fach sortiert.</p>
       </div>
 
-      <!-- Upload Zone -->
-      <div class="upload-zone" id="upload-zone"
-           onclick="document.getElementById('file-input').click()"
-           ondragover="handleDragOver(event)"
-           ondragleave="handleDragLeave(event)"
-           ondrop="handleDrop(event)">
-        <input type="file" id="file-input" multiple onchange="uploadFiles(this.files)">
-        <div class="upload-icon">📤</div>
-        <h3>Dateien hierher ziehen oder klicken</h3>
-        <p>PDF, Word, Excel, PowerPoint, Bilder — bis 50 MB</p>
-      </div>
-
-      <div class="upload-progress" id="upload-progress">
-        <div class="progress-label" id="progress-label">Wird hochgeladen …</div>
-        <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+      <div class="upload-box">
+        <h3>📤 Datei hochladen</h3>
+        <div class="upload-selects">
+          <div>
+            <label class="sel-label">Jahrgang</label>
+            <select class="sel" id="sel-jahrgang">
+              <option value="Jahrgang 5">Jahrgang 5</option>
+              <option value="Jahrgang 6">Jahrgang 6</option>
+              <option value="Jahrgang 7">Jahrgang 7</option>
+              <option value="Jahrgang 8">Jahrgang 8</option>
+              <option value="Jahrgang 9">Jahrgang 9</option>
+              <option value="Jahrgang 10" selected>Jahrgang 10</option>
+              <option value="Jahrgang 11">Jahrgang 11</option>
+              <option value="Jahrgang 12">Jahrgang 12</option>
+              <option value="Jahrgang 13">Jahrgang 13</option>
+              <option value="Allgemein">Allgemein</option>
+            </select>
+          </div>
+          <div>
+            <label class="sel-label">Fach</label>
+            <select class="sel" id="sel-fach">
+              <option value="Deutsch">🖊️ Deutsch</option>
+              <option value="Mathematik">📐 Mathematik</option>
+              <option value="Englisch">🌍 Englisch</option>
+              <option value="Politik & Wirtschaft">🏛️ Politik & Wirtschaft</option>
+              <option value="Ethik">☯️ Ethik</option>
+              <option value="Erdkunde">🌎 Erdkunde</option>
+              <option value="Geschichte">📜 Geschichte</option>
+              <option value="Biologie">🌿 Biologie</option>
+              <option value="Chemie">⚗️ Chemie</option>
+              <option value="Physik">⚡ Physik</option>
+              <option value="Sport">⚽ Sport</option>
+              <option value="Kunst">🎨 Kunst</option>
+              <option value="Musik">🎵 Musik</option>
+              <option value="Sonstiges">🗂️ Sonstiges</option>
+            </select>
+          </div>
+        </div>
+        <div class="upload-zone" id="upload-zone"
+             onclick="document.getElementById('file-input').click()"
+             ondragover="handleDragOver(event)"
+             ondragleave="handleDragLeave(event)"
+             ondrop="handleDrop(event)">
+          <input type="file" id="file-input" multiple onchange="uploadFiles(this.files)">
+          <div style="font-size:1.5rem">📂</div>
+          <p>Klicken oder Dateien hierher ziehen</p>
+        </div>
+        <div class="upload-progress" id="upload-progress">
+          <div class="progress-label" id="progress-label">Wird hochgeladen …</div>
+          <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+        </div>
       </div>
 
       <div class="controls">
@@ -228,20 +261,9 @@
         <div class="count-badge" id="count-badge">0 Dateien</div>
       </div>
 
-      <div class="file-list" id="file-list"></div>
-
-      <!-- Google Drive -->
-      <div class="section-title">📁 Google Drive</div>
-      <div class="drive-section">
-        <div class="drive-header">
-          <h3>Geteilter Ordner</h3>
-          <a id="btn-open-drive" href="#" target="_blank" class="btn-card btn-secondary">In Drive öffnen ↗</a>
-        </div>
-        <div id="drive-container"></div>
-      </div>
+      <div id="file-tree"></div>
     </div>
 
-    <!-- KI ASSISTENT -->
     <div class="panel" id="panel-ki">
       <div class="ki-header">
         <h2>KI-<em>Assistent</em></h2>
@@ -312,16 +334,11 @@
   const WORKER = 'https://tiny-mud-3bdgemini-proxy.emircan-ep.workers.dev';
 
   function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim().replace(/^"|"$/g,''); }
-  const PASSWORT    = cssVar('--passwort');
-  const SCHULE      = cssVar('--schule');
-  const DRIVE_LINK  = cssVar('--drive-link');
-  const DRIVE_EMBED = cssVar('--drive-embed');
+  const PASSWORT = cssVar('--passwort');
+  const SCHULE   = cssVar('--schule');
 
   document.getElementById('schulname-login').textContent = SCHULE;
   document.getElementById('schulname-header').textContent = SCHULE;
-  document.getElementById('btn-open-drive').href = DRIVE_LINK;
-  document.getElementById('drive-container').innerHTML =
-    `<iframe class="drive-embed" src="${DRIVE_EMBED}" allowfullscreen></iframe>`;
 
   function einloggen() {
     if (document.getElementById('pw').value !== PASSWORT) {
@@ -350,8 +367,9 @@
     btn.classList.add('active');
   }
 
-  // ── DATEIVERWALTUNG ──
   let alleFiles = [];
+  let collapsedJG = {};
+  let collapsedFach = {};
 
   async function loadFiles() {
     try {
@@ -365,31 +383,79 @@
     const q = document.getElementById('search-input').value.toLowerCase();
     const gefiltert = alleFiles.filter(f => f.name.toLowerCase().includes(q));
     document.getElementById('count-badge').textContent = gefiltert.length + ' Datei' + (gefiltert.length !== 1 ? 'en' : '');
-    const liste = document.getElementById('file-list');
 
+    const tree = document.getElementById('file-tree');
     if (!gefiltert.length) {
-      liste.innerHTML = `<div class="empty-state"><div class="emoji">${alleFiles.length ? '🔍' : '📂'}</div><p>${alleFiles.length ? 'Keine Treffer' : 'Noch keine Dateien — lade jetzt hoch!'}</p></div>`;
+      tree.innerHTML = `<div class="empty-state"><p>${alleFiles.length ? '🔍 Keine Treffer' : '📂 Noch keine Dateien — lade jetzt hoch!'}</p></div>`;
       return;
     }
 
-    liste.innerHTML = gefiltert.map(f => {
-      const ext = f.name.split('.').pop().toLowerCase();
-      const { icon, cls } = getIcon(ext);
-      const size = formatSize(f.size);
-      const datum = new Date(f.uploaded).toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
-      return `<div class="file-item">
-        <div class="file-icon ${cls}">${icon}</div>
-        <div class="file-info">
-          <div class="file-name" title="${f.name}">${f.name}</div>
-          <div class="file-meta">${size} · ${datum}</div>
+    // Baum: Jahrgang → Fach → Dateien
+    const struktur = {};
+    gefiltert.forEach(f => {
+      const jg = f.jahrgang || f.kategorie || 'Allgemein';
+      const fach = f.fach || 'Sonstiges';
+      if (!struktur[jg]) struktur[jg] = {};
+      if (!struktur[jg][fach]) struktur[jg][fach] = [];
+      struktur[jg][fach].push(f);
+    });
+
+    const fachIcons = {
+      'Deutsch':'🖊️','Mathematik':'📐','Englisch':'🌍','Politik & Wirtschaft':'🏛️',
+      'Ethik':'☯️','Erdkunde':'🌎','Geschichte':'📜','Biologie':'🌿','Chemie':'⚗️',
+      'Physik':'⚡','Sport':'⚽','Kunst':'🎨','Musik':'🎵','Sonstiges':'🗂️'
+    };
+
+    tree.innerHTML = Object.keys(struktur).sort().map(jg => {
+      const jgFiles = Object.values(struktur[jg]).flat();
+      const jgId = jg.replace(/[^a-z0-9]/gi,'_');
+      const jgCollapsed = collapsedJG[jg];
+      return `<div class="jahrgang-gruppe">
+        <div class="jahrgang-titel ${jgCollapsed?'collapsed':''}" onclick="toggleJG('${jg}')">
+          📁 ${jg}
+          <span class="jg-badge">${jgFiles.length}</span>
+          <span class="jg-arrow">▾</span>
         </div>
-        <div class="file-actions">
-          <button class="btn-icon" title="Herunterladen" onclick="window.open('${WORKER}/download/${encodeURIComponent(f.key)}')">⬇️</button>
-          <button class="btn-icon del" title="Löschen" onclick="deleteFile('${f.key}','${f.name}')">🗑️</button>
+        <div id="jg-${jgId}" style="display:${jgCollapsed?'none':'block'}">
+          ${Object.keys(struktur[jg]).sort().map(fach => {
+            const fachFiles = struktur[jg][fach];
+            const fachId = (jg+fach).replace(/[^a-z0-9]/gi,'_');
+            const fachCollapsed = collapsedFach[jg+'_'+fach];
+            const icon = fachIcons[fach] || '📁';
+            return `<div class="fach-gruppe">
+              <div class="fach-titel ${fachCollapsed?'collapsed':''}" onclick="toggleFach('${jg}','${fach}')">
+                ${icon} ${fach}
+                <span class="fach-badge">${fachFiles.length}</span>
+                <span class="fach-arrow">▾</span>
+              </div>
+              <div class="file-list" id="fach-${fachId}" style="display:${fachCollapsed?'none':'flex'}">
+                ${fachFiles.map(f => {
+                  const ext = f.name.split('.').pop().toLowerCase();
+                  const { icon: fi, cls } = getIcon(ext);
+                  const size = formatSize(f.size);
+                  const datum = new Date(f.uploaded).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
+                  return `<div class="file-item">
+                    <div class="file-icon ${cls}">${fi}</div>
+                    <div class="file-info">
+                      <div class="file-name" title="${f.name}">${f.name}</div>
+                      <div class="file-meta">${size} · ${datum}</div>
+                    </div>
+                    <div class="file-actions">
+                      <button class="btn-icon" title="Herunterladen" onclick="window.open('${WORKER}/download/${encodeURIComponent(f.key)}')">⬇️</button>
+                      <button class="btn-icon del" title="Löschen" onclick="deleteFile('${f.key}','${f.name}')">🗑️</button>
+                    </div>
+                  </div>`;
+                }).join('')}
+              </div>
+            </div>`;
+          }).join('')}
         </div>
       </div>`;
     }).join('');
   }
+
+  function toggleJG(jg) { collapsedJG[jg] = !collapsedJG[jg]; renderFiles(); }
+  function toggleFach(jg, fach) { collapsedFach[jg+'_'+fach] = !collapsedFach[jg+'_'+fach]; renderFiles(); }
 
   function getIcon(ext) {
     if (ext === 'pdf') return { icon: '📄', cls: 'icon-pdf' };
@@ -408,6 +474,9 @@
 
   async function uploadFiles(files) {
     if (!files?.length) return;
+    const jahrgang = document.getElementById('sel-jahrgang').value;
+    const fach = document.getElementById('sel-fach').value;
+    const kategorie = jahrgang + ' / ' + fach;
     document.getElementById('upload-progress').style.display = 'block';
     let done = 0;
     for (const file of files) {
@@ -415,6 +484,9 @@
       document.getElementById('progress-bar').style.width = Math.round((done/files.length)*100) + '%';
       const fd = new FormData();
       fd.append('file', file);
+      fd.append('kategorie', kategorie);
+      fd.append('jahrgang', jahrgang);
+      fd.append('fach', fach);
       try {
         await fetch(WORKER + '/upload', { method: 'POST', body: fd });
         done++;
@@ -449,7 +521,7 @@
     setTimeout(() => el.remove(), 3000);
   }
 
-  // ── KI ──
+  // KI
   let currentType = 'arbeitsblatt';
   let currentTitle = '';
   let currentRawText = '';
@@ -463,42 +535,34 @@
   function markdownToHtml(text) {
     return text
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/^#### (.+)$/gm,'<h3>$1</h3>')
-      .replace(/^### (.+)$/gm,'<h3>$1</h3>')
-      .replace(/^## (.+)$/gm,'<h2>$1</h2>')
-      .replace(/^# (.+)$/gm,'<h1>$1</h1>')
-      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g,'<em>$1</em>')
-      .replace(/^\* (.+)$/gm,'<li>$1</li>')
-      .replace(/^- (.+)$/gm,'<li>$1</li>')
+      .replace(/^#### (.+)$/gm,'<h3>$1</h3>').replace(/^### (.+)$/gm,'<h3>$1</h3>')
+      .replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/^# (.+)$/gm,'<h1>$1</h1>')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/^\* (.+)$/gm,'<li>$1</li>').replace(/^- (.+)$/gm,'<li>$1</li>')
       .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
       .replace(/(<li>.*<\/li>\n?)+/g,m=>`<ul>${m}</ul>`)
-      .replace(/^---+$/gm,'<hr>')
-      .replace(/\*/g,'')
+      .replace(/^---+$/gm,'<hr>').replace(/\*/g,'')
       .replace(/\n\n/g,'</p><p>')
       .replace(/^(?!<[hupolt]|<\/[hupolt]|<hr)(.+)$/gm,(m)=>m.startsWith('<')?m:`<p>${m}</p>`)
-      .replace(/<p><\/p>/g,'')
-      .replace(/<p>(<h[123]>)/g,'$1')
-      .replace(/(<\/h[123]>)<\/p>/g,'$1');
+      .replace(/<p><\/p>/g,'').replace(/<p>(<h[123]>)/g,'$1').replace(/(<\/h[123]>)<\/p>/g,'$1');
   }
 
   async function generieren() {
-    const thema    = document.getElementById('thema').value.trim();
-    const klasse   = document.getElementById('klasse').value.trim();
-    const fach     = document.getElementById('fach').value.trim();
-    const niveau   = document.getElementById('niveau').value;
-    const wuensche = document.getElementById('wuensche').value.trim();
+    const thema=document.getElementById('thema').value.trim();
+    const klasse=document.getElementById('klasse').value.trim();
+    const fach=document.getElementById('fach').value.trim();
+    const niveau=document.getElementById('niveau').value;
+    const wuensche=document.getElementById('wuensche').value.trim();
     if (!thema) { alert('Bitte ein Thema eingeben.'); return; }
 
-    const labels = { arbeitsblatt:'Arbeitsblatt', stunde:'Stundenplanung', reihe:'Unterrichtsreihe', pruefung:'Prüfungsaufgaben', elternbrief:'Elternbrief' };
-    const extra = `\nFach: ${fach||'nicht angegeben'}\nKlasse: ${klasse||'nicht angegeben'}\nNiveau: ${niveau||'mittel'}\n${wuensche?'Wünsche: '+wuensche:''}`;
-
-    const prompts = {
-      arbeitsblatt: `Erstelle ein detailliertes Arbeitsblatt für den Schulunterricht.\nThema: ${thema}${extra}\n\nEnthalte: kurzer Einführungstext, mind. 5 abwechslungsreiche Aufgaben, klare Aufgabenstellungen. Auf Deutsch, schulgerecht, klar strukturiert.`,
-      stunde: `Erstelle eine vollständige Stundenplanung (90 Min.).\nThema: ${thema}${extra}\n\nEnthalte: Lernziele, tabellarischer Verlaufsplan (Zeit/Phase/Inhalt/Methode/Sozialform), Materialien, Differenzierungshinweise, Hausaufgabe.`,
-      reihe: `Erstelle eine Unterrichtsreihenplanung.\nThema: ${thema}${extra}\n\nEnthalte: Lernziele, 6-8 Stunden mit Thema/Methoden/Materialien, Leistungsüberprüfung.`,
-      pruefung: `Erstelle einen Prüfungsaufgabensatz.\nThema: ${thema}${extra}\n\nAufgaben auf 3 Anforderungsebenen mit Punkten und Lösungserwartungen.`,
-      elternbrief: `Schreibe einen professionellen Elternbrief.\nAnlass: ${thema}\nSchule: IGS 15\nKlasse: ${klasse||'nicht angegeben'}\n${wuensche?'Hinweise: '+wuensche:''}\n\nFreundlich, klar, professionell. Mit Datum, Anrede, Grußformel.`
+    const labels={arbeitsblatt:'Arbeitsblatt',stunde:'Stundenplanung',reihe:'Unterrichtsreihe',pruefung:'Prüfungsaufgaben',elternbrief:'Elternbrief'};
+    const extra=`\nFach: ${fach||'nicht angegeben'}\nKlasse: ${klasse||'nicht angegeben'}\nNiveau: ${niveau||'mittel'}\n${wuensche?'Wünsche: '+wuensche:''}`;
+    const prompts={
+      arbeitsblatt:`Erstelle ein detailliertes Arbeitsblatt.\nThema: ${thema}${extra}\n\nEinführungstext, mind. 5 Aufgaben, klar strukturiert. Auf Deutsch.`,
+      stunde:`Erstelle eine Stundenplanung (90 Min.).\nThema: ${thema}${extra}\n\nLernziele, Verlaufsplan (Zeit/Phase/Inhalt/Methode/Sozialform), Materialien, Differenzierung, Hausaufgabe.`,
+      reihe:`Erstelle eine Unterrichtsreihenplanung.\nThema: ${thema}${extra}\n\nLernziele, 6-8 Stunden, Leistungsüberprüfung.`,
+      pruefung:`Erstelle Prüfungsaufgaben.\nThema: ${thema}${extra}\n\n3 Anforderungsebenen mit Punkten und Lösungserwartungen.`,
+      elternbrief:`Schreibe einen Elternbrief.\nAnlass: ${thema}\nSchule: IGS 15\nKlasse: ${klasse||'nicht angegeben'}\n${wuensche?'Hinweise: '+wuensche:''}\n\nFreundlich, professionell, mit Datum und Grußformel.`
     };
 
     currentTitle = labels[currentType] + ': ' + thema;
@@ -510,9 +574,8 @@
 
     try {
       const res = await fetch(WORKER, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompts[currentType] }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4000 } })
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents:[{parts:[{text:prompts[currentType]}]}], generationConfig:{temperature:0.7,maxOutputTokens:4000} })
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || 'Fehler');
@@ -521,9 +584,8 @@
       document.getElementById('output-body').innerHTML = markdownToHtml(currentRawText);
       document.getElementById('ki-output').style.display = 'block';
       document.getElementById('ki-output').scrollIntoView({ behavior: 'smooth' });
-    } catch(e) {
-      alert('Fehler: ' + e.message);
-    } finally {
+    } catch(e) { alert('Fehler: ' + e.message); }
+    finally {
       btn.disabled = false;
       document.getElementById('btn-text').textContent = 'Generieren';
       document.getElementById('loading').style.display = 'none';
@@ -540,7 +602,7 @@
 
   function alsPDFspeichern() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
     const title = currentTitle || 'KI-Ergebnis';
     doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.text(title, 20, 20);
     doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.text('IGS 15 — Lehrkräfte-Plattform', 20, 28);
