@@ -98,7 +98,6 @@
   .btn-icon.del:hover { background: #FEE2E2; border-color: #FCA5A5; }
   .empty-state { text-align: center; padding: 2.5rem; color: #7A6F65; background: #fff; border-radius: 12px; border: 1px solid #EDE7DC; }
 
-  /* KI */
   .ki-header { margin-bottom: 2rem; }
   .ki-header h2 { font-family: 'Fraunces',serif; font-size: 2.2rem; font-weight: 300; margin-bottom: .4rem; }
   .ki-header h2 em { font-style: italic; color: #C4956A; }
@@ -148,44 +147,21 @@
 
   .noten-box { background: #fff; border-radius: 20px; border: 1px solid #EDE7DC; padding: 1.75rem; margin-bottom: 1.5rem; }
   .noten-box h3 { font-family: 'Fraunces',serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 1.25rem; }
+  .noten-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .noten-label { display: block; font-size: .78rem; font-weight: 500; color: #7A6F65; margin-bottom: .35rem; letter-spacing: .04em; text-transform: uppercase; }
+  .noten-input { width: 100%; padding: .85rem 1rem; border: 1.5px solid #E5DDD4; border-radius: 10px; font-size: 1.1rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #FAF7F3; outline: none; transition: border-color .2s; }
+  .noten-input:focus { border-color: #C4956A; background: #fff; box-shadow: 0 0 0 3px rgba(196,149,106,.15); }
 
-  .schnell-rechner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; align-items: end; }
-  .schnell-rechner .form-group { margin-bottom: 0; }
-  .note-display { background: #F5F0E8; border-radius: 14px; padding: 1rem; text-align: center; }
-  .note-zahl { font-family: 'Fraunces',serif; font-size: 3rem; font-weight: 500; line-height: 1; }
-  .note-text { font-size: .8rem; color: #7A6F65; margin-top: .25rem; }
-  .note-1 { color: #166534; } .note-2 { color: #1d4ed8; } .note-3 { color: #92400e; }
-  .note-4 { color: #b45309; } .note-5 { color: #dc2626; } .note-6 { color: #7f1d1d; }
-
-  .schluessel-box { display: grid; grid-template-columns: repeat(6, 1fr); gap: .4rem; margin-bottom: 1.5rem; }
-  .schluessel-item { background: #FAF7F3; border: 1px solid #EDE7DC; border-radius: 8px; padding: .6rem .4rem; text-align: center; font-size: .78rem; }
-  .schluessel-item .s-note { font-family: 'Fraunces',serif; font-size: 1.1rem; font-weight: 500; }
-  .schluessel-item .s-range { color: #7A6F65; font-size: .72rem; margin-top: .1rem; }
-
-  /* Klassenliste */
-  .klassen-grid { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1rem; }
-  .schueler-row { display: grid; grid-template-columns: 2fr 1fr 1fr 80px 36px; gap: .5rem; align-items: center; background: #FAF7F3; border: 1px solid #EDE7DC; border-radius: 10px; padding: .6rem .75rem; }
-  .schueler-row input { width: 100%; padding: .5rem .75rem; border: 1.5px solid #E5DDD4; border-radius: 8px; font-size: .88rem; font-family: 'DM Sans',sans-serif; color: #1A1714; background: #fff; outline: none; }
-  .schueler-row input:focus { border-color: #C4956A; }
-  .schueler-note { font-family: 'Fraunces',serif; font-size: 1.3rem; font-weight: 500; text-align: center; }
-  .schueler-prozent { font-size: .78rem; color: #7A6F65; text-align: center; }
-  .btn-add-schueler { display: flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; background: #F5F0E8; border: 1.5px dashed #C8BCAC; border-radius: 10px; font-size: .88rem; font-family: 'DM Sans',sans-serif; color: #7A6F65; cursor: pointer; transition: all .15s; width: 100%; justify-content: center; margin-bottom: 1rem; }
-  .btn-add-schueler:hover { border-color: #C4956A; color: #C4956A; background: #FEF4EC; }
-
-  /* Notenspiegel */
-  .notenspiegel { background: #FAF7F3; border-radius: 14px; padding: 1.25rem; }
-  .notenspiegel h4 { font-family: 'Fraunces',serif; font-size: 1rem; font-weight: 500; margin-bottom: 1rem; }
-  .spiegel-balken { display: flex; flex-direction: column; gap: .4rem; }
-  .spiegel-row { display: flex; align-items: center; gap: .75rem; }
-  .spiegel-label { width: 60px; font-size: .82rem; font-weight: 600; }
-  .spiegel-bar-wrap { flex: 1; background: #EDE7DC; border-radius: 99px; height: 20px; overflow: hidden; }
-  .spiegel-bar { height: 100%; border-radius: 99px; transition: width .4s; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: .72rem; color: #fff; font-weight: 600; min-width: 24px; }
-  .bar-1{background:#166534} .bar-2{background:#1d4ed8} .bar-3{background:#92400e}
-  .bar-4{background:#b45309} .bar-5{background:#dc2626} .bar-6{background:#7f1d1d}
-  .spiegel-count { width: 30px; font-size: .78rem; color: #7A6F65; text-align: right; }
-  .schnitt-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #EDE7DC; display: flex; justify-content: space-between; align-items: center; }
-  .schnitt-label { font-size: .85rem; color: #7A6F65; }
-  .schnitt-wert { font-family: 'Fraunces',serif; font-size: 1.5rem; font-weight: 500; }
+  /* Notentabelle */
+  .noten-tabelle { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; }
+  .noten-tabelle thead tr { background: #1A1714; color: #F5F0E8; }
+  .noten-tabelle th { padding: .75rem 1rem; text-align: left; font-size: .85rem; font-weight: 500; letter-spacing: .03em; }
+  .noten-tabelle td { padding: .75rem 1rem; font-size: .95rem; border-bottom: 1px solid #EDE7DC; }
+  .noten-tabelle tr:last-child td { border-bottom: none; }
+  .noten-tabelle tr:nth-child(even) td { background: #FAF7F3; }
+  .note-chip { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; font-family: 'Fraunces',serif; font-size: 1.1rem; font-weight: 500; color: #fff; }
+  .chip-1{background:#166534} .chip-2{background:#1d4ed8} .chip-3{background:#b45309}
+  .chip-4{background:#d97706} .chip-5{background:#dc2626} .chip-6{background:#7f1d1d}
 
   .loading { display: none; text-align: center; padding: 3rem; color: #7A6F65; }
   .loading-dots { display: inline-flex; gap: .4rem; margin-top: .75rem; }
@@ -199,9 +175,7 @@
   .toast-error { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
 
   @media (max-width: 600px) {
-    .upload-selects, .form-row, .schnell-rechner { grid-template-columns: 1fr; }
-    .schluessel-box { grid-template-columns: repeat(3,1fr); }
-    .schueler-row { grid-template-columns: 1fr 1fr 60px 30px; }
+    .upload-selects, .form-row, .noten-inputs { grid-template-columns: 1fr; }
     main { padding: 1.5rem 1rem 3rem; }
     header, .tabs { padding: 0 1rem; }
     .hero h2, .ki-header h2, .noten-header h2 { font-size: 1.8rem; }
@@ -385,60 +359,37 @@
     <div class="panel" id="panel-noten">
       <div class="noten-header">
         <h2>📊 Noten<em>rechner</em></h2>
-        <p>Punkte eingeben — Note kommt automatisch. Mit Notenspiegel für die ganze Klasse.</p>
+        <p>Maximale Punkte eingeben — Tabelle wird automatisch berechnet.</p>
       </div>
-
-      <!-- Einzel-Rechner -->
       <div class="noten-box">
-        <h3>🎯 Schnellrechner</h3>
-        <div class="schnell-rechner">
-          <div class="form-group">
-            <label>Erreichte Punkte</label>
-            <input type="number" id="punkte-erreicht" placeholder="z.B. 32" min="0" oninput="berechneNote()">
+        <h3>⚙️ Einstellungen</h3>
+        <div class="noten-inputs">
+          <div>
+            <label class="noten-label">Maximale Punkte</label>
+            <input type="number" class="noten-input" id="max-punkte" placeholder="z.B. 60" min="1" oninput="berechneTabelle()">
           </div>
-          <div class="form-group">
-            <label>Maximale Punkte</label>
-            <input type="number" id="punkte-max" placeholder="z.B. 40" min="1" oninput="berechneNote()">
-          </div>
-          <div class="note-display">
-            <div class="note-zahl" id="schnell-note">—</div>
-            <div class="note-text" id="schnell-text">Note</div>
+          <div>
+            <label class="noten-label">Notenschlüssel</label>
+            <select class="noten-input" id="noten-schluessel" onchange="berechneTabelle()">
+              <option value="standard">Standard Hessen (ab 50% = Note 4)</option>
+              <option value="streng">Streng (ab 60% = Note 4)</option>
+              <option value="mild">Mild (ab 45% = Note 4)</option>
+            </select>
           </div>
         </div>
-
-        <div class="form-group" style="margin-bottom:1rem">
-          <label>Notenschlüssel</label>
-          <select id="schluessel" onchange="berechneNote(); berechneKlasse()">
-            <option value="standard">Standard Hessen (ab 50% = 4)</option>
-            <option value="streng">Streng (ab 60% = 4)</option>
-            <option value="mild">Mild (ab 45% = 4)</option>
-          </select>
-        </div>
-
-        <div class="schluessel-box" id="schluessel-anzeige"></div>
-      </div>
-
-      <!-- Klassenliste -->
-      <div class="noten-box">
-        <h3>👥 Klassenliste</h3>
-        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 80px 36px;gap:.5rem;margin-bottom:.5rem;padding:0 .75rem">
-          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em">Name</div>
-          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em">Erreicht</div>
-          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em">Von</div>
-          <div style="font-size:.75rem;font-weight:600;color:#7A6F65;text-transform:uppercase;letter-spacing:.04em;text-align:center">Note</div>
-          <div></div>
-        </div>
-        <div class="klassen-grid" id="klassen-grid"></div>
-        <button class="btn-add-schueler" onclick="addSchueler()">+ Schüler/in hinzufügen</button>
-
-        <!-- Notenspiegel -->
-        <div class="notenspiegel" id="notenspiegel" style="display:none">
-          <h4>📈 Notenspiegel</h4>
-          <div class="spiegel-balken" id="spiegel-balken"></div>
-          <div class="schnitt-box">
-            <span class="schnitt-label">Klassendurchschnitt</span>
-            <span class="schnitt-wert" id="schnitt-wert">—</span>
-          </div>
+        <div id="noten-tabelle-wrap" style="display:none">
+          <table class="noten-tabelle">
+            <thead>
+              <tr>
+                <th>Note</th>
+                <th>Bezeichnung</th>
+                <th>Punkte von</th>
+                <th>Punkte bis</th>
+                <th>Prozent</th>
+              </tr>
+            </thead>
+            <tbody id="noten-tbody"></tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -466,7 +417,6 @@
     document.getElementById('login').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     loadFiles();
-    initNotenrechner();
   }
 
   function ausloggen() { sessionStorage.clear(); location.reload(); }
@@ -475,7 +425,6 @@
     document.getElementById('login').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     loadFiles();
-    initNotenrechner();
   }
 
   function showTab(id, btn) {
@@ -492,113 +441,27 @@
     mild:     [{note:1,min:90},{note:2,min:75},{note:3,min:60},{note:4,min:45},{note:5,min:20},{note:6,min:0}],
   };
   const NOTEN_TEXT = {1:'Sehr gut',2:'Gut',3:'Befriedigend',4:'Ausreichend',5:'Mangelhaft',6:'Ungenügend'};
-  let schuelerListe = [];
 
-  function getSchluessel() { return SCHLUESSEL[document.getElementById('schluessel').value]; }
+  function berechneTabelle() {
+    const max = parseInt(document.getElementById('max-punkte').value);
+    if (!max || max < 1) { document.getElementById('noten-tabelle-wrap').style.display = 'none'; return; }
 
-  function prozentZuNote(pct) {
-    const sk = getSchluessel();
-    for (const s of sk) { if (pct >= s.min) return s.note; }
-    return 6;
-  }
+    const sk = SCHLUESSEL[document.getElementById('noten-schluessel').value];
+    document.getElementById('noten-tabelle-wrap').style.display = 'block';
 
-  function berechneNote() {
-    const err = parseFloat(document.getElementById('punkte-erreicht').value);
-    const max = parseFloat(document.getElementById('punkte-max').value);
-    const el = document.getElementById('schnell-note');
-    const tx = document.getElementById('schnell-text');
-    if (isNaN(err) || isNaN(max) || max <= 0) { el.textContent = '—'; el.className = 'note-zahl'; tx.textContent = 'Note'; return; }
-    const pct = Math.round((err/max)*100);
-    const note = prozentZuNote(pct);
-    el.textContent = note;
-    el.className = 'note-zahl note-' + note;
-    tx.textContent = NOTEN_TEXT[note] + ' (' + pct + '%)';
-    aktualisiereSchluesselAnzeige();
-  }
-
-  function aktualisiereSchluesselAnzeige() {
-    const sk = getSchluessel();
-    const max = parseFloat(document.getElementById('punkte-max').value) || 100;
-    document.getElementById('schluessel-anzeige').innerHTML = sk.map((s,i) => {
-      const bis = i === 0 ? 100 : sk[i-1].min - 1;
-      const vonP = Math.round(s.min / 100 * max);
-      const bisP = Math.round(bis / 100 * max);
-      return `<div class="schluessel-item">
-        <div class="s-note note-${s.note}">${s.note}</div>
-        <div class="s-range">${s.min}–${bis}%</div>
-        <div class="s-range">${vonP}–${bisP}P</div>
-      </div>`;
+    const tbody = document.getElementById('noten-tbody');
+    tbody.innerHTML = sk.map((s, i) => {
+      const bisProz = i === 0 ? 100 : sk[i-1].min - 1;
+      const vonPkt = Math.ceil(s.min / 100 * max);
+      const bisPkt = Math.floor(bisProz / 100 * max);
+      return `<tr>
+        <td><span class="note-chip chip-${s.note}">${s.note}</span></td>
+        <td><strong>${NOTEN_TEXT[s.note]}</strong></td>
+        <td>${vonPkt} Punkte</td>
+        <td>${bisPkt} Punkte</td>
+        <td>${s.min} % – ${bisProz} %</td>
+      </tr>`;
     }).join('');
-  }
-
-  function initNotenrechner() {
-    aktualisiereSchluesselAnzeige();
-    if (schuelerListe.length === 0) {
-      for (let i = 0; i < 5; i++) addSchueler();
-    }
-  }
-
-  function addSchueler() {
-    const id = Date.now() + Math.random();
-    schuelerListe.push({ id });
-    renderKlasse();
-  }
-
-  function removeSchueler(id) {
-    schuelerListe = schuelerListe.filter(s => s.id !== id);
-    renderKlasse();
-  }
-
-  function renderKlasse() {
-    const grid = document.getElementById('klassen-grid');
-    const max = parseFloat(document.getElementById('punkte-max').value) || '';
-    grid.innerHTML = schuelerListe.map(s => {
-      return `<div class="schueler-row" id="row-${s.id}">
-        <input type="text" placeholder="Name …" value="${s.name||''}" oninput="updateSchueler(${s.id},'name',this.value)">
-        <input type="number" placeholder="Pkt." min="0" value="${s.erreicht!==undefined?s.erreicht:''}" oninput="updateSchueler(${s.id},'erreicht',this.value)">
-        <input type="number" placeholder="${max||'Max'}" min="1" value="${s.max||max||''}" oninput="updateSchueler(${s.id},'max',this.value)">
-        <div>
-          <div class="schueler-note note-${s.note||''}">${s.note||'—'}</div>
-          <div class="schueler-prozent">${s.pct!==undefined?s.pct+'%':''}</div>
-        </div>
-        <button class="btn-icon del" onclick="removeSchueler(${s.id})">🗑️</button>
-      </div>`;
-    }).join('');
-    berechneKlasse();
-  }
-
-  function updateSchueler(id, feld, wert) {
-    const s = schuelerListe.find(x => x.id === id);
-    if (!s) return;
-    s[feld] = wert;
-    const err = parseFloat(s.erreicht);
-    const max = parseFloat(s.max) || parseFloat(document.getElementById('punkte-max').value);
-    if (!isNaN(err) && !isNaN(max) && max > 0) {
-      s.pct = Math.round((err/max)*100);
-      s.note = prozentZuNote(s.pct);
-    } else { s.pct = undefined; s.note = undefined; }
-    renderKlasse();
-  }
-
-  function berechneKlasse() {
-    const mitNoten = schuelerListe.filter(s => s.note);
-    const verteilung = {1:0,2:0,3:0,4:0,5:0,6:0};
-    mitNoten.forEach(s => verteilung[s.note]++);
-    const spiegel = document.getElementById('notenspiegel');
-    if (mitNoten.length === 0) { spiegel.style.display = 'none'; return; }
-    spiegel.style.display = 'block';
-    const max = Math.max(...Object.values(verteilung), 1);
-    document.getElementById('spiegel-balken').innerHTML = [1,2,3,4,5,6].map(n => {
-      const count = verteilung[n];
-      const pct = Math.round((count/max)*100);
-      return `<div class="spiegel-row">
-        <div class="spiegel-label note-${n}">${n} — ${NOTEN_TEXT[n].split(' ')[0]}</div>
-        <div class="spiegel-bar-wrap"><div class="spiegel-bar bar-${n}" style="width:${pct}%">${count>0?count:''}</div></div>
-        <div class="spiegel-count">${count}×</div>
-      </div>`;
-    }).join('');
-    const schnitt = mitNoten.reduce((a,s) => a + s.note, 0) / mitNoten.length;
-    document.getElementById('schnitt-wert').textContent = schnitt.toFixed(2);
   }
 
   // ── DATEIVERWALTUNG ──
@@ -636,11 +499,11 @@
       }
     }
     const fachMap = {
-      'Deutsch': ['deutsch','grammatik','rechtschreib','aufsatz','lesen','schreiben','märchen','maerchen','fabel','gedicht','kurzgeschichte','erzählung','erzaehlung','satzglieder','nomen','verb','adjektiv','pronomen','artikel','diktat','wortschatz','satzbau','interpunktion','komma','reim','strophe','metapher','lyrik','epik','inhaltsangabe','charakterisierung','brief','bewerbung','leseverstehen'],
+      'Deutsch': ['deutsch','grammatik','rechtschreib','aufsatz','lesen','schreiben','märchen','maerchen','fabel','gedicht','kurzgeschichte','erzählung','satzglieder','nomen','verb','adjektiv','pronomen','diktat','wortschatz','satzbau','interpunktion','reim','strophe','metapher','lyrik','epik','inhaltsangabe','charakterisierung','brief','bewerbung','leseverstehen'],
       'Mathematik': ['mathe','mathematik','geometrie','algebra','rechnen','zahlen','bruch','dezimal','prozent','gleichung','funktion','diagramm','statistik','wahrscheinlichkeit','dreieck','viereck','kreis','fläche','volumen','umfang','winkel','koordinaten','addition','subtraktion','multiplikation','division','potenzen','wurzel','primzahl','dreisatz','terme','variable','stochastik','vektor'],
       'Englisch': ['englisch','english','vocabulary','grammar','reading','writing','listening','present','past','future','tense','irregular','verb','noun','adjective','adverb','preposition','sentence','paragraph','dialogue','letter','email','simple','continuous','perfect','passive','conditional','spelling'],
-      'GL (Gesellschaftslehre)': ['gl','gesellschaft','politik','geschichte','erdkunde','geographie','sozial','ägypten','aegypten','griechen','rom','römer','roemer','mittelalter','demokratie','wirtschaft','europa','welt','antike','revolution','krieg','frieden','recht','gesetz','staat','regierung','parlament','wahl','partei','grundgesetz','menschenrecht','globalisierung','migration','flucht','asyl','klima','kontinent','bevölkerung','stadtentwicklung','pharao','mesopotamien','babylon','alexander','caesar','feudalismus','kreuzzug','pest','humanismus','sklaverei','industrialisierung','weimarer','kaiserreich','holocaust','nationalsozialismus','ddr','brd','mauerfall','un','nato','steinzeit','bronzezeit','eisenzeit'],
-      'NaWi (Naturwissenschaften)': ['nawi','natur','physik','chemie','biologie','bio','pflanzen','tiere','atom','energie','wärme','optik','elektr','magnet','kraft','bewegung','welle','schall','licht','strom','spannung','widerstand','säure','base','reaktion','verbrennung','element','periodensystem','molekül','ion','zelle','organ','körper','ernährung','verdauung','blut','kreislauf','gehirn','nerven','evolution','ökologie','ökosystem','fotosynthese','vererbung','gen','dna','bakterien','virus','impfung','experiment','hypothese','thermometer','druck','aggregatzustand'],
+      'GL (Gesellschaftslehre)': ['gl','gesellschaft','politik','geschichte','erdkunde','geographie','sozial','ägypten','aegypten','griechen','rom','römer','mittelalter','demokratie','wirtschaft','europa','welt','antike','revolution','krieg','frieden','recht','gesetz','staat','regierung','parlament','wahl','partei','grundgesetz','menschenrecht','globalisierung','migration','flucht','klima','kontinent','bevölkerung','pharao','mesopotamien','babylon','alexander','caesar','feudalismus','kreuzzug','pest','humanismus','sklaverei','industrialisierung','weimarer','kaiserreich','holocaust','nationalsozialismus','ddr','brd','mauerfall','un','nato','steinzeit','bronzezeit','eisenzeit'],
+      'NaWi (Naturwissenschaften)': ['nawi','natur','physik','chemie','biologie','bio','pflanzen','tiere','atom','energie','wärme','optik','elektr','magnet','kraft','bewegung','welle','schall','licht','strom','spannung','widerstand','säure','base','reaktion','verbrennung','element','periodensystem','molekül','ion','zelle','organ','körper','ernährung','verdauung','blut','kreislauf','gehirn','nerven','evolution','ökologie','ökosystem','fotosynthese','vererbung','gen','dna','bakterien','virus','experiment','hypothese','thermometer','druck','aggregatzustand'],
       'Ethik': ['ethik','moral','werte','religion','philosophie','verantwortung','gewissen','gerechtigkeit','freiheit','würde','respekt','toleranz','empathie','freundschaft','liebe','familie','gemeinschaft','konflikt','gewalt','mobbing','sucht','drogen','identität','glück','sinn','tod','trauer','hoffnung','glaube','ritual','buddhismus','hinduismus','judentum','islam','christentum','weltreligion','normen','dilemma'],
       'Sport': ['sport','bewegung','turnen','fitness','ausdauer','kraft','koordination','dehnung','aufwärmen','fußball','basketball','volleyball','handball','leichtathletik','schwimmen','tanzen','geräteturnen','laufen','werfen','springen','klettern','puls','training','wettkampf','regelkunde'],
       'Kunst': ['kunst','zeichnen','malen','farbe','gestalt','form','linie','perspektive','komposition','collage','skulptur','drucken','aquarell','acryl','bleistift','kohle','pastell','design','grafik','illustration','bildanalyse','kunstgeschichte','renaissance','barock','impressionismus','expressionismus'],
@@ -695,7 +558,7 @@
               <div class="file-list" id="fach-${fachId}" style="display:${fachCollapsed?'none':'flex'}">
                 ${fachFiles.map(f => {
                   const ext = f.name.split('.').pop().toLowerCase();
-                  const { icon: fi, cls } = getIcon(ext);
+                  const {icon:fi,cls} = getIcon(ext);
                   const size = formatSize(f.size);
                   const datum = new Date(f.uploaded).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
                   return `<div class="file-item">
@@ -718,8 +581,8 @@
     }).join('');
   }
 
-  function toggleJG(jg) { collapsedJG[jg] = !collapsedJG[jg]; renderFiles(); }
-  function toggleFach(jg, fach) { collapsedFach[jg+'_'+fach] = !collapsedFach[jg+'_'+fach]; renderFiles(); }
+  function toggleJG(jg) { collapsedJG[jg]=!collapsedJG[jg]; renderFiles(); }
+  function toggleFach(jg,fach) { collapsedFach[jg+'_'+fach]=!collapsedFach[jg+'_'+fach]; renderFiles(); }
 
   function getIcon(ext) {
     if (ext==='pdf') return {icon:'📄',cls:'icon-pdf'};
